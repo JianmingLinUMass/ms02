@@ -1,14 +1,14 @@
 # UI Diagrams
 
 ## UI Diagrams 1 with Explanation
-![alt text](/Users/srishtinandy/Downloads/CS326/Milestone2/HOME/1.png)
+![Home Page Diagram](/Users/srishtinandy/Downloads/CS326/Milestone2/HOME/1.png)
 
 **Use Case**: 
 This is an preliminary-stage diagram of our home page. As our app aims to focus on grammar (something most langauge-learning apps don't focus on), there are metrics that show how engaged the user is for motivational purposes. In addition, the home page serves as a landing base for the user, where they can also reorient themselves with reminders of goals they have set, as learning English is an arduous task. 
 
 
 ## UI Diagrams 2 with Explanation
-![alt text](/Users/srishtinandy/Downloads/CS326/Milestone2/HOME/2.png)
+![Learning Page Diagram](/Users/srishtinandy/Downloads/CS326/Milestone2/HOME/2.png)
 
 
 **Use Case**: 
