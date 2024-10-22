@@ -31,6 +31,9 @@
 ## Lawrence Meng - Note Recorder
 - **Role**: Note Recorder - records new ideas discussed among the team, as well as including diagrams of possible design ideas
 - **Top 3 Commits**:
+    1. Commit 1: Proposed ideas for features
+    2. Commit 2: Implemented features.md 
+    3. Commit 3: Continued to communicate with the team to ensure all tasks were completed on time         by the project deadline 
 
 ## Loick Marion - Project Manager
 - **Role**: Project Manager - looks over the initial project idea and makes sure we stay on track with our goals 
