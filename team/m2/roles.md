@@ -1,8 +1,11 @@
 # Team Roles and Commit Contributions
 
 ## Calder McKenna - 
-- **Role**: Task Manager - 
+- **Role**: Task Manager - ensures tasks are assigned and completed on time and correctly. Works with the team on Slack to discuss the different tasks and have them completed on time.
 - **Top 3 Commits**:
+1. Commit 1: Worked with Jianming to communicate with team members in Slack to break up the tasks for milestone 2 and assign them.
+2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/5cd3f5aa983d1283a9185c5466fde5c5b893c154): Implemented the task I was assigned to do, the problem.md file.
+3. Commit 3: Continued to work with the team to ensure that the tasks were completed on time by the deadline.
 
 ## Dhruv Kartik - 
 - **Role**: Meeting Manager - arranges weekly meetings and biweekly check-ins to see where we're at
