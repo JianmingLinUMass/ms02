@@ -1,4 +1,4 @@
-## Contribution Log for Joe Lebedeva
+## Contribution Log for Joe Lebedev
 
 ### Time 10/18/2024
 - **Task**: Schedule a meeting
