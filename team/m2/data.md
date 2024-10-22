@@ -48,23 +48,44 @@
   - `language` (string): Language this lesson applies to
   - `level` (string): Difficulty level of the lesson
   - `category` (string): Grammar category (e.g., verb tenses, pronouns)
-- **Data Source**:
+- **Data Source**: Curated educational content created by us
 
-### 4. Data Type 4
+### 4. Interactive Exercises 
 
-- **Description**:
+- **Description**: Interactive exercises that allow users to practice grammar skills.
 - **Attributes**:
-- **Data Source**: 
+  - `exercise_id` (string): A unique identifier for each exercise.
+  - `lesson_id` (string): The lesson to which the exercise is linked.
+  - `exercise_type` (string): The type of exercise (e.g., multiple-choice, fill-in-the-blank).
+  - `questions` (JSON): The set of questions and possible answers.
+  - `correct_answers` (JSON): The set of correct answers for evaluation.
+  - `created_at` (timestamp): The date and time the exercise was added.
 
-### 5. Data Type 5
+- **Data Source**: Curated content aligned with lesson materials
 
-- **Description**: 
+### 5. User Activity
+
+- **Description**: Tracks daily user engagement and activity
 - **Attributes**:
-- **Data Source**: 
+  - `activity_id` (string): Unique identifier for activity entry
+  - `user_id` (string): Associated user
+  - `date` (date): Activity date
+  - `minutes_practiced` (integer): Total practice time
+  - `lessons_completed` (array): Lessons completed that day
+  - `exercises_complete` (array): Exercises completed that day
+  - `points_earned` (integer): Daily points earned
+
+- **Data Source**: System generated based on user interaction
 
 ## Data Relationships
+User to Lessons: Many-to-many (users can access multiple lessons, lessons can be accessed by multiple users)
+Lessons to Exercises: One-to-many (each lesson has multiple exercises)
+User to Progress: One-to-many (user has progress records for each completed lesson)
+User to Activity: One-to-many (user has multiple activity records)
 
 
 
 ## Data Sources
-
+User-Input Data: Includes user profiles, lesson progress, and input from completing exercises.
+System-Generated Data: Lessons, exercises generated and updated by the system based on user interactions.
+Administrator-Generated Data: New grammar lessons and exercises are added by administrators or content creators.
