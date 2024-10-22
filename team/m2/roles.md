@@ -11,6 +11,9 @@
 ## Jianming Lin - 
 - **Role**: Communication Lead
 - **Top 3 Commits**:
+- Commit 1: Set up the team's Slack channel and invited each member to the channel.
+- Commit 2: Managed Slack updates by informing teammates about deadlines and incoming meeting times.
+- Commit 3: Created the Github repository for the team for milestone 2, set up the whole project structure, and invited each team member to the repository.
 
 ## Joe Lebedeva - 
 - **Role**: Ideas Coordinator
