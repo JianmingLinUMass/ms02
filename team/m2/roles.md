@@ -16,7 +16,7 @@
 - Commit 3: Created the Github repository for the team for milestone 2, set up the whole project structure, and invited each team member to the repository.
 
 ## Joe Lebedev - 
-- **Role**: Ideas Coordinator - brainstorms features and function on the application, in regards to the group's overall goal
+- **Role**: Ideas and Design Coordinator - brainstorms features and function on the application, in regards to the group's overall goal
 - **Top 3 Commits**:
 - Commit 1: Came up with one of the possible UI designs.
 - Commit 2: Coordinated teammates to work together and decide when we meet to discuss the project.
