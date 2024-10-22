@@ -15,9 +15,12 @@
 - Commit 2: Managed Slack updates by informing teammates about deadlines and incoming meeting times.
 - Commit 3: Created the Github repository for the team for milestone 2, set up the whole project structure, and invited each team member to the repository.
 
-## Joe Lebedeva - 
+## Joe Lebedev - 
 - **Role**: Ideas Coordinator - brainstorms features and function on the application, in regards to the group's overall goal
 - **Top 3 Commits**:
+- Commit 1: Came up with one of the possible UI designs.
+- Commit 2: Coordinated teammates to work together and decide when we meet to discuss the project.
+- Commit 3: Structured the ideas during the meetings.
 
 ## Lawrence Meng - 
 - **Role**: Note Recorder - records new ideas discussed among the team, as well as including diagrams of possible design ideas
