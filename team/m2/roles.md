@@ -33,8 +33,11 @@
 - **Top 3 Commits**:
 
 ## Loick Marion - Project Manager
-- **Role**: Project Manager  - 
+- **Role**: Project Manager - looks over the initial project idea and makes sure we stay on track with our goals 
 - **Top 3 Commits**:
+    1. Commit 1: Came up with our project idea.
+    2. Commit 2: Actively participated in the discussion to lay out the image of our application.
+    3. Commit 3: Partially worked on the features. 
 
 ## Srishti Nandy - Timekeeper
 - **Role**: Timekeeper - helps enforce deadlines by checking upcoming due dates, as well as allotting the proper time needed for each task
