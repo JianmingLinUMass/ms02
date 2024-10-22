@@ -1,6 +1,6 @@
 # Team Roles and Commit Contributions
 
-## Calder McKenna - 
+## Calder McKenna - Task Manager
 - **Role**: Task Manager - ensures tasks are assigned and completed on time and correctly. Works with the team on Slack to discuss the different tasks and have them completed on time.
 - **Top 3 Commits**:
     1. Commit 1: Worked with Jianming to communicate with team members in Slack to break up the tasks for milestone 2 and assign them.
