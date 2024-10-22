@@ -39,3 +39,6 @@
 ## Srishti Nandy - Timekeeper
 - **Role**: Timekeeper - helps enforce deadlines by checking upcoming due dates, as well as allotting the proper time needed for each task
 - **Top 3 Commits**:
+- Commit 1: brainstormed Learning Page and Home Page diagrams
+- Commit 2:
+- Commit 3: 
