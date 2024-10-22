@@ -32,10 +32,22 @@
 
 - **Data Source**: System generated from user interactions with exercises.
 
-### 3. Data Type 3
+### 3. Grammar Lessons
 
-- **Description**:
+- **Description**: Contains educational content for grammar concepts
 - **Attributes**:
+  - `title` (string): Name of the lesson
+  - `content` (JSON): Structured lesson content including:
+
+    - `explanation` (text)
+    - `examples` (array)
+    - `usage_rules` (array)
+    - `common_mistakes` (array)
+
+  - `lesson_id` (string): Unique identifier for each lesson
+  - `language` (string): Language this lesson applies to
+  - `level` (string): Difficulty level of the lesson
+  - `category` (string): Grammar category (e.g., verb tenses, pronouns)
 - **Data Source**:
 
 ### 4. Data Type 4
