@@ -10,6 +10,9 @@
 ## Dhruv Kartik - 
 - **Role**: Meeting Manager - arranges weekly meetings and biweekly check-ins to see where we're at
 - **Top 3 Commits**:
+- Commit 1: Created the data structure for users
+- Commit 2: Created the data strcuture for language progress, exercices, grammar and user activity
+- Commit 3: Added the data relationships and sources
 
 ## Jianming Lin - 
 - **Role**: Communication Lead - facilitates communication within the team on Slack channel
