@@ -19,6 +19,10 @@
 ## Lawrence Meng - 
 - **Role**:
 - **Top 3 Commits**:
+i. Proposed ideas for features
+ii. Implemented features.md
+iii. Continued to communicate with the team to ensure all tasks were completed on time by the project deadline
+
 
 ## Loick Marion - 
 - **Role**:
