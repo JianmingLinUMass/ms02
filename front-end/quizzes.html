@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Learning Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
 
+    <div class="quiz-container">
+        <h1>QUIZZES</h1>
+        <div class="subsection-links">
+            <a href="#grammar">Grammar</a>
+            <a href="#punctuation">Punctuation</a>
+        </div>
+        
+        <h2>Grammar</h2>
+        <p>Translate the following word:</p>
+        
+        <div class="question">
+            <span id="word">Word</span>
+        </div>
+        
+        <form id="quiz-form">
+            <input type="text" id="answer" placeholder="answer" required>
+            <button type="submit">Submit</button>
+        </form>
+        
+        <div id="result" class="hidden">
+            <p id="result-message"></p>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
