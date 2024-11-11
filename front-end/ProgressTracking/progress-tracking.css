@@ -1,0 +1,23 @@
+h1 {
+    font-style: italic;
+}
+
+#TO-DO {
+    background-color: yellow;
+}
+
+#footer-note {
+    color: rgb(84, 223, 28);
+    text-align: center;
+    bottom: 0;
+    vertical-align: bottom
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
