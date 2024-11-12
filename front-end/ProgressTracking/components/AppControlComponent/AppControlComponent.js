@@ -55,7 +55,7 @@ export class AppControlComponent {
     }
 
     #attachEventListeners() {
-        // Add any buttons/drop-down listener here
+        
     }
 
     #renderAllOtherComponents() {
