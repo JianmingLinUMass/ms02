@@ -5,8 +5,10 @@ import Service from './Service.js';
 export class UserMetricsRepositoryService extends Service {
   constructor() {
     super();
-    this.dbName = 'DB';
-    this.storeName = 'tasks';
+    this.dbName = 'metricsDB';
+    this.storeNames = ['userProfile', 'userBasic', 'userPassword',
+      'userNativeLan', 'userTargetLan', 'userPoint'];
+    this.profileStoreName = this.storeNames[0];
     this.db = null;
 
     // Initialize the database
@@ -26,9 +28,7 @@ export class UserMetricsRepositoryService extends Service {
 
       request.onupgradeneeded = event => {
         const db = event.target.result;
-        db.createObjectStore(this.storeName, {
-          autoIncrement: true,
-        });
+        this.createAllObjectStores(db);
       };
 
       request.onsuccess = event => {
@@ -42,12 +42,39 @@ export class UserMetricsRepositoryService extends Service {
     });
   }
 
-// ------------------------------------------------ Profile ------------------------------------------------
+  async createAllObjectStores(db) {
+    for (const storeName of this.storeNames) {
+      db.createObjectStore(storeName, {
+        keyPath: storeName,
+        autoIncrement: true,
+      });
+    }
+  }
+
+  // ------------------------------------------------ Profile ------------------------------------------------
+  async clearProfile() {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[0]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[0]);
+      const request = store.clear();
+
+      request.onsuccess = () => {
+        this.publish(Events.ClearProfileSuccess);
+        resolve('Profile cleared');
+      };
+
+      request.onerror = () => {
+        this.publish(Events.ClearProfileFailure);
+        reject('Error clearing profile');
+      };
+    });
+  }
+
   async storeProfile(profile) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.add(profile);
+      const transaction = this.db.transaction([this.storeNames[0]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[0]);
+      const request = store.add(profile); // profile is a File object
 
       request.onsuccess = () => {
         this.publish(Events.StoreProfileSuccess, profile);
@@ -56,20 +83,24 @@ export class UserMetricsRepositoryService extends Service {
 
       request.onerror = () => {
         this.publish(Events.StoreProfileFailure, profile);
-        reject('Error storing profile: ');
+        reject('Error storing profile');
       };
     });
   }
+
   async loadProfileFromDB() {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readonly');
-      const store = transaction.objectStore(this.storeName);
+      const transaction = this.db.transaction([this.storeNames[0]], 'readonly');
+      const store = transaction.objectStore(this.storeNames[0]);
       const request = store.getAll();
 
       request.onsuccess = event => {
-        const profile = event.target.result;
-        this.publish('NewProfile', profile)
-        resolve(profile);
+        if (event.target.result && event.target.result['0']) {
+          const profile = event.target.result['0'].file;
+          this.readURL(profile);
+          this.publish(Events.LoadProfileSuccess, profile)
+          resolve(event.target.result['0'].file);
+        }
       };
 
       request.onerror = () => {
@@ -78,10 +109,29 @@ export class UserMetricsRepositoryService extends Service {
       };
     });
   }
-// ------------------------------------------------ User id ------------------------------------------------
+  
+  readURL(file) {
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profile-picture').src = e.target.result
+        }
+        reader.readAsDataURL(file)
+    }
+  }
+
+  // ------------------------------------------------ User id ------------------------------------------------
   addSubscriptions() {
+    this.subscribe(Events.ClearProfile, data => {
+      this.clearProfile();
+    })
+
     this.subscribe(Events.StoreProfile, data => {
       this.storeProfile(data);
     });
+
+    this.subscribe(Events.LoadProfile, data => {
+      this.loadProfileFromDB();
+    })
   }
 }

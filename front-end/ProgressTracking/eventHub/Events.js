@@ -2,18 +2,6 @@
  * An object containing various message types for metrics management.
  */
 export const Events = {  
-    LoadMetrics: 'LoadMetrics',
-    LoadMetricsSuccess: 'LoadMetricsSuccess',
-    LoadMetricsFailure: 'LoadMetricsFailure',
-  
-    StoreMetrics: 'StoreMetrics',
-    StoreMetricsSuccess: 'StoreMetricsSuccess',
-    StoreMetricsFailure: 'StoreMetricsFailure',
-  
-    DeleteMetrics: 'DeleteMetrics',
-    DeleteMetricsSuccess: 'DeleteMetricsSuccess',
-    DeleteMetricsFailure: 'DeleteMetricsFailure',
-
 // ------------------------------------------------ Profile ------------------------------------------------
     LoadProfile: 'LoadProfile',
     LoadProfileSuccess: 'LoadProfileSuccess',
@@ -22,5 +10,9 @@ export const Events = {
     StoreProfile: 'StoreProfile',
     StoreProfileSuccess: 'StoreProfileSuccess',
     StoreProfileFailure: 'StoreProfileFailure',
+
+    ClearProfile: 'ClearProfile',
+    ClearProfileSuccess: 'ClearProfileSuccess',
+    ClearProfileFailure: 'ClearProfileFailure',
   };
   
