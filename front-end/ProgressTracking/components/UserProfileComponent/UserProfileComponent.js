@@ -55,26 +55,28 @@ export class UserProfileComponent extends BaseComponent {
             return;
         }
 
-        this.readURL(editProfileInput);
-
-        this.#publishProfile(file);
+        // we can only add 'file' object to objectStore since it cannot contain htmlInputElement (editProfileInput)
+        this.#publishClearProfile();
+        this.#publishStoreProfile(file);
+        this.#publishLoadProfile();
         this.#clearInputs(editProfileInput);
     }
 
-    readURL(editProfileInput) {
-        if (editProfileInput.files && editProfileInput.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-picture').src = e.target.result
-            }
-            reader.readAsDataURL(editProfileInput.files[0])
-        }
+    #publishClearProfile() {
+        const hub = EventHub.getInstance();
+        hub.publish(Events.ClearProfile, {});
     }
 
-    #publishProfile(file) {
+    #publishStoreProfile(file) {
         const hub = EventHub.getInstance();
         hub.publish(Events.StoreProfile, { file });
     }
+
+    #publishLoadProfile() {
+        const hub = EventHub.getInstance();
+        hub.publish(Events.LoadProfile, {});
+    }
+
 
     #clearInputs(editProfileInput) {
         editProfileInput.value = '';
