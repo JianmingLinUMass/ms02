@@ -20,7 +20,7 @@ export class UserMetricsRepositoryFactory {
    * @param {string} [repoType='local'] - The type of repository service to
    * create. Can be 'local' or 'remote'.
    * @returns {UserMetricsRepositoryService|UserMetricsRepositoryRemoteService} An instance
-   * of the appropriate task repository service.
+   * of the appropriate metrics repository service.
    * @throws Will throw an error if the repository type is not recognized.
    */
   static get(repoType = 'local') {

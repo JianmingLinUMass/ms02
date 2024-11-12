@@ -5,15 +5,15 @@ import Service from './Service.js';
 export class UserMetricsRepositoryService extends Service {
   constructor() {
     super();
-    this.dbName = 'metricsDB';
-    this.storeName = 'metrics';
+    this.dbName = 'DB';
+    this.storeName = 'tasks';
     this.db = null;
 
     // Initialize the database
     this.initDB()
       .then(() => {
-        // Load metrics on initialization
-        this.loadMetricsFromDB();
+        // Load profile on initialization
+        this.loadProfileFromDB();
       })
       .catch(error => {
         console.error(error);
@@ -27,7 +27,6 @@ export class UserMetricsRepositoryService extends Service {
       request.onupgradeneeded = event => {
         const db = event.target.result;
         db.createObjectStore(this.storeName, {
-          keyPath: 'id',
           autoIncrement: true,
         });
       };
@@ -43,68 +42,46 @@ export class UserMetricsRepositoryService extends Service {
     });
   }
 
-  async storeMetrics(metrics) {
+// ------------------------------------------------ Profile ------------------------------------------------
+  async storeProfile(profile) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readwrite');
       const store = transaction.objectStore(this.storeName);
-      const request = store.add(metrics);
+      const request = store.add(profile);
 
       request.onsuccess = () => {
-        this.publish(Events.StoreMetricsSuccess, metrics);
-        resolve('Metrics stored successfully');
+        this.publish(Events.StoreProfileSuccess, profile);
+        resolve('Profile stored successfully');
       };
 
       request.onerror = () => {
-        this.publish(Events.StoreMetricsFailure, metrics);
-        reject('Error storing metrics: ');
+        this.publish(Events.StoreProfileFailure, profile);
+        reject('Error storing profile: ');
       };
     });
   }
-
-  async loadMetricsFromDB() {
+  async loadProfileFromDB() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readonly');
       const store = transaction.objectStore(this.storeName);
       const request = store.getAll();
 
       request.onsuccess = event => {
-        const metrics = event.target.result;
-        metrics.forEach(metric => this.publish('NewMetric', metric));
-        resolve(metrics);
+        const profile = event.target.result;
+        this.publish('NewProfile', profile)
+        resolve(profile);
       };
 
       request.onerror = () => {
-        this.publish(Events.LoadMetricsFailure);
-        reject('Error retrieving metrics');
+        this.publish(Events.LoadProfileFailure);
+        reject('Error retrieving profile');
       };
     });
   }
-
-  async clearMetrics() {
-    return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
-      const store = transaction.objectStore(this.storeName);
-      const request = store.clear();
-
-      request.onsuccess = () => {
-        this.publish(Events.DeleteMetricsSuccess);
-        resolve('All metrics cleared');
-      };
-
-      request.onerror = () => {
-        this.publish(Events.DeleteMetricsFailure);
-        reject('Error clearing metrics');
-      };
-    });
-  }
-
+// ------------------------------------------------ User id ------------------------------------------------
   addSubscriptions() {
-    this.subscribe(Events.StoreMetrics, data => {
-      this.storeMetrics(data);
-    });
-
-    this.subscribe(Events.DeleteMetrics, () => {
-      this.clearMetrics();
+    this.subscribe(Events.StoreProfile, data => {
+      this.storeProfile(data);
     });
   }
 }

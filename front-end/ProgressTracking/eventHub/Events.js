@@ -13,5 +13,14 @@ export const Events = {
     DeleteMetrics: 'DeleteMetrics',
     DeleteMetricsSuccess: 'DeleteMetricsSuccess',
     DeleteMetricsFailure: 'DeleteMetricsFailure',
+
+// ------------------------------------------------ Profile ------------------------------------------------
+    LoadProfile: 'LoadProfile',
+    LoadProfileSuccess: 'LoadProfileSuccess',
+    LoadProfileFailure: 'LoadProfileFailure',
+
+    StoreProfile: 'StoreProfile',
+    StoreProfileSuccess: 'StoreProfileSuccess',
+    StoreProfileFailure: 'StoreProfileFailure',
   };
   

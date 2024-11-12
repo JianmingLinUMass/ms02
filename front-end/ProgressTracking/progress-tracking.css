@@ -20,4 +20,8 @@ h1 {
     margin: 0 auto;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-  }
+}
+
+body {
+    background-color: rgb(250, 240, 225);
+}
