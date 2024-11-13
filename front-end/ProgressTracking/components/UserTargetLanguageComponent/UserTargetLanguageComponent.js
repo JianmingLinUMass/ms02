@@ -30,9 +30,8 @@ export class UserTargetLanguageComponent extends BaseComponent {
         <br><br>
         <div id="TO-DO">User Target Language Component</div>
         <div>Target Language(s):</div>
-        <div>Add a drop down menu here</div>
         <p>*Should have an unordered list of target language here</p>
-        <button>Add Target Language</button>`;
+        <button id="add-target-language-button">Add Target Language</button>`;
     }
 
     #attachEventListeners() {

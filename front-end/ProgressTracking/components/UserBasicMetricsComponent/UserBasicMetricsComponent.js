@@ -8,6 +8,10 @@ export class UserBasicMetricsComponent extends BaseComponent{
     constructor() {
         super();
         this.loadCSS('UserBasicMetricsComponent');
+
+        this.userID = "userID123";
+        this.username = "username456";
+        this.emailAddress = "email.edu";
     }
 
     render() {
@@ -27,13 +31,36 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <div id="TO-DO">User Basic Metrics Component</div>
-        <div>User ID: {}</div>
-        <div>Username: {}</div>
-        <div>Email Address: {}</div>`;
+        <br>
+        <div><b>User ID:</b> 
+            <span id="user-id"></span>
+        </div>
+        <div><b>Username:</b>
+            <span id="username">username456</span>
+        </div>
+        <div><b>Email Address:</b>
+            <span id="email-address">email.edu</span>    
+        </div>`;
     }
 
     #attachEventListeners() {
+        const userIdSpan = this.#container.querySelector('#user-id');
+        const usernameSpan = this.#container.querySelector('#username');
+        const userEmailAddressSpan = this.#container.querySelector('#email-address');
 
+        userIdSpan.innerHTML = this.userID;
+        usernameSpan.innerHTML = this.username;
+        userEmailAddressSpan.innerHTML = this.emailAddress;
+
+        this.#publishStoreUserMetrics(this.userID);       // store user id as an user metrics
+        this.#publishStoreUserMetrics(this.username);     // store username as an user metrics
+        this.#publishStoreUserMetrics(this.emailAddress); // store user email address as an user metrics
+
+        // *To-Do: enable load user metrics here, if needed*
+    }
+
+    #publishStoreUserMetrics(userMetrics) {
+        const hub = EventHub.getInstance();
+        hub.publish(Events.StoreBasicMetrics, { userMetrics });
     }
 }

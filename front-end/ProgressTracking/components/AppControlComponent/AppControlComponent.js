@@ -50,7 +50,7 @@ export class AppControlComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <h1>Welcome to the User Page, {username}.</h1>
+        <h1>Welcome to the User Page!</h1>
         <div id="viewContainer"></div>`;
     }
 

@@ -29,10 +29,10 @@ export class UserPointMetricsComponent extends BaseComponent {
         this.#container.innerHTML = `
         <br><br>
         <div id="TO-DO">User Point Component</div>
-        <div>Level: {}</div>
-        <div>Daily Goal (in points): {} [edit]</div>
-        <div>Points Earned (from Learn Page): {}</div>
-        <div>Points Earned (from Exercise Page): {}</div>`;
+        <div id="level">Level: {}</div>
+        <div id="point-earned-from-learn-page">Points Earned (from Learn Page): {}</div>
+        <div id="point-earned-from-exercise-page">Points Earned (from Exercise Page): {}</div>
+        <br><br>`;
     }
 
     #attachEventListeners() {
