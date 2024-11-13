@@ -28,10 +28,10 @@ export class UserPasswordComponent extends BaseComponent {
     #setupContentInContainer() {
         this.#container.innerHTML = `
         <div id="TO-DO">User Password Component</div>
-        <div>Password: {********} [show]</div>
-        <div>New Password: {} [show]</div>
-        <div>Confirm New Password: {} [show]</div>
-        <button>Reset Password</button>`;
+        <div id="password">Password: {********} [show]</div>
+        <div id="new-password">New Password: {} [show]</div>
+        <div id="confirm-new-password">Confirm New Password: {} [show]</div>
+        <button id="reset-password-button">Reset Password</button>`;
     }
 
     #attachEventListeners() {

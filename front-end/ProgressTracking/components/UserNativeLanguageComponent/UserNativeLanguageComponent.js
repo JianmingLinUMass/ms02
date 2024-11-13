@@ -30,9 +30,8 @@ export class UserNativeLanguageComponent extends BaseComponent {
         <br><br>
         <div id="TO-DO">User Native Language Component</div>
         <div>Native Language(s):</div>
-        <div>Add a drop down menu here</div>
         <p>*Should have an unordered list of native language here</p>
-        <button>Add Native Language</button>`;
+        <button id="add-native-language-button">Add Native Language</button>`;
     }
 
     #attachEventListeners() {

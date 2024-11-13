@@ -27,7 +27,7 @@ export class UserProfileComponent extends BaseComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <div id="TO-DO">User Profile:</div>
+        <div><b>User Profile:</b></div>
         <img src="../../front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg" alt="Default Profile" id="profile-picture">
         <form enctype="multipart/form-data">
             <input type="file" accept="image/*" id="edit-profile-input"/>
@@ -76,7 +76,6 @@ export class UserProfileComponent extends BaseComponent {
         const hub = EventHub.getInstance();
         hub.publish(Events.LoadProfile, {});
     }
-
 
     #clearInputs(editProfileInput) {
         editProfileInput.value = '';

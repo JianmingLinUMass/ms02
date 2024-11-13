@@ -14,5 +14,15 @@ export const Events = {
     ClearProfile: 'ClearProfile',
     ClearProfileSuccess: 'ClearProfileSuccess',
     ClearProfileFailure: 'ClearProfileFailure',
-  };
+
+// ------------------------------------------------ Basic Metrics ------------------------------------------------
+    LoadBasicMetrics: 'LoadBasicMetrics',
+    LoadBasicMetricsSuccess: 'LoadBasicMetricsSuccess',
+    LoadBasicMetricsFailure: 'LoadBasicMetricsFailure',
+
+    StoreBasicMetrics: 'StoreBasicMetrics',
+    StoreBasicMetricsSuccess: 'StoreBasicMetricsSuccess',
+    StoreBasicMetricsFailure: 'StoreBasicMetricsFailure',
+
+};
   
