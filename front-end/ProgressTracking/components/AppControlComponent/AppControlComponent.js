@@ -1,8 +1,6 @@
 import { UserProfileComponent } from '../UserProfileComponent/UserProfileComponent.js'
 import { UserBasicMetricsComponent } from '../UserBasicMetricsComponent/UserBasicMetricsComponent.js'
 import { UserPasswordComponent } from '../UserPasswordComponent/UserPasswordComponent.js'
-import { UserNativeLanguageComponent } from '../UserNativeLanguageComponent/UserNativeLanguageComponent.js'
-import { UserTargetLanguageComponent } from '../UserTargetLanguageComponent/UserTargetLanguageComponent.js'
 import { UserPointMetricsComponent } from '../UserPointMetricsComponent/UserPointMetricsComponent.js'
 import { EventHub } from '../../eventHub/EventHub.js'
 
@@ -11,8 +9,6 @@ export class AppControlComponent {
     #userProfileComponent = null;
     #userBasicMetricsComponent = null;
     #userPasswordComponent = null;
-    #userNativeLanguageComponent = null;
-    #userTargetLanguageComponent = null;
     #userPointMetricsComponent = null;
     #hub = null;
 
@@ -21,8 +17,6 @@ export class AppControlComponent {
         this.#userProfileComponent = new UserProfileComponent();
         this.#userBasicMetricsComponent = new UserBasicMetricsComponent();
         this.#userPasswordComponent = new UserPasswordComponent();
-        this.#userNativeLanguageComponent = new UserNativeLanguageComponent();
-        this.#userTargetLanguageComponent = new UserTargetLanguageComponent();
         this.#userPointMetricsComponent = new UserPointMetricsComponent();
     }
 
@@ -34,8 +28,6 @@ export class AppControlComponent {
         this.#userProfileComponent.render();
         this.#userBasicMetricsComponent.render();
         this.#userPasswordComponent.render();
-        this.#userNativeLanguageComponent.render();
-        this.#userTargetLanguageComponent.render();
         this.#userPointMetricsComponent.render();
 
         this.#renderAllOtherComponents();
@@ -65,8 +57,6 @@ export class AppControlComponent {
         viewContainer.appendChild(this.#userProfileComponent.render());
         viewContainer.appendChild(this.#userBasicMetricsComponent.render());
         viewContainer.appendChild(this.#userPasswordComponent.render());
-        viewContainer.appendChild(this.#userNativeLanguageComponent.render());
-        viewContainer.appendChild(this.#userTargetLanguageComponent.render());
         viewContainer.appendChild(this.#userPointMetricsComponent.render());
     }
 }

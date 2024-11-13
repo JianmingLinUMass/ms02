@@ -6,8 +6,7 @@ export class UserMetricsRepositoryService extends Service {
   constructor() {
     super();
     this.dbName = 'metricsDB';
-    this.storeNames = ['userProfileMetrics', 'userBasicMetrics', 'userPasswordMetrics',
-                       'userNativeLanMetrics', 'userTargetLanMetrics', 'userPointMetrics'];
+    this.storeNames = ['userProfileMetrics', 'userBasicMetrics', 'userPasswordMetrics', 'userPointMetrics'];
     this.db = null;
 
     // Initialize the database
@@ -179,8 +178,8 @@ export class UserMetricsRepositoryService extends Service {
   // to enable this store function, complete pair it with loadPointMetricsFromDB().
   async storePointMetrics(pointMetrics) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeNames[5]], 'readwrite');
-      const store = transaction.objectStore(this.storeNames[5]);
+      const transaction = this.db.transaction([this.storeNames[3]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[3]);
       const request = store.add(pointMetrics);
       // add one of the followings for each call of storePointMetrics()
       //   0: level
@@ -203,8 +202,8 @@ export class UserMetricsRepositoryService extends Service {
   /*
   async loadPointMetricsFromDB() {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeNames[5]], 'readonly');
-      const store = transaction.objectStore(this.storeNames[5]);
+      const transaction = this.db.transaction([this.storeNames[3]], 'readonly');
+      const store = transaction.objectStore(this.storeNames[3]);
       const request = store.getAll();
 
       request.onsuccess = event => {
