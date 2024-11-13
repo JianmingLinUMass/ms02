@@ -11,7 +11,7 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
         this.userID = "userID123";
         this.username = "username456";
-        this.emailAddress = "email.edu";
+        this.emailAddress = "aaa@email.edu";
     }
 
     render() {

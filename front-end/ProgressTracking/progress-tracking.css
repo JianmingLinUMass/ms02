@@ -25,4 +25,5 @@ h1 {
 body {
     background-color: rgb(250, 240, 225);
     line-height: 1.5;
+    margin-left: 30px;
 }

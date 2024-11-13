@@ -24,6 +24,19 @@ export const Events = {
     StoreBasicMetricsSuccess: 'StoreBasicMetricsSuccess',
     StoreBasicMetricsFailure: 'StoreBasicMetricsFailure',
 
+// ------------------------------------------------ Password Metrics ------------------------------------------------
+    LoadPasswordMetrics: 'LoadPasswordMetrics',
+    LoadPasswordMetricsSuccess: 'LoadPasswordMetricsSuccess',
+    LoadPasswordMetricsFailure: 'LoadPasswordMetricsFailure',
+
+    StorePasswordMetrics: 'StorePasswordMetrics',
+    StorePasswordMetricsSuccess: 'StorePasswordMetricsSuccess',
+    StorePasswordMetricsFailure: 'StorePasswordMetricsFailure',
+
+    ClearPasswordMetrics: 'ClearPasswordMetrics',
+    ClearPasswordMetricsSuccess: 'ClearPasswordMetricsSuccess',
+    ClearPasswordMetricsFailure: 'ClearPasswordMetricsFailure',
+
 // ------------------------------------------------ Point Metrics ------------------------------------------------
     LoadPointMetrics: 'LoadPointMetrics',
     LoadPointMetricsSuccess: 'LoadPointMetricsSuccess',

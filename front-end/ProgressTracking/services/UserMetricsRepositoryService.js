@@ -12,9 +12,10 @@ export class UserMetricsRepositoryService extends Service {
     // Initialize the database
     this.initDB()
       .then(() => {
-        // Load profile on initialization
         this.loadProfileFromDB();
         //this.loadBasicFromDB(); // *To-Do: enable load user metrics here, if needed*
+        this.loadPasswordMetricsFromDB();
+        //this.loadPointMetricsFromDB();
       })
       .catch(error => {
         console.error(error);
@@ -171,7 +172,66 @@ export class UserMetricsRepositoryService extends Service {
   }
   */
 
+  // ------------------------------------------------ User Password ------------------------------------------------
+  async clearPasswordMetrics() {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[2]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[2]);
+      const request = store.clear();
 
+      request.onsuccess = () => {
+        this.publish(Events.ClearPasswordMetricsSuccess);
+        resolve('Password cleared');
+      };
+
+      request.onerror = () => {
+        this.publish(Events.ClearPasswordMetricsFailure);
+        reject('Error clearing password');
+      };
+    });
+  }
+
+  async storePasswordMetrics(passwordMetrics) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[2]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[2]);
+      const request = store.add(passwordMetrics);
+      // add one of the followings for each call of storePasswordMetrics()
+      //   0: user current password
+
+      request.onsuccess = () => {
+        this.publish(Events.StorePasswordMetricsSuccess, passwordMetrics);
+        resolve('Password metrics stored successfully');
+      };
+
+      request.onerror = () => {
+        this.publish(Events.StorePasswordMetricsFailure, passwordMetrics);
+        reject('Error storing password metrics');
+      };
+    });
+  }
+
+  async loadPasswordMetricsFromDB() {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[2]], 'readonly');
+      const store = transaction.objectStore(this.storeNames[2]);
+      const request = store.getAll();
+
+      request.onsuccess = event => {
+        if (event.target.result && event.target.result['0']) {
+          const password = event.target.result['0']['passwordMetrics'];
+          document.getElementById('password').innerHTML = password;
+          this.publish(Events.LoadPasswordMetricsSuccess, password)
+          resolve(event.target.result['0']['passwordMetrics']);
+        }
+      };
+
+      request.onerror = () => {
+        this.publish(Events.LoadPasswordMetricsFailure);
+        reject('Error retrieving password metrics');
+      };
+    });
+  }
 
   // ------------------------------------------------ User Point ------------------------------------------------
   // currently point metrics are not stored in the database, since they are initialized before we load them from this db
@@ -246,6 +306,17 @@ export class UserMetricsRepositoryService extends Service {
       this.loadBasicMetricsFromDB();
     });
     */
+
+    // password metrics
+    this.subscribe(Events.ClearPasswordMetrics, data => {
+      this.clearPasswordMetrics();
+    });
+    this.subscribe(Events.StorePasswordMetrics, data => {
+      this.storePasswordMetrics(data);
+    });
+    this.subscribe(Events.LoadPasswordMetrics, data => {
+      this.loadPasswordMetricsFromDB();
+    });
 
     // point metrics
     this.subscribe(Events.StorePointMetrics, data => {
