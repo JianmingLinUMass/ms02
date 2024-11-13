@@ -24,5 +24,14 @@ export const Events = {
     StoreBasicMetricsSuccess: 'StoreBasicMetricsSuccess',
     StoreBasicMetricsFailure: 'StoreBasicMetricsFailure',
 
+// ------------------------------------------------ Point Metrics ------------------------------------------------
+    LoadPointMetrics: 'LoadPointMetrics',
+    LoadPointMetricsSuccess: 'LoadPointMetricsSuccess',
+    LoadPointMetricsFailure: 'LoadPointMetricsFailure',
+
+    StorePointMetrics: 'StorePointMetrics',
+    StorePointMetricsSuccess: 'StorePointMetricsSuccess',
+    StorePointMetricsFailure: 'StorePointMetricsFailure',
+
 };
   

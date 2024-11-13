@@ -52,15 +52,15 @@ export class UserBasicMetricsComponent extends BaseComponent{
         usernameSpan.innerHTML = this.username;
         userEmailAddressSpan.innerHTML = this.emailAddress;
 
-        this.#publishStoreUserMetrics(this.userID);       // store user id as an user metrics
-        this.#publishStoreUserMetrics(this.username);     // store username as an user metrics
-        this.#publishStoreUserMetrics(this.emailAddress); // store user email address as an user metrics
+        this.#publishStoreBasicMetrics(this.userID);       // store user id as a basic metrics
+        this.#publishStoreBasicMetrics(this.username);     // store username as a basic metrics
+        this.#publishStoreBasicMetrics(this.emailAddress); // store user email address as a basic metrics
 
-        // *To-Do: enable load user metrics here, if needed*
+        // *To-Do: enable load basic metrics here, if needed*
     }
 
-    #publishStoreUserMetrics(userMetrics) {
+    #publishStoreBasicMetrics(basicMetrics) {
         const hub = EventHub.getInstance();
-        hub.publish(Events.StoreBasicMetrics, { userMetrics });
+        hub.publish(Events.StoreBasicMetrics, { basicMetrics });
     }
 }
