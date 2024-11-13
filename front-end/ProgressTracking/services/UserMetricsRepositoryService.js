@@ -6,8 +6,8 @@ export class UserMetricsRepositoryService extends Service {
   constructor() {
     super();
     this.dbName = 'metricsDB';
-    this.storeNames = ['userProfile', 'userBasic', 'userPassword',
-                       'userNativeLan', 'userTargetLan', 'userPoint'];
+    this.storeNames = ['userProfileMetrics', 'userBasicMetrics', 'userPasswordMetrics',
+                       'userNativeLanMetrics', 'userTargetLanMetrics', 'userPointMetrics'];
     this.db = null;
 
     // Initialize the database
@@ -124,32 +124,32 @@ export class UserMetricsRepositoryService extends Service {
 
   // ------------------------------------------------ User Basic ------------------------------------------------
   // currently basic metrics are not stored in the database, since they are initialized before we load them from this db
-  // to enable this store function, complete pair it with loadBasicFromDB().
-  async storeBasic(basicMetrics) {
+  // to enable this store function, complete pair it with loadBasicMetricsFromDB().
+  async storeBasicMetrics(basicMetrics) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeNames[1]], 'readwrite');
       const store = transaction.objectStore(this.storeNames[1]);
       const request = store.add(basicMetrics);
-      // add one of the followings for each call of storeBasic()
+      // add one of the followings for each call of storeBasicMetrics()
       //   0: user id
       //   1: username
       //   2: email address
 
       request.onsuccess = () => {
-        this.publish(Events.StoreProfileSuccess, basicMetrics);
+        this.publish(Events.StoreBasicMetricsSuccess, basicMetrics);
         resolve('Basic metrics stored successfully');
       };
 
       request.onerror = () => {
-        this.publish(Events.StoreProfileFailure, basicMetrics);
+        this.publish(Events.StoreBasicMetricsFailure, basicMetrics);
         reject('Error storing basic metrics');
       };
     });
   }
 
-  // *To-Do: enable load user metrics here, if needed*
+  // *To-Do: enable load basic metrics here, if needed*
   /*
-  async loadBasicFromDB() {
+  async loadBasicMetricsFromDB() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeNames[1]], 'readonly');
       const store = transaction.objectStore(this.storeNames[1]);
@@ -172,6 +172,58 @@ export class UserMetricsRepositoryService extends Service {
   }
   */
 
+
+
+  // ------------------------------------------------ User Point ------------------------------------------------
+  // currently point metrics are not stored in the database, since they are initialized before we load them from this db
+  // to enable this store function, complete pair it with loadPointMetricsFromDB().
+  async storePointMetrics(pointMetrics) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[5]], 'readwrite');
+      const store = transaction.objectStore(this.storeNames[5]);
+      const request = store.add(pointMetrics);
+      // add one of the followings for each call of storePointMetrics()
+      //   0: level
+      //   1: points earned from learn page
+      //   2: points earned from exercise page
+
+      request.onsuccess = () => {
+        this.publish(Events.StorePointMetricsSuccess, pointMetrics);
+        resolve('Point metrics stored successfully');
+      };
+
+      request.onerror = () => {
+        this.publish(Events.StorePointMetricsFailure, pointMetrics);
+        reject('Error storing point metrics');
+      };
+    });
+  }
+
+  // *To-Do: enable load point metrics here, if needed*
+  /*
+  async loadPointMetricsFromDB() {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeNames[5]], 'readonly');
+      const store = transaction.objectStore(this.storeNames[5]);
+      const request = store.getAll();
+
+      request.onsuccess = event => {
+        console.log('result:', event.target.result)
+        if (event.target.result && event.target.result['0'] && event.target.result['1'] && event.target.result['2']) {
+          const profile = event.target.result['0'].file; // change this to level, then duplicate twice for two points
+          this.publish(Events.LoadPointMetricsSuccess, profile)
+          resolve(event.target.result['0'].file);
+        }
+      };
+
+      request.onerror = () => {
+        this.publish(Events.LoadPointMetricsFailure);
+        reject('Error retrieving point metrics');
+      };
+    });
+  }
+  */
+
   // ------------------------------------------------ Add Subscriptions ------------------------------------------------
   addSubscriptions() {
     // profile
@@ -187,15 +239,24 @@ export class UserMetricsRepositoryService extends Service {
 
     // basic metrics
     this.subscribe(Events.StoreBasicMetrics, data => {
-      this.storeBasic(data);
+      this.storeBasicMetrics(data);
     });
-    // *To-Do: enable load user metrics here, if needed*
+    // *To-Do: enable load basic metrics here, if needed*
     /*
     this.subscribe(Events.LoadBasicMetrics, data => {
-      this.loadBasicFromDB();
+      this.loadBasicMetricsFromDB();
     });
     */
 
-
+    // point metrics
+    this.subscribe(Events.StorePointMetrics, data => {
+      this.storePointMetrics(data);
+    });
+    // *To-Do: enable load point metrics here, if needed*
+    /*
+    this.subscribe(Events.LoadPointMetrics, data => {
+      this.loadPointMetricsFromDB();
+    });
+    */
   }
 }
