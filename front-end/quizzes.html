@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Learning Quiz</title>
+    <title>Quizzes Page</title>
     <link rel="stylesheet" href="quiz.css">
 </head>
 <body>
-
-    <div class="quiz-container">
-        <h1>QUIZZES</h1>
-        <div class="subsection-links">
-            <a href="#grammar">Grammar</a>
-            <a href="#punctuation">Punctuation</a>
-        </div>
+    <div class="modules-box">
+        <h2>Modules</h2>
+        <ol class="module-list">
+            <li><a href="#nouns">Nouns</a></li>
+            <li><a href="#verbs">Verbs</a></li>
+            <li><a href="#adjectives">Adjectives</a></li>
+            <li><a href="#prepositions">Prepositions</a></li>
+            <li><a href="#conjunctions">Conjunctions</a></li>
+            <li><a href="#pronouns">Pronouns</a></li>
+            <li><a href="#punctuation">Punctuation</a></li>
+        </ol>
+    </div>
+    <div class="container">
+        <h1 class="title">THE QUIZ PAGE!</h1>
+        <p class="welcome-message">Welcome to our quizzes page, where it's time to put your skills to the test. You'll find all of our quizzes on the left side of the page.</p>
         
-        <h2>Grammar</h2>
-        <p>Translate the following word:</p>
-        
-        <div class="question">
-            <span id="word">Word</span>
-        </div>
-        
-        <form id="quiz-form">
-            <input type="text" id="answer" placeholder="answer" required>
-            <button type="submit">Submit</button>
-        </form>
-        
-        <div id="result" class="hidden">
-            <p id="result-message"></p>
-            <button onclick="nextQuestion()">Next Question</button>
+        <div class="flashcard">
+            <div class="question">What is the translation of this word?</div>
+            <input type="text" class="answer-input" placeholder="Type your answer here">
+            <div class="button-group">
+                <button class="hint-button">Hint</button>
+                <button class="submit-button">Submit</button>
+            </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
