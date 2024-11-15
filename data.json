@@ -2,5 +2,9 @@
   {
     "inputData": "Hello",
     "timestamp": "2024-11-01T16:35:07.526Z"
+  },
+  {
+    "inputData": "test",
+    "timestamp": "2024-11-01T16:46:25.040Z"
   }
 ]
