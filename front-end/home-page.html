@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Learning Home</title>
+  <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
 
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="theory.html">Educational Resources</a></li>
+      <li><a href="quizzes.html">Interactive Exercises</a></li>
+      <li><a href="exercises.html">Exercises</a></li>
+      <li><a href="accounts.html">Account</a></li>
+      <li><a href="ProgressTracking">Progress Tracking</a></li>
+      <li><a href="team">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Welcome to Grammargic!</h1>
+    <p>Master the grammar and structure of your chosen language with interactive exercises!</p>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <!-- Educational Section Link -->
+    <section id="education">
+      <h2>Educational Resources</h2>
+      <p>Discover lessons on grammar structures, sentence formation, and language rules.</p>
+      <button onclick="navigateTo('theory.html')">Start Learning</button>
+    </section>
+
+    <!-- Interactive Exercises Section -->
+    <section id="interactive">
+      <h2>Interactive Exercises</h2>
+      <p>Practice what you've learned through engaging exercises that build fluency.</p>
+      <button onclick="navigateTo('quizzes.html')">Start Practicing</button>
+    </section>
+  </main>
+
+  <script>
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+  </script>
+
+</body>
+</html>
