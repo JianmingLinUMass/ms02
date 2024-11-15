@@ -1,0 +1,89 @@
+body {
+    background-color: rgba(253, 232, 255, 0.8);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display:flex;
+    gap: 10px;
+}
+
+.home-button {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #00ad9e;
+    font-weight: bold;
+    cursor: pointer;
+    border: 4px solid #00ad9e;
+}
+
+.exercises-header {
+    font-size: 22px;
+    color: #ffffff;
+    background-color: #ff547c;
+    padding: 10px 40px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.page-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 120px;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    color: rgba(255, 105, 180, 0.85);
+}
+
+.description {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: #00ad9e;
+}
+
+.unit-selection {
+    position: relative;
+    display: inline-block;
+}
+
+.unit-button {
+    background-color: white;
+    color:#00ad9e;
+    padding: 16px;
+    font-size: 20px;
+    border: none;
+    margin-top: 40px;
+}
+
+.units {
+    display: none;
+    position: absolute;
+    background-color: white;
+}
+
+.units a {
+    color: #00ad9e;
+    font-size: 16px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/*changes background color when units are hovered*/
+.units a:hover {background-color: #ddd;}
+
+/*changes units to visible when unit-button is hovered*/
+.unit-selection:hover .units {display: block;}
+
+/*changes background color of unit-button when it is hovered*/
+.unit-selection:hover .unit-button {background-color: aquamarine;}
