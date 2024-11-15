@@ -42,6 +42,16 @@ body {
     text-align: left;
 }
 
+.home-button {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #00ad9e;
+    font-weight: bold;
+    cursor: pointer;
+    border: 4px solid #00ad9e;
+}
+
 .welcome-message {
     font-size: 18px;
     color: rgba(42, 167, 160, 0.7); 
