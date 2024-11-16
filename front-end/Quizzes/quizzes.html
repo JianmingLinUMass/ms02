@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quizzes Page</title>
     <link rel="stylesheet" href="quizzes.css">
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="../navbar.css">
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="home-page.html">Home</a></li>
-            <li><a href="theory.html">Educational Resources</a></li>
-            <li><a href="quizzes.html">Interactive Exercises</a></li>
-            <li><a href="Exercises/exercises.html">Exercises</a></li>
-            <li><a href="accounts.html">Account</a></li>
-            <li><a href="ProgressTracking/progress-tracking.html">Progress Tracking</a></li>
+            <li><a href="../home-page.html">Home</a></li>
+            <li><a href="../theory.html">Educational Resources</a></li>
+            <li><a href="../Quizzes/quizzes.html">Interactive Exercises</a></li>
+            <li><a href="../Exercises/exercises.html">Exercises</a></li>
+            <li><a href="../accounts.html">Account</a></li>
+            <li><a href="../ProgressTracking/progress-tracking.html">Progress Tracking</a></li>
         </ul>
     </nav>
 
@@ -40,17 +40,19 @@
       </p>
 
       <div class="flashcard">
-        <div class="question">What is the translation of this word?</div>
+        <div class="question" id = question-text>What is the translation of this word?</div>
         <input
           type="text"
           class="answer-input"
+          id ="answer-input"
           placeholder="Type your answer here"
         />
         <div class="button-group">
-          <button class="hint-button">Hint</button>
-          <button class="submit-button">Submit</button>
+          <button class="hint-button" id="hint-button">Hint</button>
+          <button class="submit-button" id="submit-button">Submit</button>
         </div>
       </div>
     </div>
+    <script src="./quizzes.js"></script>
   </body>
 </html>
