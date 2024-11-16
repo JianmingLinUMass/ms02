@@ -42,16 +42,13 @@ export class AppControlComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <div class="home-container">
-            <div class="home-button">🏠︎</div>
-        </div>
         <h1 id="welcome-note">Welcome to the User Page!</h1>
         <div id="viewContainer"></div>`;
     }
 
     #attachEventListeners() {
-        const homeButton = this.#container.querySelector('.home-button');
-        homeButton.addEventListener('click', () => document.location.href="home-page.html");
+        // const homeButton = this.#container.querySelector('.home-button');
+        // homeButton.addEventListener('click', () => document.location.href="../home-page.html");
     }
 
     #renderAllOtherComponents() {

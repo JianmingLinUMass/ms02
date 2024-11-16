@@ -4,111 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theory Page</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: #ffdce3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            color: #ff547c;
-        }
-
-        .home-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .home-button {
-            background-color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: #00ad9e;
-            font-weight: bold;
-            cursor: pointer;
-            border: 4px solid #00ad9e;
-        }
-
-        .theory-header {
-            font-size: 20px;
-            color: #ffffff;
-            background-color: #ff547c;
-            padding: 10px 60px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            padding: 20px 60px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .unit {
-            background-color: #ffffff;
-            padding: 5px 30px;
-            border-radius: 5px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #00ad9e;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .box-container {
-            display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            width: 80%; 
-            flex-grow: 1; 
-        }
-
-        .box {
-            width: 120px;
-            height: 120px;
-            background-color: #0bc8b8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 10px;
-            color: #ffffff;
-            cursor: pointer;
-            border: 6px solid #12d7c6;
-        }
-    </style>
+    <link rel="stylesheet" href="theory.css">
+    <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
-
-    <div class="home-container">
-        <a href="index.html" class="home-button">🏠︎</a>
-        <a href="exercises.html" class="theory-header">Theory</a>
-    </div>
+    <nav>
+        <ul>
+            <li><a href="home-page.html">Home</a></li>
+            <li><a href="theory.html">Educational Resources</a></li>
+            <li><a href="quizzes.html">Interactive Exercises</a></li>
+            <li><a href="Exercises/exercises.html">Exercises</a></li>
+            <li><a href="accounts.html">Account</a></li>
+            <li><a href="ProgressTracking/progress-tracking.html">Progress Tracking</a></li>
+        </ul>
+    </nav>
 
     <div class="header">
         <div class="title">Present Simple</div>
-
         <div class="unit">Unit 1 ▾</div>
     </div>
 
