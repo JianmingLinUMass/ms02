@@ -37,7 +37,7 @@ const server = http.createServer((req, res) => {
     }
     // get HTML files
     else if (req.method === 'GET') {
-        let filePath = path.join(__dirname, '../front-end', req.url === '/' ? 'index.html' : req.url);
+        let filePath = path.join(__dirname, '../front-end', req.url === '/' ? 'home-page.html' : req.url);
 
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
