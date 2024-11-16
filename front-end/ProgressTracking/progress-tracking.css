@@ -2,28 +2,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 auto;
     box-sizing: border-box;
-    font-family: 'Courier New', monospace;
-
+    align-items: center;
 }
 
 body {
-    background-color: #ffdce3;
-    line-height: 1.5;
-    margin-left: 30px;
-    padding-top: 20px; 
+    background-color: rgba(253, 232, 255, 0.8);
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    color: rgba(42, 167, 160, 0.7);
 }
-
-/* .home-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-} */
-
-
 
 #welcome-note {
     font-style: italic;

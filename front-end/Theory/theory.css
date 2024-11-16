@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Courier New', monospace;
-    background-color: #ffdce3;
+    background-color: rgba(253, 232, 255, 0.8);
     display: flex;
     flex-direction: column;
     align-items: center;
