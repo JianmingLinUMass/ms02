@@ -31,7 +31,7 @@ export class UserPointMetricsComponent extends BaseComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <br>
+        <br><br/>
         <div><b>Current Level:</b>
             <span id="level"></span>
         </div>

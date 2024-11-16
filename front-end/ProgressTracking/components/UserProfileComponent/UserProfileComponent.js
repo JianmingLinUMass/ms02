@@ -28,7 +28,7 @@ export class UserProfileComponent extends BaseComponent {
     #setupContentInContainer() {
         this.#container.innerHTML = `
         <div><b>User Profile:</b></div>
-        <img src="../../front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg" alt="Default Profile" id="profile-picture">
+        <img src="https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true" alt="Default Profile" id="profile-picture">
         <form enctype="multipart/form-data">
             <input type="file" accept="image/*" id="edit-profile-input"/>
         </form>
@@ -37,7 +37,7 @@ export class UserProfileComponent extends BaseComponent {
         <br/><br/>
         <div>*Default Profile Picture Attribution*</div>
         <a href="https://www.vecteezy.com/free-vector/default-profile-picture">Default Profile Picture Vectors by Vecteezy</a>
-        <br/><br/>`;
+        <br/><br/><br/>`;
     }
 
     #attachEventListeners() {
