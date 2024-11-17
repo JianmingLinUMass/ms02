@@ -12,12 +12,12 @@
     <nav>
       <ul>
         <li><a href="home-page.html">Home</a></li>
-        <li><a href="Theory/theory.html">Educational Resources</a></li>
-        <li><a href="Quizzes/quizzes.html">Interactive Exercises</a></li>
-        <li><a href="Exercises/exercises.html">Exercises</a></li>
-        <li><a href="accounts.html">Account</a></li>
+        <li><a href="../Theory/theory.html">Educational Resources</a></li>
+        <li><a href="../Quizzes/quizzes.html">Interactive Exercises</a></li>
+        <li><a href="../Exercises/exercises.html">Exercises</a></li>
+        <li><a href="../accounts.html">Account</a></li>
         <li>
-          <a href="ProgressTracking/progress-tracking.html"
+          <a href="../ProgressTracking/progress-tracking.html"
             >Progress Tracking</a
           >
         </li>
@@ -42,7 +42,7 @@
           Discover lessons on grammar structures, sentence formation, and
           language rules.
         </p>
-        <button onclick="navigateTo('Theory/theory.html')">
+        <button onclick="navigateTo('../Theory/theory.html')">
           Start Learning
         </button>
       </section>
@@ -54,7 +54,7 @@
           Practice what you've learned through engaging exercises that build
           fluency.
         </p>
-        <button onclick="navigateTo('Quizzes/quizzes.html')">
+        <button onclick="navigateTo('../Quizzes/quizzes.html')">
           Start Practicing
         </button>
       </section>
@@ -66,4 +66,27 @@
       }
     </script>
   </body>
+
+  <section id="progress-dashboard">
+    <h2>Your Progress</h2>
+    <div class="progress-item">
+      <p>Lessons Completed: <span id="lessons-completed">0</span> / 10</p>
+      <div class="progress-bar-container">
+        <div id="lessons-progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+    <div class="progress-item">
+      <p>Quizzes Passed: <span id="quizzes-passed">0</span> / 5</p>
+      <div class="progress-bar-container">
+        <div id="quizzes-progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <!-- Link JavaScript -->
+  <script src="progress-tracking.js"></script>
+  
+
 </html>
