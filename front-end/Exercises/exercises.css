@@ -28,6 +28,7 @@ body {
 
 .description {
     font-size: 20px;
+    font-weight: bold;
     margin-top: 40px;
     color: #00ad9e;
 }

@@ -32,3 +32,13 @@ body {
     margin-top: 20px;
     color: #00ad9e;
 }
+.exercise { 
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.exercise-question {
+    font-size: 16px;
+    color: #00ad9e;
+    margin-top: 10px;
+}
