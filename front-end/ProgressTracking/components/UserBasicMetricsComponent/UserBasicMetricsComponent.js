@@ -31,7 +31,6 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <br>
         <div><b>User ID:</b> 
             <span id="user-id"></span>
         </div>
