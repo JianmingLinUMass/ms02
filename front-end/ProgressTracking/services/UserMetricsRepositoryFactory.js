@@ -1,5 +1,5 @@
-import { UserMetricsRepositoryService } from "./UserMetricsRepositoryService.js";
-import { UserMetricsRepositoryRemoteService } from "./UserMetricsRepositoryRemoteService.js";
+import { UserMetricsRepositoryService } from "../../../front-end/ProgressTracking/services/UserMetricsRepositoryService.js";
+import { UserMetricsRepositoryRemoteService } from "../../../front-end/ProgressTracking/services/UserMetricsRepositoryRemoteService.js";
 
 /**
  * Factory class to create instances of metrics repository services.
