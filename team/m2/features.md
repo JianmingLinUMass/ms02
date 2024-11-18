@@ -4,7 +4,7 @@
 
 A sidebar will provide easy access to key sections of the app, allowing smooth navigation from any part of the site to the main page, language options, and settings.
 
-**Assigned to**: Calder McKenna
+**Assigned to**: Dhruv Kartik
 
 ## Main Page Navigation
 
@@ -34,16 +34,16 @@ The main page will contain clickable boxes that will allow users to navigate to 
 
 This will provide explanations on grammatical topconcepts like sentence structure and verb conjugation, along with example usages of each concept. Users will be able to easily navigate or search for specific topics, making it simple to find relevant information. Progress will also be tracked by account, allowing learners to see which sections they've completed and revisit where they left off. The Theory Page prepares users to apply their knowledge in the exercises.
 
-**Assigned to**: Lawrence Meng
+**Assigned to**: Joe Lebedev
 
 ## Game
 
 A quiz-style game where users will select correct answers in a time limit, earning more points when selecting quicker. Users can compete against themselves to improve their speed and accuracy. This feature helps users solidify their knowledge in a playful and interactive manner, keeping users engaged to learning.
 
-**Assigned to**: Loick Marion
+**Assigned to**: Srishti Nandy
 
 ## Accounts/Log-in
 
 Allows users to create accounts that will enable progress to be saved. With secure authentication, users will be able to register using their email. This feature ensures data is saved so users will be able to continue their progress, providing a seamless experience.
 
-**Assigned to**: Srishti Nandy
+**Assigned to**: Lawrence Meng
