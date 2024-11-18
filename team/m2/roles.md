@@ -62,6 +62,9 @@
 
 - **Role**: Timekeeper - helps enforce deadlines by checking upcoming due dates, as well as allotting the proper time needed for each task
 - **Top 3 Commits**:
-  1. Commit 1: brainstormed Learning Page diagram
-  2. Commit 2: brainstormed Home Page diagram
-  3. Commit 3: created the list of roles depending on each member's capabilities and curiosities
+  1. Commit 1: https://github.com/JianmingLinUMass/ms02/pull/20 
+     This is the CSS for our current quiz page.
+  3. Commit 2: https://github.com/JianmingLinUMass/ms02/pull/19
+     This commit has the HTML for our current quiz page. I created a "flashcard"-like structure, where the user can ask for a hint or click the next question, which is the main feature. There is also a list of modules on the side that will hopefully be interactive to help navigate through the available quizzes. 
+  5. Commit 3: https://github.com/JianmingLinUMass/ms02/pull/10
+     This commit has the original layout of our quiz page, at its most primitive stage in terms of design. 
