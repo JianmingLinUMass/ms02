@@ -20,6 +20,11 @@
   1. Commit 1: Created the data structure for users
   2. Commit 2: Created the data strcuture for language progress, exercices, grammar and user activity
   3. Commit 3: Added the data relationships and sources
+ 
+  - **Top 3 Commits (Milestone 3)**:
+  1. [Commit 1](https://github.com/JianmingLinUMass/ms02/commit/b232a064973a1abb178379a5a41f1aba7a220276): Setup the homepage and homepage css. Added content and some secttions and buttons on the homepage
+  2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/877b90d3f54f977b03f228322139fa0e917ad13e): Implemented a dynamic visual dashboard for tracking users progress using indexDB
+  3. [Commit 3](https://github.com/JianmingLinUMass/ms02/commit/c9cebf0d8e7e21544e68a251498bf2e01424a862): Implemented dynamic tips section on the homepage that displays a daily language learning tip or motivational quote that changes dynamically. The tips are preloaded into a JSON file  and users can cycle through multiple tips.
 
 ## Jianming Lin - Communication Lead
 
