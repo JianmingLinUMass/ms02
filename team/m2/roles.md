@@ -8,6 +8,11 @@
   2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/5cd3f5aa983d1283a9185c5466fde5c5b893c154): Implemented the task I was assigned to do, the `problem.md` file.
   3. Commit 3: Continued to work with the team to ensure that the tasks were completed on time by the deadline.
 
+- **Top 3 Commit**:
+  1. [Commit 1](https://github.com/JianmingLinUMass/ms02/commit/5bafda6db68a1f78aa19b7080b7eb41e6180de47): Made several improvements on my existing implementation of the exercise features, completing the current iteration of the exercise page. I believe these improvements made the exercise page function better and made it a much better experience for the user as well.
+  2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/8d63e8144aa6dfed9d06583727aa54635e6040ef): Added functionality that let users get a different exercise based on what unit they chose, while remaining on the same HTML page.
+  3. [Commit 3](https://github.com/JianmingLinUMass/ms02/commit/1711443feea63b7ce23422507dcce2d3223493a6): Added basic functionality for the exercise page, with a quiz-style exercise for the users to practice what they learned elsewhere in our app.
+
 ## Dhruv Kartik - Meeting Manager
 
 - **Role**: Meeting Manager - arranges weekly meetings and biweekly check-ins to see where we're at
