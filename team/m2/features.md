@@ -22,7 +22,7 @@ The main page will contain clickable boxes that will allow users to navigate to 
 
 ## Exercises
 
-- Set up exercise page with a button leading to the exercise for the specific unit the user is trying to practice. (1 Point)
+- Set up exercise page with a button leading to the exercise for the specific unit the user is trying to practice. (1 point)
 - Created dynamically loading exercise page which changes based on the unit the user selects using URL parsing. (1 point)
 - Created an exercise page that gives the user a random set of 10 questions depending on the unit the user chose, and takes answers for each of those questions, giving them feedback on their answers after they submit. (5 points)
 - Implemented a reset feature that rebuilds the page with a different set of questions from the same unit and clears all feedbcak from any previously submitted exercise. (2 points)
