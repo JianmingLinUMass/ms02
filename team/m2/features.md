@@ -1,5 +1,17 @@
 # Application Features
 
+## Homepage
+
+-  navigation bar with links to various sections of the application (e.g., Home, Educational Resources, Interactive Exercises) (1 point)
+-  static header with a welcome message and a brief introduction to the application (1 point)
+-  section with a brief description of educational resources and a button that links to the theory page (1 point)
+- section with a description of interactive exercises and a button linking to the quizzes page (1 point)
+- dashboard showing progress tracking with placeholder for dynamically updating progress bars for lessons completed and quizzes passed. (3 points)
+-  A section that displays a random tip from a JSON file. The user can cycle through tips using a "Next Tip" button (3 points)
+-  Quick stats section with daily streak (2 points)
+
+  **Assigned to**: Dhruv Kartik
+
 ## Sidebar Navigation
 
 A sidebar will provide easy access to key sections of the app, allowing smooth navigation from any part of the site to the main page, language options, and settings.
