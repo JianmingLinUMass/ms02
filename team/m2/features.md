@@ -22,9 +22,13 @@ The main page will contain clickable boxes that will allow users to navigate to 
 
 ## Exercises
 
-Users will be able to engage in multiple-choice activities and fill-in-the-blank exercises which will increase in difficulty and complexity as they progress. Their progress will be tracked by the progress tracker. This will be the main way that users will test their knowledge and understanding of grammatical concepts.
+-Set up exercise page with a button leading to the exercise for the specific unit the user is trying to practice. (1 Point)
+-Created dynamically loading exercise page which changes based on the unit the user selects using URL parsing. (1 point)
+-Created an exercise page that gives the user a random set of 10 questions depending on the unit the user chose, and takes answers for each of those questions, giving them feedback on their answers after they submit. (5 points)
+-Implemented a reset feature that rebuilds the page with a different set of questions from the same unit and clears all feedbcak from any previously submitted exercise. (2 points).
+-Used HTML and CSS to theme the exercise in accordance with the design of our overall project to make the exercise visually appealing and engaging for the user. (1 point).
 
-**Assigned to**: Joe Lebedev
+**Assigned to**: Calder McKenna
 
 ## Theory Page
 
