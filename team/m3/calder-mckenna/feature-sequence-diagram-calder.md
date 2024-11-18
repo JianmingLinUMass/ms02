@@ -8,6 +8,7 @@ Sequence Diagram:
     sequenceDiagram
         exercises.css->>exercises.html: provides css for exercise main page
         exercises.html->>unitexercise.html: allows for traversal to unit specific exercise page
-        exercises.js->>unitexercise.html: provides functionality to unit specific exercise page 
+        exercises.js->>unitexercise.html: provides functionality to unit specific exercise page
+        unitexercise.html->>exercises.js: takes user input from web page and runs js functions on it
         units.css->>unitexercise.html: provides css for unit specific exercise page
 ```
