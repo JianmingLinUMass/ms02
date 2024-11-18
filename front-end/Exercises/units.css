@@ -60,3 +60,29 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
 }
+
+#reset-button {
+    background-color: red;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.score {
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.green {
+    color: green;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
