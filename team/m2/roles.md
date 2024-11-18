@@ -41,8 +41,8 @@
 
 - **Role**: Note Recorder - records new ideas discussed among the team, as well as including diagrams of possible design ideas
 - **Top 3 Commits**:
-  1. Commit 1: Proposed ideas for features
-  2. Commit 2: Implemented features.md
+  1. Commit 1: Kept detailed record of tasks and team progress
+  2. Commit 2: Implemented login page, completing a initial landing page for all Grammargic users to enter user information, not allowing users to proceed without entering their info.This will allow for users to save progress and use Grammargic over time. Also included a link to a sign up page for new users to create their account. 
   3. Commit 3: Continued to communicate with the team to ensure all tasks were completed on time by the project deadline
 
 ## Loick Marion - Project Manager
