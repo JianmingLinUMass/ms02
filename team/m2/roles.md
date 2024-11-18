@@ -33,9 +33,9 @@
 
 - **Role**: Ideas and Design Coordinator - brainstorms features and function on the application, in regards to the group's overall goal
 - **Top 3 Commits**:
-  1. Commit 1: Came up with one of the possible UI designs.
-  2. Commit 2: Coordinated teammates to work together and decide when we meet to discuss the project.
-  3. Commit 3: Structured the ideas during the meetings.
+  1. Commit 1: Implemented the Theory page and its features.
+  2. Commit 2: Coordinated first in-person meeting.
+  3. Commit 3: Came up with one of the possible UI designs.
 
 ## Lawrence Meng - Note Recorder
 
