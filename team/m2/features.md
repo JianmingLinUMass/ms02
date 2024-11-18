@@ -6,6 +6,10 @@ A sidebar will provide easy access to key sections of the app, allowing smooth n
 
 **Assigned to**: Dhruv Kartik
 
+- Expanded the sidebar functionality to include it on each html page with uniform styling (1 point)
+
+**Assigned to**: Loick Marion
+
 ## Main Page Navigation
 
 The main page will contain clickable boxes that will allow users to navigate to exercises, theory, or games. It will also contain a clickable progress-indicating icon.
@@ -47,6 +51,10 @@ This will provide explanations on grammatical topconcepts like sentence structur
 A quiz-style game where users will select correct answers in a time limit, earning more points when selecting quicker. Users can compete against themselves to improve their speed and accuracy. This feature helps users solidify their knowledge in a playful and interactive manner, keeping users engaged to learning.
 
 **Assigned to**: Srishti Nandy
+
+- Providing functionality to connect the quiz with a back-end sqlite database (3 points)
+
+**Assigned to**: Loick Marion
 
 ## Accounts/Log-in
 
