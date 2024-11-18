@@ -1,6 +1,6 @@
-import { EventHub } from '../../eventHub/EventHub.js';
-import { Events } from '../../eventHub/Events.js';
-import { BaseComponent } from '../BaseComponent/BaseComponent.js'
+import { EventHub } from '../../../../front-end/ProgressTracking/eventHub/EventHub.js';
+import { Events } from '../../../../front-end/ProgressTracking/eventHub/Events.js';
+import { BaseComponent } from '../../../../front-end/ProgressTracking/components/BaseComponent/BaseComponent.js'
 
 export class UserBasicMetricsComponent extends BaseComponent{
     #container = null;
@@ -31,7 +31,6 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <br>
         <div><b>User ID:</b> 
             <span id="user-id"></span>
         </div>

@@ -1,8 +1,8 @@
-import { UserProfileComponent } from '../UserProfileComponent/UserProfileComponent.js'
-import { UserBasicMetricsComponent } from '../UserBasicMetricsComponent/UserBasicMetricsComponent.js'
-import { UserPasswordComponent } from '../UserPasswordComponent/UserPasswordComponent.js'
-import { UserPointMetricsComponent } from '../UserPointMetricsComponent/UserPointMetricsComponent.js'
-import { EventHub } from '../../eventHub/EventHub.js'
+import { UserProfileComponent } from '../../../../front-end/ProgressTracking/components/UserProfileComponent/UserProfileComponent.js'
+import { UserBasicMetricsComponent } from '../../../../front-end/ProgressTracking/components/UserBasicMetricsComponent/UserBasicMetricsComponent.js'
+import { UserPasswordComponent } from '../../../../front-end/ProgressTracking/components/UserPasswordComponent/UserPasswordComponent.js'
+import { UserPointMetricsComponent } from '../../../../front-end/ProgressTracking/components/UserPointMetricsComponent/UserPointMetricsComponent.js'
+import { EventHub } from '../../../../front-end/ProgressTracking/eventHub/EventHub.js'
 
 export class AppControlComponent {
     #container = null;
@@ -42,12 +42,13 @@ export class AppControlComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <h1>Welcome to the User Page!</h1>
+        <h1 id="welcome-note">Welcome to the User Page!</h1>
         <div id="viewContainer"></div>`;
     }
 
     #attachEventListeners() {
-        
+        // const homeButton = this.#container.querySelector('.home-button');
+        // homeButton.addEventListener('click', () => document.location.href="../home-page.html");
     }
 
     #renderAllOtherComponents() {
