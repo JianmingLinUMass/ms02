@@ -1,6 +1,6 @@
-import { EventHub } from '../../eventHub/EventHub.js';
-import { Events } from '../../eventHub/Events.js';
-import { BaseComponent } from '../BaseComponent/BaseComponent.js'
+import { EventHub } from '../../../../front-end/ProgressTracking/eventHub/EventHub.js';
+import { Events } from '../../../../front-end/ProgressTracking/eventHub/Events.js';
+import { BaseComponent } from '../../../../front-end/ProgressTracking/components/BaseComponent/BaseComponent.js'
 
 export class UserProfileComponent extends BaseComponent {
     #container = null;
@@ -8,6 +8,8 @@ export class UserProfileComponent extends BaseComponent {
     constructor() {
         super();
         this.loadCSS('UserProfileComponent');
+
+        this.imgURL = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
     }
 
     render() {
@@ -15,6 +17,7 @@ export class UserProfileComponent extends BaseComponent {
 
         this.#createContainer();
         this.#setupContentInContainer();
+        this.#setupDefaultProfile();
         this.#attachEventListeners();
 
         return this.#container;
@@ -28,7 +31,7 @@ export class UserProfileComponent extends BaseComponent {
     #setupContentInContainer() {
         this.#container.innerHTML = `
         <div><b>User Profile:</b></div>
-        <img src="https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true" alt="Default Profile" id="profile-picture">
+        <img src="" alt="Default Profile" id="profile-picture">
         <form enctype="multipart/form-data">
             <input type="file" accept="image/*" id="edit-profile-input"/>
         </form>
@@ -38,6 +41,11 @@ export class UserProfileComponent extends BaseComponent {
         <div>*Default Profile Picture Attribution*</div>
         <a href="https://www.vecteezy.com/free-vector/default-profile-picture">Default Profile Picture Vectors by Vecteezy</a>
         <br/><br/><br/>`;
+    }
+
+    #setupDefaultProfile() {
+        this.#container.querySelector('#profile-picture').setAttribute('src', this.imgURL);
+        //this.#publishStoreProfile(new File([this.imgURL], 'newfilename'))
     }
 
     #attachEventListeners() {

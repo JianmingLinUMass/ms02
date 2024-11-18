@@ -2,7 +2,10 @@ import { AppControlComponent } from '../../front-end/ProgressTracking/components
 import { UserMetricsRepositoryFactory } from '../../front-end/ProgressTracking/services/UserMetricsRepositoryFactory.js';
 
 const appController = new AppControlComponent();
-const appContainer = document.getElementById('app');
-appContainer.appendChild(appController.render());
+appController.render();
 
-const metricsRepository = UserMetricsRepositoryFactory.get('local');
+// Initialize IndexedDB database
+export function initDatabase() {
+    const metricsRepository = UserMetricsRepositoryFactory.get('local');
+    console.log('In initializing indexed db.')
+} 

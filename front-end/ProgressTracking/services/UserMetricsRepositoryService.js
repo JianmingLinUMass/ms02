@@ -1,5 +1,5 @@
-import { Events } from '../eventHub/Events.js';
-import Service from './Service.js';
+import { Events } from '../../../front-end/ProgressTracking/eventHub/Events.js';
+import Service from '../../../front-end/ProgressTracking/services/Service.js';
 
 // Local service
 export class UserMetricsRepositoryService extends Service {
@@ -71,6 +71,8 @@ export class UserMetricsRepositoryService extends Service {
   }
 
   async storeProfile(profile) {
+    console.log('Profile:',profile)
+
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeNames[0]], 'readwrite');
       const store = transaction.objectStore(this.storeNames[0]);
