@@ -42,4 +42,8 @@ A quiz-style game where users will select correct answers in a time limit, earni
 
 Allows users to create accounts that will enable progress to be saved. With secure authentication, users will be able to register using their email. This feature ensures data is saved so users will be able to continue their progress, providing a seamless experience.
 
-**Assigned to**: Srishti Nandy
+Medium feature (2 points)
+A login page with input fields that require completion before logging in ensures users provide all of the necessary information required to access their progress in their account. A CSS file integrates containers for a better UI as well as a visually pleasing color scheme that is cohesive with the rest of the pages. An external link gives an option for new users to create an account, but has not been implemented as of 11/17/2024
+
+
+**Assigned to**: Lawrence Meng 
