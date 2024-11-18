@@ -50,13 +50,14 @@
   2. Commit 2: Implemented login page, completing a initial landing page for all Grammargic users to enter user information, not allowing users to proceed without entering their info.This will allow for users to save progress and use Grammargic over time. Also included a link to a sign up page for new users to create their account. 
   3. Commit 3: Continued to communicate with the team to ensure all tasks were completed on time by the project deadline
 
-## Loick Marion - Project Manager
+## Loick Marion - Project Manager, Backend Design
 
-- **Role**: Project Manager - looks over the initial project idea and makes sure we stay on track with our goals
+- **Role**: Project Manager - looks over the initial project idea and makes sure we stay on track with our goals. Checks in with team members and ensures that they are up to date with tasks.
+- **Role**: Implement Backend Design - implements a basic backend features to give group members the option to connect their code to a sqlite server side database.
 - **Top 3 Commits**:
-  1. Commit 1: Came up with our project idea.
-  2. Commit 2: Actively participated in the discussion to lay out the image of our application.
-  3. Commit 3: Partially worked on the features.
+  1. [Commit 1](https://github.com/JianmingLinUMass/ms02/commit/f6d57672022f88abd9370818fffa8add6dc8a6a6): Created a SQL database and integrated it into the back end, enabled queries from the front end.
+  2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/481984dd93054158529e71ef4d7f7ff51a621ec2): Edited the quiz feature on the front end to load questions from the database. This provides a framwork for others to use/ modify as needed to access the backend/database with their features.
+  3. [Commit 3](https://github.com/JianmingLinUMass/ms02/commit/3a8bdad121e9637287fb7a94ff3a3327dccdaaf0): Added a navigation bar to every page that allows the user to access each page from every page.
 
 ## Srishti Nandy - Timekeeper
 
