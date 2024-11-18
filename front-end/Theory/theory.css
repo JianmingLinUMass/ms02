@@ -60,6 +60,11 @@ nav ul li:hover {
     color: #00ad9e;
 }
 
+.unit-selection {
+    position: relative;
+    display: inline-block;
+}
+
 .unit {
     background-color: #ffffff;
     padding: 5px 30px;
@@ -69,7 +74,26 @@ nav ul li:hover {
     color: #00ad9e;
     margin-top: 10px;
     cursor: pointer;
+    border: none;
 }
+
+.unit-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+}
+
+.unit-content a {
+    color: #00ad9e;
+    font-size: 16px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.unit-content a:hover {background-color: #ddd;}
+
+.show {display: block;}
 
 .box-container {
     display: flex;
@@ -92,4 +116,15 @@ nav ul li:hover {
     color: #ffffff;
     cursor: pointer;
     border: 6px solid #12d7c6;
+}
+
+.box:hover {background-color: #12d7c6;}
+
+a { text-decoration: none; }
+
+.description {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: #00ad9e;
 }

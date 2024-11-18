@@ -3,10 +3,15 @@
 ## Calder McKenna - Task Manager
 
 - **Role**: Task Manager - ensures tasks are assigned and completed on time and correctly. Works with the team on Slack to discuss the different tasks and have them completed on time.
-- **Top 3 Commits**:
+- **Top 3 Commits (Milestone 2)**:
   1. Commit 1: Worked with Jianming to communicate with team members in Slack to break up the tasks for milestone 2 and assign them.
   2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/5cd3f5aa983d1283a9185c5466fde5c5b893c154): Implemented the task I was assigned to do, the `problem.md` file.
   3. Commit 3: Continued to work with the team to ensure that the tasks were completed on time by the deadline.
+
+- **Top 3 Commits (Milestone 3)**:
+  1. [Commit 1](https://github.com/JianmingLinUMass/ms02/commit/5bafda6db68a1f78aa19b7080b7eb41e6180de47): Made several improvements on my existing implementation of the exercise features, completing the current iteration of the exercise page. I believe these improvements made the exercise page function better and made it a much better experience for the user as well.
+  2. [Commit 2](https://github.com/JianmingLinUMass/ms02/commit/8d63e8144aa6dfed9d06583727aa54635e6040ef): Added functionality that let users get a different exercise based on what unit they chose, while remaining on the same HTML page.
+  3. [Commit 3](https://github.com/JianmingLinUMass/ms02/commit/1711443feea63b7ce23422507dcce2d3223493a6): Added basic functionality for the exercise page, with a quiz-style exercise for the users to practice what they learned elsewhere in our app.
 
 ## Dhruv Kartik - Meeting Manager
 
@@ -28,9 +33,9 @@
 
 - **Role**: Ideas and Design Coordinator - brainstorms features and function on the application, in regards to the group's overall goal
 - **Top 3 Commits**:
-  1. Commit 1: Came up with one of the possible UI designs.
-  2. Commit 2: Coordinated teammates to work together and decide when we meet to discuss the project.
-  3. Commit 3: Structured the ideas during the meetings.
+  1. Commit 1: Implemented the Theory page and its features.
+  2. Commit 2: Coordinated first in-person meeting.
+  3. Commit 3: Came up with one of the possible UI designs.
 
 ## Lawrence Meng - Note Recorder
 
