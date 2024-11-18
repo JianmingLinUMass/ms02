@@ -44,6 +44,7 @@ body {
     padding: 16px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 26px;
+    font-weight: bold;
     border: none;
     margin-top: 60px;
 }
@@ -56,7 +57,7 @@ body {
 
 .units a {
     color: #00ad9e;
-    font-size: 20px;
+    font-size: 16px;
     padding: 12px 16px;
     text-decoration: none;
     display: block;

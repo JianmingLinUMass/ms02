@@ -38,12 +38,25 @@ body {
     margin-top: 20px;
 }
 .exercise-question {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #00ad9e;
     margin-top: 10px;
 }
 
-.submit-button {
+.answer-label {
+    font-size: 16px;
+}
+.radio-button {
+    cursor: pointer;
+}
+
+#submit-button {
     background-color: #00ad9e;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
