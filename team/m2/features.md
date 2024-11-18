@@ -1,5 +1,17 @@
 # Application Features
 
+## Homepage
+
+-  navigation bar with links to various sections of the application (e.g., Home, Educational Resources, Interactive Exercises) (1 point)
+-  static header with a welcome message and a brief introduction to the application (1 point)
+-  section with a brief description of educational resources and a button that links to the theory page (1 point)
+- section with a description of interactive exercises and a button linking to the quizzes page (1 point)
+- dashboard showing progress tracking with placeholder for dynamically updating progress bars for lessons completed and quizzes passed. (3 points)
+-  A section that displays a random tip from a JSON file. The user can cycle through tips using a "Next Tip" button (3 points)
+-  Quick stats section with daily streak (2 points)
+
+  **Assigned to**: Dhruv Kartik
+
 ## Sidebar Navigation
 
 A sidebar will provide easy access to key sections of the app, allowing smooth navigation from any part of the site to the main page, language options, and settings.
@@ -22,11 +34,11 @@ The main page will contain clickable boxes that will allow users to navigate to 
 
 ## Exercises
 
-Set up exercise page with a button leading to the exercise for the specific unit the user is trying to practice (1 Point).
-Created dynamically loading exercise page which changes based on the unit the user selects using URL parsing (1 point).
-Created an exercise page that gives the user a random set of 10 questions depending on the unit the user chose, and takes answers for each of those questions, giving them feedback on their answers after they submit (5 points).
-Implemented a reset feature that rebuilds the page with a different set of questions from the same unit and clears all feedbcak from any previously submitted exercise (2 points).
-Used HTML and CSS to theme the exercise in accordance with the design of our overall project to make the exercise visually appealing and engaging for the user (1 point).
+- Set up exercise page with a button leading to the exercise for the specific unit the user is trying to practice. (1 point)
+- Created dynamically loading exercise page which changes based on the unit the user selects using URL parsing. (1 point)
+- Created an exercise page that gives the user a random set of 10 questions depending on the unit the user chose, and takes answers for each of those questions, giving them feedback on their answers after they submit. (5 points)
+- Implemented a reset feature that rebuilds the page with a different set of questions from the same unit and clears all feedbcak from any previously submitted exercise. (2 points)
+- Used HTML and CSS to theme the exercise in accordance with the design of our overall project to make the exercise visually appealing and engaging for the user. (1 point)
 
 **Assigned to**: Calder McKenna
 
