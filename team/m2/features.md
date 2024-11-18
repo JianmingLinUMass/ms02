@@ -32,6 +32,12 @@ The main page will contain clickable boxes that will allow users to navigate to 
 
 ## Theory Page
 
+- set up main theory page with the right header (1 point)
+- dropdown that allows you to choose between different units (3 points)
+- create pages for the different units (1 point) 
+- create boxes for the several blocks of each unit (3 points)
+- link box to the first theory block (2 point)
+
 This will provide explanations on grammatical topconcepts like sentence structure and verb conjugation, along with example usages of each concept. Users will be able to easily navigate or search for specific topics, making it simple to find relevant information. Progress will also be tracked by account, allowing learners to see which sections they've completed and revisit where they left off. The Theory Page prepares users to apply their knowledge in the exercises.
 
 **Assigned to**: Joe Lebedev
