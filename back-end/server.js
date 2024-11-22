@@ -61,7 +61,7 @@ const server = http.createServer(async (req, res) => {
     } 
     // Serve HTML files
     else if (req.method === 'GET') {
-        let filePath = path.join(__dirname, '../front-end', req.url === '/' ? 'home-page.html' : req.url);
+        let filePath = path.join(__dirname, '../front-end', req.url === '/' ? 'Homepage/home-page.html' : req.url);
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
                 res.writeHead(404, { 'Content-Type': 'text/plain' });

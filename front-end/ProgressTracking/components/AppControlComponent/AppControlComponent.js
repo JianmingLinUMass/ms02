@@ -1,8 +1,8 @@
-import { UserProfileComponent } from '../../../../front-end/ProgressTracking/components/UserProfileComponent/UserProfileComponent.js'
-import { UserBasicMetricsComponent } from '../../../../front-end/ProgressTracking/components/UserBasicMetricsComponent/UserBasicMetricsComponent.js'
-import { UserPasswordComponent } from '../../../../front-end/ProgressTracking/components/UserPasswordComponent/UserPasswordComponent.js'
-import { UserPointMetricsComponent } from '../../../../front-end/ProgressTracking/components/UserPointMetricsComponent/UserPointMetricsComponent.js'
-import { EventHub } from '../../../../front-end/ProgressTracking/eventHub/EventHub.js'
+import { UserProfileComponent } from '/ProgressTracking/components/UserProfileComponent/UserProfileComponent.js'
+import { UserBasicMetricsComponent } from '/ProgressTracking/components/UserBasicMetricsComponent/UserBasicMetricsComponent.js'
+import { UserPasswordComponent } from '/ProgressTracking/components/UserPasswordComponent/UserPasswordComponent.js'
+import { UserPointMetricsComponent } from '/ProgressTracking/components/UserPointMetricsComponent/UserPointMetricsComponent.js'
+import { EventHub } from '/ProgressTracking/eventHub/EventHub.js'
 
 export class AppControlComponent {
     #container = null;

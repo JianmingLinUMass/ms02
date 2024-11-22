@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let tips = [];
   
     // Fetch tips from the JSON file
-    fetch("tips.json")
+    fetch("/Homepage/tips.json")
       .then(response => response.json())
       .then(data => {
         tips = data;

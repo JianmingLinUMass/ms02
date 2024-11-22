@@ -1,5 +1,5 @@
-import { Events } from '../../../front-end/ProgressTracking/eventHub/Events.js';
-import Service from '../../../front-end/ProgressTracking/services/Service.js';
+import { Events } from '/ProgressTracking/eventHub/Events.js';
+import Service from '/ProgressTracking/services/Service.js';
 
 // Local service
 export class UserMetricsRepositoryService extends Service {
