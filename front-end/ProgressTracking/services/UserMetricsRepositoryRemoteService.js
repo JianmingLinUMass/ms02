@@ -1,6 +1,6 @@
-import Service from "../../../front-end/ProgressTracking/services/Service.js";
-import { fetch } from "../../../front-end/ProgressTracking/utility/fetch.js"; // 'fetch()' is used by fake service only
-import { Events } from '../../../front-end/ProgressTracking/eventHub/Events.js';
+import Service from "/ProgressTracking/services/Service.js";
+import { fetch } from "/ProgressTracking/utility/fetch.js"; // 'fetch()' is used by fake service only
+import { Events } from '/ProgressTracking/eventHub/Events.js';
 
 // Remote fake service
 export class UserMetricsRepositoryRemoteService extends Service {

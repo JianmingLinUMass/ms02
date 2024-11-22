@@ -1,6 +1,6 @@
-import { EventHub } from '../../../../front-end/ProgressTracking/eventHub/EventHub.js';
-import { Events } from '../../../../front-end/ProgressTracking/eventHub/Events.js';
-import { BaseComponent } from '../../../../front-end/ProgressTracking/components/BaseComponent/BaseComponent.js'
+import { EventHub } from '/ProgressTracking/eventHub/EventHub.js';
+import { Events } from '/ProgressTracking/eventHub/Events.js';
+import { BaseComponent } from '/ProgressTracking/components/BaseComponent/BaseComponent.js'
 
 export class UserPointMetricsComponent extends BaseComponent {
     #container = null;
