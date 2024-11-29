@@ -1,10 +1,17 @@
 // quizzes.js
 
 // Fetch a random question when the page loads
-async function loadQuestion() {
+async function loadQuestion(queryParams = {}) {
     try {
-        // Fetch all questions from the server
-        const response = await fetch('/questions');
+        // Fetch questions from the server
+        const response = await fetch('/questions', {
+            method: 'POST',  // Use POST instead of GET
+            headers: {
+                'Content-Type': 'application/json'  // Inform the server we're sending JSON
+            },
+            body: JSON.stringify(queryParams)  // Convert the queryParams object to a JSON string
+        });
+
         console.log(response)
         const questions = await response.json();
         console.log(questions)
@@ -30,7 +37,7 @@ function handleSubmit(question) {
         ? 'Correct!' 
         : `Incorrect. The correct answer is: ${correctAnswer}`;
 
-    alert(resultMessage); // You can replace this with a styled message in the UI
+    alert(resultMessage); // @ srishti replace this with a styled message in the UI
     document.getElementById('answer-input').value = ''; // Clear the input field
 }
 
@@ -40,4 +47,4 @@ document.getElementById('hint-button').addEventListener('click', () => {
 });
 
 // Initialize the page by loading a question
-window.onload = loadQuestion;
+window.onload = loadQuestion();
