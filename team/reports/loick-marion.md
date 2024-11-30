@@ -39,3 +39,18 @@
 - **Task**: Connected quizzes page to database
 - **Details**: I made a javascript function that queries the database fron the front end. I modified the quizzes html page to have elements update with the result of that function, allowing for the user to see and answer a question from the database.
 - **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/481984dd93054158529e71ef4d7f7ff51a621ec2
+
+### Time 11/22/2024
+- **Task**: Fixed frontend links
+- **Details**: Fixed links/import statements etc in our front end. Most of them were done relatively and didn't work with backend.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/6ca5698981ebb39059e4e93367c5f9da6a989ff7
+
+### Time 11/22/2024
+- **Task**: Updated Backend to use ExpressJS
+- **Details**: Recreated our server.js file to use ExpressJS to be in line with ms04 requirements.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/d605017236129a7e0404b446ec96fbc053f673b5
+
+### Time 11/22/2024
+- **Task**: Updated Database and Backend to Support new Question format.
+- **Details**: I put more thought and decided on the final form our questions should be stored in. I then made the encessary adjustemnts to store questions in that format in sqlite and wury from the frontend.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/744598fc81385f853830a713bbdd96c7b65b8730
