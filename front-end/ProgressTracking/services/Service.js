@@ -1,4 +1,4 @@
-import { EventHub } from '../../../front-end/ProgressTracking/eventHub/EventHub.js';
+import { EventHub } from '/ProgressTracking/eventHub/EventHub.js';
 
 /**
  * The Service class is an abstract class that provides a common interface for
