@@ -54,6 +54,41 @@ app.post('/questions', async (req, res) => {
   }
 });
 
+/*
+ User Account Section Starts
+ */
+const dbFilePathForUserAccounts = path.resolve(__dirname, 'userAccounts.db');
+const databaseForUserAccounts = new Database(dbFilePathForUserAccounts);
+
+// pass an object that has query data in the form: {user_id: 1}. The attribute has to be `user_id`.
+// This should only fetch one user account, if successful. (assuming that each user id should be unique)
+app.post('/userAccounts', async (req, res) => {
+  console.log("Attempting to fetch user accounts");
+  try {
+    const user_id = req.body;
+    const attributes = [];
+    const values = [];
+
+    const queryParams = { user_id };
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value) {
+        attributes.push(key);
+        values.push(value.value);
+      }
+    }
+
+    const userAccounts = await databaseForUserAccounts.queryUserAccounts(attributes, values);
+    //const userAccounts = await databaseForUserAccounts.queryUserAccounts([], []); // get all user accounts stored in userAccounts.db
+    res.status(200).json(userAccounts);
+  } catch (err) {
+    console.error("Error fetching user accounts:", err);
+    res.status(500).send('Failed to fetch user accounts');
+  }
+});
+/*
+ User Account Section Ends
+ */
+
 // Catch-all for any requests to serve HTML files
 app.get('*', (req, res) => {
   let filePath = path.join(frontEndPath, req.path === '/' ? 'Homepage/home-page.html' : req.path);

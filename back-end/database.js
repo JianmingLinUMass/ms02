@@ -56,9 +56,33 @@ class Database {
 
     //TODO: add table for users.
 
-    //Idea: Users have unique userID. Have 2 tables, one for account details and one for activity.
-    //login tbale has ID, username, email, encrypted password, filepath to image location in backend(this is debatable, maybe just dynamically generate from user id, maybe have a subfolder for each last digit of userid)
+    // Idea: Users have unique userID. Have 2 tables, one for account details and one for activity.
+    // Login table has ID, username, email, encrypted password, filepath to image location in backend
+    //   (this is debatable, maybe just dynamically generate from user id, maybe have a subfolder for each last digit of userid)
     
+    /* Create user accounts table, called 'userAccounts'.
+    user id:            the unique id                     (unmodifiable; generated upon user account set up)
+    username:           the user's profile name            (modifiable; should be initialized upon user account set up)
+    user email:         the user's email address          (modifiable; should be initialized upon user account set up)
+    user password:      the user's password               (modifiable; should be stored encrypted upon user account set up)
+    user profile path:   the user's profile picture filepath (modifiable; should have a default picture available upon user account set up)
+    */
+    createUserAccountsTable() {
+        const sql = `
+            CREATE TABLE IF NOT EXISTS userAccounts (
+                user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                user_email TEXT NOT NULL,
+                user_password TEXT NOT NULL,
+                user_profile_path TEXT NOT NULL,
+            )`;
+        return this.runCommand(sql);
+    }
+
+    removeUserAccountsTable(){
+        const sql = `DROP TABLE IF EXISTS userAccounts;`
+        return this.runCommand(sql);
+    }
 
     // Add a new question
     addQuestion(question, answer, language, category, exception, possible_answers = null) {
@@ -75,8 +99,6 @@ class Database {
             return this.runCommand(sql, [question, answer, language, category, exception]);
         }
     }
-
-
 
     // General method to query questions by attributes.For example, to query all english questions that deal with future simple, have
     // attributes = ["language", "category"] and
@@ -97,6 +119,30 @@ class Database {
         }
     }
 
+    // Add a new user account
+    addUserAccount(username, user_email, user_password, user_profile_path) {
+        const sql = `
+        INSERT INTO userAccounts (username, user_email, user_password, user_profile_path)
+        VALUES (?, ?, ?, ?)`;
+        return this.runCommand(sql, [username, user_email, user_password, user_profile_path]);
+    }
+
+    // Method to query user account. Use attribute `user_id` to locale a specific account, since user id should be unique.
+    // For example, to query a specific account, need to have 
+    // attributes = ["user_id"] and values = [1]
+    queryUserAccounts(attributes, values) {
+        if(attributes.length === 0) { // if attributes is empty, return all user accounts stored in `userAccounts.db`
+            const sql = `SELECT * FROM userAccounts`;
+            return this.runCommand(sql);
+        } else {
+            // Construct the WHERE clause based on the attributes (i.e. user_id)
+            const whereClause = attributes.map(attr => `${attr} = ?`);
+            const sql = `SELECT * FROM userAccounts WHERE ${whereClause}`;
+            
+            // Execute the query with the provided values
+            return this.runCommand(sql, values);
+        }
+    }
 }
 
 module.exports = Database;
