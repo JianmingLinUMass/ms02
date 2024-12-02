@@ -6,7 +6,8 @@ const defaultUserProfilePath = 'https://github.com/JianmingLinUMass/ms02/blob/ma
 // User accounts you want to insert
 // (username, user_email, user_password, user_profile_path)
 const userAccountsToAdd = [
-    {username: 'username123', user_email: 'emailaddress456@gmail.com', user_password: 'password789', user_profile_path: defaultUserProfilePath}
+    {username: 'username123', user_email: 'emailaddress456@gmail.com', user_password: 'password789', user_profile_path: defaultUserProfilePath, 
+        user_level: 1, user_point_exercise: 0, user_point_quiz: 0 }
 ];
 
 // Function to add user accounts to the database
@@ -16,9 +17,9 @@ async function addUserAccounts() { // If not modifying the database, this functi
     try {
         // Loop through each user account and add it to the database
         for (const ua of userAccountsToAdd) {
-            const { username, user_email, user_password, user_profile_path } = ua;
+            const { username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz } = ua;
 
-            await db.addUserAccount(username, user_email, user_password, user_profile_path);  
+            await db.addUserAccount(username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz);  
             console.log(`User account added: "${username}"`);
         }
         console.log('All user accounts have been added successfully!');

@@ -4,6 +4,6 @@ const db = new Database('./questions.db');  // Path to your SQLite database
 db.removeQuestionsTable()
 db.createQuestionsTable()
 
-const db2 = new Database('./userAccounts.db');
-db2.removeUserAccountsTable();
-db2.createUserAccountsTable();
+// const db2 = new Database('./userAccounts.db');
+// db2.removeUserAccountsTable();
+// db2.createUserAccountsTable();

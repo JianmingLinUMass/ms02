@@ -7,68 +7,67 @@
     <style>
       /* Main content */
       main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
 
-        section {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
+      section {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
 
-        section:hover {
-            transform: translateY(-5px);
-        }
+      section:hover {
+        transform: translateY(-5px);
+      }
 
-        section h2 {
-            color: #4a5568;
-            margin-bottom: 1rem;
-        }
+      section h2 {
+        color: #4a5568;
+        margin-bottom: 1rem;
+      }
 
-        button {
-            background-color: #4a5568;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
-        }
+      button {
+        background-color: #4a5568;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
 
-        button:hover {
-            background-color: #2d3748;
-        }
+      button:hover {
+        background-color: #2d3748;
+      }
 
-        /* Quick Stats */
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
+      /* Quick Stats */
+      .quick-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
 
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #4a5568;
-        }
-        
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #4a5568;
+      }
     </style>
     <link rel="stylesheet" href="/Homepage/homepage.css" />
     <link rel="stylesheet" href="/Homepage/navbar.css" />
@@ -77,13 +76,13 @@
     <!-- Navigation Bar -->
     <nav>
       <ul>
-          <li><a href="/Homepage/home-page.html">Home</a></li>
-          <li><a href="/Theory/theory.html">Theory</a></li>
-          <li><a href="/Quizzes/quizzes.html">Quizzes</a></li>
-          <li><a href="/Exercises/exercises.html">Exercises</a></li>
-          <li><a href="/ProgressTracking/progress-tracking.html">Account</a></li>
+        <li><a href="/Homepage/home-page.html">Home</a></li>
+        <li><a href="/Theory/theory.html">Theory</a></li>
+        <li><a href="/Quizzes/quizzes.html">Quizzes</a></li>
+        <li><a href="/Exercises/exercises.html">Exercises</a></li>
+        <li><a href="/ProgressTracking/progress-tracking.html">Account</a></li>
       </ul>
-  </nav>
+    </nav>
 
     <!-- Header -->
     <header>
@@ -119,7 +118,7 @@
           Start Practicing
         </button>
       </section>
-    
+
       <!-- Dynamic Tips Section -->
       <section id="dynamic-tips">
         <h2>Daily Language Tip</h2>
@@ -168,19 +167,15 @@
         <p class="stat-number" id="completed-lessons">0</p>
       </div>
     </div>
-  <script>
-    function updateQuickStats() {
-            document.getElementById('streak-count').textContent = '5'; // Example value
-            document.getElementById('points').textContent = '750'; // Example value
-            document.getElementById('completed-lessons').textContent = '12'; // Example value
-        }
-        document.addEventListener('DOMContentLoaded', () => {  
-            updateQuickStats();
-        });
-  </script>
-  
-  <!-- Link JavaScript -->
-  <script src="/Homepage/progress-tracking.js"></script>
-  
-
+    <script>
+      function updateQuickStats() {
+        document.getElementById("streak-count").textContent = "5"; // Example value
+        document.getElementById("points").textContent = "750"; // Example value
+        document.getElementById("completed-lessons").textContent = "12"; // Example value
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        updateQuickStats();
+      });
+    </script>
+  </section>
 </html>

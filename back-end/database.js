@@ -61,11 +61,14 @@ class Database {
     //   (this is debatable, maybe just dynamically generate from user id, maybe have a subfolder for each last digit of userid)
     
     /* Create user accounts table, called 'userAccounts'.
-    user id:            the unique id                     (unmodifiable; generated upon user account set up)
-    username:           the user's profile name            (modifiable; should be initialized upon user account set up)
-    user email:         the user's email address          (modifiable; should be initialized upon user account set up)
-    user password:      the user's password               (modifiable; should be stored encrypted upon user account set up)
-    user profile path:   the user's profile picture filepath (modifiable; should have a default picture available upon user account set up)
+    user id:             the unique id                     (unmodifiable; generated upon user account set up)
+    username:            the user's profile name            (modifiable; should be initialized upon user account set up)
+    user email:          the user's email address          (modifiable; should be initialized upon user account set up)
+    user password:       the user's password               (modifiable; should be stored encrypted upon user account set up)
+    user profile path:    the user's profile picture filepath (modifiable; should have a default picture available upon user account set up)
+    user level:          the user's current level          (unmodifiable by user; should be updated based on user points earned from exercise and quiz)
+    user point exercise: the user's points from exercise   (unmodifiable by user; should be updated based on number of exercises the user has completed so far)
+    user point quiz:     the user's points from quiz       (unmodifiable by user; should be updated based on number of quizzes the user has completed so far)
     */
     createUserAccountsTable() {
         const sql = `
@@ -75,7 +78,10 @@ class Database {
                 user_email TEXT NOT NULL,
                 user_password TEXT NOT NULL,
                 user_profile_path TEXT NOT NULL,
-            )`;
+                user_level INTEGER NOT NULL,
+                user_point_exercise DECIMAL(5, 2) NOT NULL,
+                user_point_quiz DECIMAL(5, 2) NOT NULL
+            );`;
         return this.runCommand(sql);
     }
 
@@ -120,22 +126,23 @@ class Database {
     }
 
     // Add a new user account
-    addUserAccount(username, user_email, user_password, user_profile_path) {
+    addUserAccount(username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz) {
         const sql = `
-        INSERT INTO userAccounts (username, user_email, user_password, user_profile_path)
-        VALUES (?, ?, ?, ?)`;
-        return this.runCommand(sql, [username, user_email, user_password, user_profile_path]);
+        INSERT INTO userAccounts (username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz)
+        VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        return this.runCommand(sql, [username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz]);
     }
 
-    // Method to query user account. Use attribute `user_id` to locale a specific account, since user id should be unique.
+    // Method to query user account. Use attribute `user_id` or `user_email` to locale a specific account, since values of either of these attributes should be unique.
     // For example, to query a specific account, need to have 
-    // attributes = ["user_id"] and values = [1]
+    // attributes = ["user_id"] and values = [1], OR 
+    // attributes = ["user_email"] and values = ["emailaddress456@gmail.com"]
     queryUserAccounts(attributes, values) {
         if(attributes.length === 0) { // if attributes is empty, return all user accounts stored in `userAccounts.db`
             const sql = `SELECT * FROM userAccounts`;
             return this.runCommand(sql);
         } else {
-            // Construct the WHERE clause based on the attributes (i.e. user_id)
+            // Construct the WHERE clause based on the attributes (i.e. user_id or user_email)
             const whereClause = attributes.map(attr => `${attr} = ?`);
             const sql = `SELECT * FROM userAccounts WHERE ${whereClause}`;
             
