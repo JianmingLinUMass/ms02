@@ -9,9 +9,9 @@ export class UserBasicMetricsComponent extends BaseComponent{
         super();
         this.loadCSS('UserBasicMetricsComponent');
 
-        this.userID = "userID123";
-        this.username = "username456";
-        this.emailAddress = "aaa@email.edu";
+        this.userID = "";
+        this.username = "";
+        this.emailAddress = "";
     }
 
     render() {
@@ -26,7 +26,6 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
     #createContainer() {
         this.#container = document.createElement('div');
-        this.#container.classList.add('BasicMetrics');
     }
 
     #setupContentInContainer() {
@@ -50,16 +49,5 @@ export class UserBasicMetricsComponent extends BaseComponent{
         userIdSpan.innerHTML = this.userID;
         usernameSpan.innerHTML = this.username;
         userEmailAddressSpan.innerHTML = this.emailAddress;
-
-        this.#publishStoreBasicMetrics(this.userID);       // store user id as a basic metrics
-        this.#publishStoreBasicMetrics(this.username);     // store username as a basic metrics
-        this.#publishStoreBasicMetrics(this.emailAddress); // store user email address as a basic metrics
-
-        // *To-Do: enable load basic metrics here, if needed*
-    }
-
-    #publishStoreBasicMetrics(basicMetrics) {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.StoreBasicMetrics, { basicMetrics });
     }
 }

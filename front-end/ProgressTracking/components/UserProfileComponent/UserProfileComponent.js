@@ -9,7 +9,7 @@ export class UserProfileComponent extends BaseComponent {
         super();
         this.loadCSS('UserProfileComponent');
 
-        this.imgURL = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
+        this.imgURL = '';
     }
 
     render() {
@@ -25,7 +25,6 @@ export class UserProfileComponent extends BaseComponent {
 
     #createContainer() {
         this.#container = document.createElement('div');
-        this.#container.classList.add('Profile');
     }
 
     #setupContentInContainer() {
@@ -45,7 +44,6 @@ export class UserProfileComponent extends BaseComponent {
 
     #setupDefaultProfile() {
         this.#container.querySelector('#profile-picture').setAttribute('src', this.imgURL);
-        //this.#publishStoreProfile(new File([this.imgURL], 'newfilename'))
     }
 
     #attachEventListeners() {
@@ -64,25 +62,7 @@ export class UserProfileComponent extends BaseComponent {
         }
 
         // we can only add 'file' object to objectStore since it cannot contain htmlInputElement (editProfileInput)
-        this.#publishClearProfile();
-        this.#publishStoreProfile(file);
-        this.#publishLoadProfile();
         this.#clearInputs(editProfileInput);
-    }
-
-    #publishClearProfile() {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.ClearProfile, {});
-    }
-
-    #publishStoreProfile(file) {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.StoreProfile, { file });
-    }
-
-    #publishLoadProfile() {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.LoadProfile, {});
     }
 
     #clearInputs(editProfileInput) {

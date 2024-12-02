@@ -9,7 +9,7 @@ export class UserPasswordComponent extends BaseComponent {
         super();
         this.loadCSS('UserPasswordComponent');
 
-        this.currentPassword = "password789";
+        this.currentPassword = "";
         this.isCurrentlyShowingPassword = false;
     }
 
@@ -25,7 +25,6 @@ export class UserPasswordComponent extends BaseComponent {
 
     #createContainer() {
         this.#container = document.createElement('div');
-        this.#container.classList.add('Password');
     }
 
     #setupContentInContainer() {
@@ -54,7 +53,6 @@ export class UserPasswordComponent extends BaseComponent {
         userPasswordSpan.style.visibility = "hidden";
 
         userPasswordSpan.innerHTML = this.currentPassword;
-        this.#publishStorePasswordMetrics(this.currentPassword);
 
         showHidePasswordButton.addEventListener('click', () => this.#handleShowHidePasswordButton(userPasswordSpan));
         resetPasswordButton.addEventListener('click', () => this.#handleResetPasswordButton(userPasswordSpan, userNewPasswordSpan, userConfirmNewPasswordSpan));
@@ -86,27 +84,9 @@ export class UserPasswordComponent extends BaseComponent {
         } else {
             this.currentPassword = userNewPasswordSpan.value;
             userPasswordSpan.innerHTML = this.currentPassword;
-            this.#publishClearPasswordMetrics();
-            this.#publishStorePasswordMetrics(this.currentPassword);
-            this.#publishLoadPasswordMetrics();
         }
 
         this.#clearInputs(userNewPasswordSpan, userConfirmNewPasswordSpan);
-    }
-
-    #publishClearPasswordMetrics() {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.ClearPasswordMetrics, {});
-    }
-
-    #publishStorePasswordMetrics(passwordMetrics) {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.StorePasswordMetrics, { passwordMetrics });
-    }
-
-    #publishLoadPasswordMetrics() {
-        const hub = EventHub.getInstance();
-        hub.publish(Events.LoadPasswordMetrics, {});
     }
 
     #clearInputs(userNewPasswordSpan, userConfirmNewPasswordSpan) {

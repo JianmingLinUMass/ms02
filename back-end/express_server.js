@@ -60,16 +60,19 @@ app.post('/questions', async (req, res) => {
 const dbFilePathForUserAccounts = path.resolve(__dirname, 'userAccounts.db');
 const databaseForUserAccounts = new Database(dbFilePathForUserAccounts);
 
-// pass an object that has query data in the form: {user_id: 1}. The attribute has to be `user_id`.
-// This should only fetch one user account, if successful. (assuming that each user id should be unique)
+// pass an object that has query data in the form: {user_id: 1} or {user_email: "emailaddress456@gmail.com"}. The attribute has to be either `user_id` or `user_email`.
+// This should only fetch one user account, if successful. (assuming either the id or the email address is unique)
 app.post('/userAccounts', async (req, res) => {
   console.log("Attempting to fetch user accounts");
   try {
-    const user_id = req.body;
+    // To fetch the user account using `user_email`, replace each initialization/appearance from `user_id` to `user_email`
+    // Modify `user_id` here and `user_id` on the top of `progress-tracking.js`
+    // **TO-Improve: if we can have an `attribute` holding either `user_id` or `user_email`, and can make queryParams = {attribute}, the conversion problem will be much simpler
+    const user_id = req.body; 
     const attributes = [];
     const values = [];
 
-    const queryParams = { user_id };
+    const queryParams = {user_id};
     for (const [key, value] of Object.entries(queryParams)) {
       if (value) {
         attributes.push(key);
