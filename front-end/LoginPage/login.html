@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="/LoginPage/login.css">
 </head>
 <body>
   <div class="login-container">
-    <h2>Welcome back to Grammargic!</h2>
+    <h2>Welcome Back to Grammargic!</h2>
     <form id="login-form">
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
-      <button type="submit">Login</button>
+      <button type="submit" onclick="navigateTo('/Homepage/home-page.html')">Login</button>
     </form>
-    <p>Don't have an account? <a href="#">Sign up</a></p>
+    <p>Don't Have an account? <a href="#">Sign Up</a></p>
   </div>
+
+  <script>
+    function navigateTo(url) {
+      window.location.href = url; 
+    }
+  </script>
+
 </body>
