@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const Database = require('./database.js'); 
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = 3000;
@@ -59,6 +60,41 @@ app.post('/questions', async (req, res) => {
  */
 const dbFilePathForUserAccounts = path.resolve(__dirname, 'userAccounts.db');
 const databaseForUserAccounts = new Database(dbFilePathForUserAccounts);
+
+app.post('/signup', async (req, res) => {
+  try {
+      const { username, user_email, user_password } = req.body;
+
+      // Validate required fields
+      if (!username || !user_email || !user_password) {
+          return res.status(400).json({ message: "All fields are required." });
+      }
+
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(user_password, 10);
+
+      // Add the user to the database
+      const defaultUserProfilePath = 'front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg'; // Replace with your default profile picture path
+      const user_level = 1;
+      const user_point_exercise = 0.0;
+      const user_point_quiz = 0.0;
+
+      await databaseForUserAccounts.addUserAccount(
+          username,
+          user_email,
+          hashedPassword,
+          defaultUserProfilePath,
+          user_level,
+          user_point_exercise,
+          user_point_quiz
+      );
+
+      res.status(201).json({ message: "User account created successfully." });
+  } catch (err) {
+      console.error('Error during signup:', err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
 
 // pass an object that has query data in the form: {user_id: 1} or {user_email: "emailaddress456@gmail.com"}. The attribute has to be either `user_id` or `user_email`.
 // This should only fetch one user account, if successful. (assuming either the id or the email address is unique)
