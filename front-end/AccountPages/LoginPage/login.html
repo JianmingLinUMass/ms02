@@ -4,7 +4,7 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Login Page</title>
- <link rel="stylesheet" href="login.css">
+ <link rel="stylesheet" href="/AccountPages/LoginPage/login.css">
 </head>
 <body>
  <div class="login-container">
@@ -12,11 +12,17 @@
    <form id="login-form">
      <input type="text" id="username" placeholder="Username" required>
      <input type="password" id="password" placeholder="Password" required>
-     <a href="../ResetPage/resetpassword.html">Forgot password?</a>
-     <button type="submit">Login</button>
-   </form>
-   <p>Don't have an account? <a href="../SignUpPage/signup.html">Sign up</a></p>
+     <a href="/AccountPages/ResetPage/resetpassword.html">Forgot password?</a>
+     <button type="submit" onclick="navigateTo('/Homepage/home-page.html')">Login</button>
+    </form>
+   <p>Don't have an account? <a href="/AccountPages/SignUpPage/signup.html">Sign up</a></p>
  </div>
+
+ <script>
+  function navigateTo(url) {
+    window.location.href = url; 
+  }
+</script>
 </body>
 
 

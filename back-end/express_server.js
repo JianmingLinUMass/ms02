@@ -152,7 +152,7 @@ app.put('/userAccounts', async (req, res) => {
 
 // Catch-all for any requests to serve HTML files
 app.get('*', (req, res) => {
-  let filePath = path.join(frontEndPath, req.path === '/' ? 'Homepage/home-page.html' : req.path);
+  let filePath = path.join(frontEndPath, req.path === '/' ? 'AccountPages/LoginPage/login.html' : req.path);
   res.sendFile(filePath, err => {
     if (err) {
       console.error("Error serving file:", err);
