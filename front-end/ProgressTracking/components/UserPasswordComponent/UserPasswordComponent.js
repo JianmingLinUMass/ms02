@@ -52,8 +52,6 @@ export class UserPasswordComponent extends BaseComponent {
 
         userPasswordSpan.style.visibility = "hidden";
 
-        userPasswordSpan.innerHTML = this.currentPassword;
-
         showHidePasswordButton.addEventListener('click', () => this.#handleShowHidePasswordButton(userPasswordSpan));
         resetPasswordButton.addEventListener('click', () => this.#handleResetPasswordButton(userPasswordSpan, userNewPasswordSpan, userConfirmNewPasswordSpan));
     }
@@ -82,11 +80,14 @@ export class UserPasswordComponent extends BaseComponent {
         if (userNewPasswordSpan.value !== userConfirmNewPasswordSpan.value) {
             alert('Invalid input: "New Password" field does not equal to "Confirm New Password" field!');
         } else {
-            this.currentPassword = userNewPasswordSpan.value;
-            userPasswordSpan.innerHTML = this.currentPassword;
+            this.publishModifyPassword(userNewPasswordSpan.value);
         }
 
         this.#clearInputs(userNewPasswordSpan, userConfirmNewPasswordSpan);
+    }
+
+    publishModifyPassword(data) {
+        EventHub.getInstance().publish(Events.ModifyPassword, data);
     }
 
     #clearInputs(userNewPasswordSpan, userConfirmNewPasswordSpan) {
