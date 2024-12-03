@@ -150,6 +150,29 @@ class Database {
             return this.runCommand(sql, values);
         }
     }
+
+    // Delete an existing user account from userAccounts.db with the specific value (either user_email or user_id)
+    // whereAttribute: should be either "user_email" or "user_id"
+    // whereValue: should be something like "useremail2@gmail.com" (if attribute is email), or "1" (if attribute is id)
+    deleteUserAccount(whereAttribute, whereValue) {
+        const whereClause = `${whereAttribute} = ${whereValue}`;
+        const sql = `DELETE FROM userAccounts
+                     WHERE ${whereClause}`;
+
+        return this.runCommand(sql);
+    }
+
+    // Modify the modifiable values of an user account
+    // username (string), user_email (string), user_password (string), user_profile_path (string), user_level (integer), user_point_exercise (float), user_point_quiz (float)
+    modifyUserAccount(attributes, values, whereAttribute, whereValue) {
+        const setClause = attributes.map(attr => `${attr} = ?`).join(', ');
+        const whereClause = `${whereAttribute} = ${whereValue}`;
+        const sql = `UPDATE userAccounts
+                     SET ${setClause}
+                     WHERE ${whereClause}`;
+
+        return this.runCommand(sql, values);
+    }
 }
 
 module.exports = Database;
