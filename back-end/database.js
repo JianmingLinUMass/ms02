@@ -170,8 +170,10 @@ class Database {
         const sql = `UPDATE userAccounts
                      SET ${setClause}
                      WHERE ${whereClause}`;
+        this.runCommand(sql, values);
+        const sql2 = `SELECT * FROM userAccounts WHERE ${whereClause}`;
 
-        return this.runCommand(sql, values);
+        return this.runCommand(sql2);
     }
 }
 

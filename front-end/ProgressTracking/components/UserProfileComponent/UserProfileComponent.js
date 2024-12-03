@@ -61,8 +61,12 @@ export class UserProfileComponent extends BaseComponent {
             return;
         }
 
-        // we can only add 'file' object to objectStore since it cannot contain htmlInputElement (editProfileInput)
+        this.publishModifyProfile(file);
         this.#clearInputs(editProfileInput);
+    }
+
+    publishModifyProfile(data) {
+        EventHub.getInstance().publish(Events.ModifyProfile, data);
     }
 
     #clearInputs(editProfileInput) {
