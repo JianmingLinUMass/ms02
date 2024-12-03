@@ -18,7 +18,7 @@ document.getElementById('signup-form').addEventListener('submit', async (event) 
         if (response.ok) {
             // If signup is successful, notify the user and redirect to login
             alert('Signup successful!');
-            window.location.href = '/LoginPage/login.html'; // Adjust path if needed
+            window.location.href = '../LoginPage/login.html'; // Adjusted relative path
         } else {
             // Display error message
             alert(`Signup failed: ${result.message}`);

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const Database = require('./database.js'); 
 const bcrypt = require('bcrypt');
 
+
 const app = express();
 const PORT = 3000;
 
@@ -12,6 +13,14 @@ const database = new Database(dbFilePath);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// // Configure session
+// app.use(session({
+//   secret: 'your_secret_key',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: false } // Set to true if using HTTPS
+// }));
 
 // Serve static files from the front-end directory
 const frontEndPath = path.join(__dirname, '../front-end');
@@ -24,6 +33,44 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Redirect to login page by default
+app.get('/', (req, res) => {
+  res.redirect('/AccountPages/LoginPage/login.html'); // Adjusted path for login page
+});
+
+// Login validation endpoint
+app.post('/login', async (req, res) => {
+  try {
+      const { username, user_password } = req.body;
+
+      // Validate fields
+      if (!username || !user_password) {
+          return res.status(400).json({ message: "Username and password are required." });
+      }
+
+      // Query the database for the user
+      const users = await databaseForUserAccounts.queryUserAccounts(['username'], [username]);
+      if (users.length === 0) {
+          return res.status(400).json({ message: "Invalid username or password." });
+      }
+
+      const user = users[0];
+
+      // Compare hashed passwords
+      const passwordMatch = await bcrypt.compare(user_password, user.user_password);
+      if (!passwordMatch) {
+          return res.status(400).json({ message: "Invalid username or password." });
+      }
+
+      // Successful login
+      res.status(200).json({ message: "Login successful.", redirectUrl: '/Homepage/home-page.html' });
+  } catch (err) {
+      console.error('Error during login:', err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
 
 /*
   pass an object that has query data in the form:
@@ -65,16 +112,28 @@ app.post('/signup', async (req, res) => {
   try {
       const { username, user_email, user_password } = req.body;
 
-      // Validate required fields
+      // Validate fields
       if (!username || !user_email || !user_password) {
           return res.status(400).json({ message: "All fields are required." });
+      }
+
+      // Check if the username exists
+      const existingUsername = await databaseForUserAccounts.queryUserAccounts(['username'], [username]);
+      if (existingUsername && existingUsername.length > 0) {
+          return res.status(400).json({ message: "Username is already in use." });
+      }
+
+      // Check if the email exists
+      const existingUsers = await databaseForUserAccounts.queryUserAccounts(['user_email'], [user_email]);
+      if (existingUsers && existingUsers.length > 0) {
+          return res.status(400).json({ message: "Email is already in use." });
       }
 
       // Hash the password
       const hashedPassword = await bcrypt.hash(user_password, 10);
 
       // Add the user to the database
-      const defaultUserProfilePath = 'front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg'; // Replace with your default profile picture path
+      const defaultUserProfilePath = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
       const user_level = 1;
       const user_point_exercise = 0.0;
       const user_point_quiz = 0.0;
@@ -103,6 +162,7 @@ app.post('/userAccounts', async (req, res) => {
   try {
     // To fetch the user account using `user_email`, replace each initialization/appearance from `user_id` to `user_email`
     // Modify `user_id` here and `user_id` on the top of `progress-tracking.js`
+    // **TO-Improve: if we can have an `attribute` holding either `user_id` or `user_email`, and can make queryParams = {attribute}, the conversion problem will be much simpler
     const user_id = req.body; 
     const attributes = [];
     const values = [];
@@ -115,35 +175,12 @@ app.post('/userAccounts', async (req, res) => {
       }
     }
 
-    const userAccounts = await databaseForUserAccounts.queryUserAccounts(attributes, values); // fetch
+    const userAccounts = await databaseForUserAccounts.queryUserAccounts(attributes, values);
     //const userAccounts = await databaseForUserAccounts.queryUserAccounts([], []); // get all user accounts stored in userAccounts.db
     res.status(200).json(userAccounts);
   } catch (err) {
     console.error("Error fetching user accounts:", err);
     res.status(500).send('Failed to fetch user accounts');
-  }
-});
-
-app.put('/userAccounts', async (req, res) => {
-  console.log("Attempting to update user accounts");
-  try {
-    const bo = req.body;
-
-    const attributes = bo.attributes;
-    const values = bo.values;
-    const whereAttribute = bo.attribute;
-    const whereValue = bo.value;
-
-    console.log('attributes:', attributes)
-    console.log('values:', values)
-    console.log('whereAttribute:', whereAttribute)
-    console.log('whereValue:', whereValue)
-
-    const userAccounts = await databaseForUserAccounts.modifyUserAccount(attributes, values, whereAttribute, whereValue); // modify
-    res.status(200).json(userAccounts);
-  } catch (err) {
-    console.error("Error updating user accounts:", err);
-    res.status(500).send('Failed to update user accounts');
   }
 });
 /*
