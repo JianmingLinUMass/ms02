@@ -162,25 +162,54 @@ app.post('/userAccounts', async (req, res) => {
   try {
     // To fetch the user account using `user_email`, replace each initialization/appearance from `user_id` to `user_email`
     // Modify `user_id` here and `user_id` on the top of `progress-tracking.js`
-    // **TO-Improve: if we can have an `attribute` holding either `user_id` or `user_email`, and can make queryParams = {attribute}, the conversion problem will be much simpler
-    const user_id = req.body; 
-    const attributes = [];
-    const values = [];
+    // const user_id = req.body; 
+    // const attributes = [];
+    // const values = [];
 
-    const queryParams = {user_id};
-    for (const [key, value] of Object.entries(queryParams)) {
-      if (value) {
-        attributes.push(key);
-        values.push(value.value);
-      }
-    }
+    // const queryParams = {user_id};
+    // for (const [key, value] of Object.entries(queryParams)) {
+    //   if (value) {
+    //     attributes.push(key);
+    //     values.push(value.value);
+    //   }
+    // }
 
-    const userAccounts = await databaseForUserAccounts.queryUserAccounts(attributes, values);
-    //const userAccounts = await databaseForUserAccounts.queryUserAccounts([], []); // get all user accounts stored in userAccounts.db
+    // req.body should contain an object of type {attribute: , value: }
+    const bo = req.body;
+    const attribute = bo.attribute;
+    const value = bo.value;
+    console.log('body:', bo)
+    console.log('attribute:', attribute)
+    console.log('value:', value)
+
+    const userAccounts = await databaseForUserAccounts.queryUserAccounts([attribute], [value]);
     res.status(200).json(userAccounts);
   } catch (err) {
     console.error("Error fetching user accounts:", err);
     res.status(500).send('Failed to fetch user accounts');
+  }
+});
+
+app.put('/userAccounts', async (req, res) => {
+  console.log("Attempting to update user accounts");
+  try {
+    // req.body should contain an object of type {attribute: , value: }
+    const bo = req.body;
+    const attributes = bo.attributes;
+    const values = bo.values;
+    const whereAttribute = bo.attribute;
+    const whereValue = bo.value;
+    console.log('body:', bo)
+    console.log('attributes:', attributes)
+    console.log('values:', values)
+    console.log('attribute:', whereAttribute)
+    console.log('value:', whereValue)
+
+    const userAccounts = await databaseForUserAccounts.modifyUserAccount(attributes, values, whereAttribute, whereValue);
+    res.status(200).json(userAccounts);
+  } catch (err) {
+    console.error("Error updating user accounts:", err);
+    res.status(500).send('Failed to update user accounts');
   }
 });
 /*
