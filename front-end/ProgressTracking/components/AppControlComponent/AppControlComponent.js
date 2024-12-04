@@ -5,7 +5,7 @@ import { UserPointMetricsComponent } from '/ProgressTracking/components/UserPoin
 import { EventHub } from '/ProgressTracking/eventHub/EventHub.js'
 import { Events } from '/ProgressTracking/eventHub/Events.js';
 
-import { loadUserAccount, getUserAccount } from '/ProgressTracking/progress-tracking.js';
+import { fetchUserAccount, modifyUserAccount } from '/ProgressTracking/crudOpsOnUserAccountsFrontEnd.js';
 
 export class AppControlComponent {
     #container = null;
@@ -24,8 +24,9 @@ export class AppControlComponent {
     user_point_exercise = 0.0;
     user_point_quiz = 0.0;
 
-    attribute = "user_id"; // Switch user account by changing the values of `attribute` and `value`
-    value = 6;
+    // Switch user account by changing the values of `value` for `attribute`=username
+    attribute = "username"; // we switch account based on username
+    value = "u1"; // default username value
 
     constructor() {
         this.#hub = EventHub.getInstance();
@@ -33,6 +34,8 @@ export class AppControlComponent {
         this.#userBasicMetricsComponent = new UserBasicMetricsComponent();
         this.#userPasswordComponent = new UserPasswordComponent();
         this.#userPointMetricsComponent = new UserPointMetricsComponent();
+
+        this.value = localStorage.getItem("storedUsername");
 
         this.addSubscriptions();
     }
@@ -71,16 +74,16 @@ export class AppControlComponent {
         viewContainer.appendChild(this.#userPointMetricsComponent.render());
     }
 
-    fetchUserAccount(attribute, value) {
-        // Call loadUserAccount() to fetch an user account with attribute of `attribute` and value of `value`
-        const account = loadUserAccount({attribute, value});
-        return account;
-    }
+    // fetchUserAccountInApp(attribute, value) {
+    //     // Call fetchUserAccount() to fetch an user account with attribute of `attribute` and value of `value`
+    //     const account = fetchUserAccount({attribute, value});
+    //     return account;
+    // }
 
-    readUserAccount(attributes, values, attribute, value) {
-        const account = getUserAccount({attributes, values, attribute, value});
-        return account;
-    }
+    // modifyUserAccountInApp(attributes, values, attribute, value) {
+    //     const account = modifyUserAccount({attributes, values, attribute, value});
+    //     return account;
+    // }
 
     setUserAccountInfoToField(user_id, username, user_email, user_password, user_profile_path, 
                               user_level, user_point_exercise, user_point_quiz) {
@@ -122,6 +125,10 @@ export class AppControlComponent {
 
         const objectURL = URL.createObjectURL(data);
         console.log("objectURL:", objectURL);
+
+        const attributesToModify = ["user_profile_path"];
+        const valuesToModify = [objectURL];
+        modifyUserAccount({attributes:attributesToModify, values:valuesToModify, whereAttribute:this.attribute, whereValue:this.value});
     }
 
     readURL(file) {
@@ -139,6 +146,10 @@ export class AppControlComponent {
         this.#container.querySelector('#password').innerHTML = data;
     }
 
+    switchFocusingAccountWithNewUsername(data) {
+        console.log('Switching to user account with username:', data);
+    }
+
     subscribe(event, listener) {
         return EventHub.getInstance().subscribe(event, listener);
     }
@@ -152,6 +163,11 @@ export class AppControlComponent {
         // password
         this.subscribe(Events.ModifyPassword, data => {
             this.modifyPasswordInDB(data);
+        });
+
+        // listen for new value of username to switch account
+        this.subscribe(Events.SwitchFocusingAccountWithNewUsername, data => {
+            this.switchFocusingAccountWithNewUsername(data);
         });
     }
 }

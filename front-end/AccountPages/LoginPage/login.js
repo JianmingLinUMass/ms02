@@ -14,6 +14,8 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 
         const result = await response.json();
         if (response.ok) {
+            localStorage.setItem("storedUsername", username);
+
             // Redirect to the home page upon successful login
             window.location.href = result.redirectUrl;
         } else {

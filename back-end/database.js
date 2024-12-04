@@ -54,12 +54,6 @@ class Database {
     }
 
 
-    //TODO: add table for users.
-
-    // Idea: Users have unique userID. Have 2 tables, one for account details and one for activity.
-    // Login table has ID, username, email, encrypted password, filepath to image location in backend
-    //   (this is debatable, maybe just dynamically generate from user id, maybe have a subfolder for each last digit of userid)
-    
     /* Create user accounts table, called 'userAccounts'.
     user id:             the unique id                     (unmodifiable; generated upon user account set up)
     username:            the user's profile name            (modifiable; should be initialized upon user account set up)
@@ -133,25 +127,20 @@ class Database {
         return this.runCommand(sql, [username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz]);
     }
 
-    // Method to query user account. Use attribute `user_id` or `user_email` to locale a specific account, since values of either of these attributes should be unique.
+    // Method to query user account.
     // For example, to query a specific account, need to have 
     // attributes = ["user_id"] and values = [1], OR 
     // attributes = ["user_email"] and values = ["emailaddress456@gmail.com"]
     queryUserAccounts(attributes, values) {
-        if(attributes.length === 0) { // if attributes is empty, return all user accounts stored in `userAccounts.db`
-            const sql = `SELECT * FROM userAccounts`;
-            return this.runCommand(sql);
-        } else {
-            // Construct the WHERE clause based on the attributes (i.e. user_id or user_email)
-            const whereClause = attributes.map(attr => `${attr} = ?`);
-            const sql = `SELECT * FROM userAccounts WHERE ${whereClause}`;
-            
-            // Execute the query with the provided values
-            return this.runCommand(sql, values);
-        }
+        // Construct the WHERE clause based on the attributes (i.e. user_id or user_email)
+        const whereClause = attributes.map(attr => `${attr} = ?`);
+        const sql = `SELECT * FROM userAccounts WHERE ${whereClause}`;
+        
+        // Execute the query with the provided values
+        return this.runCommand(sql, values);
     }
 
-    // Delete an existing user account from userAccounts.db with the specific value (either user_email or user_id)
+    // Delete an existing user account from userAccounts.db with the specific value for a attribute
     // whereAttribute: should be either "user_email" or "user_id"
     // whereValue: should be something like "useremail2@gmail.com" (if attribute is email), or "1" (if attribute is id)
     deleteUserAccount(whereAttribute, whereValue) {
@@ -164,15 +153,18 @@ class Database {
 
     // Modify the modifiable values of an user account
     // username (string), user_email (string), user_password (string), user_profile_path (string), user_level (integer), user_point_exercise (float), user_point_quiz (float)
-    modifyUserAccount(attributes, values, whereAttribute, whereValue) {
+    modifyUserAccount(attributes, values, attribute, value) {
         const setClause = attributes.map(attr => `${attr} = ?`).join(', ');
-        const whereClause = `${whereAttribute} = ${whereValue}`;
+        console.log('value has type of String:', typeof value === 'string')
+        //const whereClause = `${attribute} = '${value}'`;
+        const whereClause = typeof value === 'string' ? `${attribute} = '${value}'` : `${attribute} = ${value}`;
+        console.log('whereClause:', whereClause)
         const sql = `UPDATE userAccounts
                      SET ${setClause}
                      WHERE ${whereClause}`;
         this.runCommand(sql, values);
+        
         const sql2 = `SELECT * FROM userAccounts WHERE ${whereClause}`;
-
         return this.runCommand(sql2);
     }
 }
