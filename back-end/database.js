@@ -84,7 +84,7 @@ class Database {
         return this.runCommand(sql);
     }
 
-    // Add a new question
+    //insert a new question into database
     addQuestion(question, answer, language, category, exception, possible_answers = null) {
         if(possible_answers){
             const sql = `

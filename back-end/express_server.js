@@ -73,19 +73,25 @@ app.post('/login', async (req, res) => {
 
 
 /*
+  Post from front end to query questions based on attributes of an object.
+
   pass an object that has query data in the form:
   {id: 42, language: "english"}, etc, not all data needs to be present
+
 */
 app.post('/questions', async (req, res) => {
   console.log("Attempting to fetch questions");
   try {
-    //need edits for security, just getting it working for now: -loick
+    //will need edits for security, just getting it working for now: -loick
+
+    //parsed obj from front end
     const { id, question,answer,language, category, exception, possible_answers } = req.body;
     const attributes = []
     const values = []
 
     const queryParams = { id, question, answer, language, category, exception, possible_answers };
 
+    //split data into list of attributes and values
     for (const [key, value] of Object.entries(queryParams)) {
       if (value) {
         attributes.push(key);
@@ -93,6 +99,7 @@ app.post('/questions', async (req, res) => {
       }
     }
 
+    //pass attributes and values into a function that will use them to query the database.
     const questions = await database.queryQuestions(attributes, values);
     res.status(200).json(questions);
 
@@ -218,6 +225,7 @@ app.put('/userAccounts', async (req, res) => {
 
 // Catch-all for any requests to serve HTML files
 app.get('*', (req, res) => {
+  //initially put users on login page
   let filePath = path.join(frontEndPath, req.path === '/' ? 'AccountPages/LoginPage/login.html' : req.path);
   res.sendFile(filePath, err => {
     if (err) {
