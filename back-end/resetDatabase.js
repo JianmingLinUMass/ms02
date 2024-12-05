@@ -10,3 +10,5 @@ function resetQuestionsTable(){
 // const db2 = new Database('./userAccounts.db');
 // db2.removeUserAccountsTable();
 // db2.createUserAccountsTable();
+
+resetQuestionsTable()
