@@ -11,4 +11,7 @@ CREATE TABLE IF NOT EXISTS userAccounts (
 );
 
 INSERT INTO userAccounts (username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz)
-VALUES ("username123", "emailaddress456@gmail.com", "password789", "https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true", 1, 0, 0)
+VALUES ("u1", "ea1@gmail.com", "p1", "https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true", 1, 0, 0)
+
+INSERT INTO userAccounts (username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz)
+VALUES ("u2", "ea2@gmail.com", "p2", "https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true", 2, 0, 0)

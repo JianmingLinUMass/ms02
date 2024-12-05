@@ -40,7 +40,7 @@ async function addUserAccounts(userAccountsToAdd) {
 // Function to fetch user account(s) with a specific attribute and value in the database
 // Reminder: username (string), user_email (string), user_password (string), user_profile_path (string), 
 //           user_level (integer), user_point_exercise (float), user_point_quiz (float)
-async function queryUserAccount(attributes, values) {
+async function queryUserAccounts(attributes, values) {
     let accounts = null;
     try {
         accounts = await db.queryUserAccounts(attributes, values);  
@@ -90,7 +90,7 @@ async function modifyUserAccount(attributes, values, whereAttribute, whereValue)
 module.exports = {
     defaultUserProfilePath: defaultUserProfilePath, 
     addUserAccounts: addUserAccounts,
-    queryUserAccount: queryUserAccount,
+    queryUserAccounts: queryUserAccounts,
     deleteUserAccount: deleteUserAccount,
     modifyUserAccount: modifyUserAccount
 };

@@ -73,19 +73,25 @@ app.post('/login', async (req, res) => {
 
 
 /*
+  Post from front end to query questions based on attributes of an object.
+
   pass an object that has query data in the form:
   {id: 42, language: "english"}, etc, not all data needs to be present
+
 */
 app.post('/questions', async (req, res) => {
   console.log("Attempting to fetch questions");
   try {
-    //need edits for security, just getting it working for now: -loick
+    //will need edits for security, just getting it working for now: -loick
+
+    //parsed obj from front end
     const { id, question,answer,language, category, exception, possible_answers } = req.body;
     const attributes = []
     const values = []
 
     const queryParams = { id, question, answer, language, category, exception, possible_answers };
 
+    //split data into list of attributes and values
     for (const [key, value] of Object.entries(queryParams)) {
       if (value) {
         attributes.push(key);
@@ -93,6 +99,7 @@ app.post('/questions', async (req, res) => {
       }
     }
 
+    //pass attributes and values into a function that will use them to query the database.
     const questions = await database.queryQuestions(attributes, values);
     res.status(200).json(questions);
 
@@ -162,25 +169,54 @@ app.post('/userAccounts', async (req, res) => {
   try {
     // To fetch the user account using `user_email`, replace each initialization/appearance from `user_id` to `user_email`
     // Modify `user_id` here and `user_id` on the top of `progress-tracking.js`
-    // **TO-Improve: if we can have an `attribute` holding either `user_id` or `user_email`, and can make queryParams = {attribute}, the conversion problem will be much simpler
-    const user_id = req.body; 
-    const attributes = [];
-    const values = [];
+    // const user_id = req.body; 
+    // const attributes = [];
+    // const values = [];
 
-    const queryParams = {user_id};
-    for (const [key, value] of Object.entries(queryParams)) {
-      if (value) {
-        attributes.push(key);
-        values.push(value.value);
-      }
-    }
+    // const queryParams = {user_id};
+    // for (const [key, value] of Object.entries(queryParams)) {
+    //   if (value) {
+    //     attributes.push(key);
+    //     values.push(value.value);
+    //   }
+    // }
 
-    const userAccounts = await databaseForUserAccounts.queryUserAccounts(attributes, values);
-    //const userAccounts = await databaseForUserAccounts.queryUserAccounts([], []); // get all user accounts stored in userAccounts.db
+    // req.body should contain an object of type {attribute: , value: }
+    const bo = req.body;
+    const attribute = bo.attribute;
+    const value = bo.value;
+    console.log('body:', bo)
+    console.log('attribute:', attribute)
+    console.log('value:', value)
+
+    const userAccounts = await databaseForUserAccounts.queryUserAccounts([attribute], [value]);
     res.status(200).json(userAccounts);
   } catch (err) {
     console.error("Error fetching user accounts:", err);
     res.status(500).send('Failed to fetch user accounts');
+  }
+});
+
+app.put('/userAccounts', async (req, res) => {
+  console.log("Attempting to update user accounts");
+  try {
+    // req.body should contain an object of type {attribute: , value: }
+    const bo = req.body;
+    const attributes = bo.attributes;
+    const values = bo.values;
+    const whereAttribute = bo.attribute;
+    const whereValue = bo.value;
+    console.log('body:', bo)
+    console.log('attributes:', attributes)
+    console.log('values:', values)
+    console.log('attribute:', whereAttribute)
+    console.log('value:', whereValue)
+
+    const userAccounts = await databaseForUserAccounts.modifyUserAccount(attributes, values, whereAttribute, whereValue);
+    res.status(200).json(userAccounts);
+  } catch (err) {
+    console.error("Error updating user accounts:", err);
+    res.status(500).send('Failed to update user accounts');
   }
 });
 /*
@@ -189,6 +225,7 @@ app.post('/userAccounts', async (req, res) => {
 
 // Catch-all for any requests to serve HTML files
 app.get('*', (req, res) => {
+  //initially put users on login page
   let filePath = path.join(frontEndPath, req.path === '/' ? 'AccountPages/LoginPage/login.html' : req.path);
   res.sendFile(filePath, err => {
     if (err) {
