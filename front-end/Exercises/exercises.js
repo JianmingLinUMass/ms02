@@ -179,7 +179,7 @@ async function updateExercisePoints() {
     await u3Account2.then(function(result) {
         console.log('put:', result);
         const points = document.getElementById("exercise-points");
-        points.innerHTML = valueToModify;
+        points.innerHTML = `Total Exercise Points: ${valueToModify}`;
     });
     console.log(`Number of points ${valueToModify}`);
 }
