@@ -1,3 +1,5 @@
+import { fetchUserAccount, modifyUserAccount } from '/ProgressTracking/crudOpsOnUserAccountsFrontEnd.js';
+
 const unitQA = {
     1: { // Past Tense
         words: [
@@ -144,6 +146,8 @@ const unitQA = {
     }
 };
 
+let notUpdated = true;
+
 function getUnitfromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("unit");
@@ -155,6 +159,29 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+async function updateExercisePoints() {
+    const attribute = "username";
+    const value = "u3";
+    const attributeToModify = ["user_point_exercise"];
+    let currExercisePoints = 0;
+    const u3Account = fetchUserAccount({attribute, value});
+    //console.log("account fetched");
+    await u3Account.then(function(result) {
+        console.log('post:', result);
+        currExercisePoints = result.user_point_exercise;
+    });
+        
+    const valueToModify = currExercisePoints + 1;
+    const u3Account2 = modifyUserAccount(attributeToModify, valueToModify, attribute, value);
+    //console.log("account modified");
+    await u3Account2.then(function(result) {
+        console.log('put:', result);
+        const points = document.getElementById("exercise-points");
+        points.innerHTML = valueToModify;
+    });
+    console.log(`Number of points ${valueToModify}`);
 }
 
 const build = () => {
@@ -227,6 +254,7 @@ function resetExercise() {
 
     const exerciseContainer = document.getElementById("exercise");
     exerciseContainer.innerHTML = "";
+    notUpdated = true;
 
     build();
 }
@@ -272,6 +300,11 @@ function checkAnswers(shuffledIndices, selectedQA) {
 
     const scoreDisplay = document.getElementById("score");
     scoreDisplay.innerHTML = `Unit ${getUnitfromURL()} Exercise - You got ${score} / ${shuffledIndices.length} correct!`;
+    //console.log(score);
+    if(score >= 7 && notUpdated == true) {
+        updateExercisePoints();
+        notUpdated = false;
+    }
 }
 
 build();
