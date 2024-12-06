@@ -223,6 +223,122 @@ app.put('/userAccounts', async (req, res) => {
  User Account Section Ends
  */
 
+
+/*
+Friends Section Starts
+*/
+
+// Add a friend
+app.post('/friends/add', async (req, res) => {
+  const { user1_id, user2_id } = req.body;
+  try {
+      if (!user1_id || !user2_id) {
+          return res.status(400).json({ message: "Both user IDs are required." });
+      }
+
+      await database.addFriend(user1_id, user2_id);
+      res.status(201).json({ message: "Friendship added successfully." });
+  } catch (err) {
+      console.error('Error adding friendship:', err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+// Remove a friend
+app.post('/friends/remove', async (req, res) => {
+  const { user1_id, user2_id } = req.body;
+  try {
+      if (!user1_id || !user2_id) {
+          return res.status(400).json({ message: "Both user IDs are required." });
+      }
+
+      await database.removeFriend(user1_id, user2_id);
+      res.status(200).json({ message: "Friendship removed successfully." });
+  } catch (err) {
+      console.error('Error removing friendship:', err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+// Fetch all friends for a user
+app.post('/friends/get', async (req, res) => {
+  const { user_id } = req.body;
+  try {
+      if (!user_id) {
+          return res.status(400).json({ message: "User ID is required." });
+      }
+
+      const sql = `
+          SELECT user2_id AS friend_id FROM friends WHERE user1_id = ?
+          UNION
+          SELECT user1_id AS friend_id FROM friends WHERE user2_id = ?;
+      `;
+      const friends = await database.runCommand(sql, [user_id, user_id]);
+      res.status(200).json(friends);
+  } catch (err) {
+      console.error('Error fetching friends:', err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+app.post('/friend-requests/send', async (req, res) => {
+  const { senderId, receiverId } = req.body;
+
+  try {
+      if (!senderId || !receiverId) {
+          return res.status(400).json({ message: "Sender and receiver IDs are required." });
+      }
+
+      // Add friend request
+      await database.addFriendRequest(senderId, receiverId);
+      res.status(201).json({ message: "Friend request sent." });
+  } catch (err) {
+      console.error("Error sending friend request:", err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+app.get('/friend-requests', async (req, res) => {
+  const { userId } = req.query;
+
+  try {
+      if (!userId) {
+          return res.status(400).json({ message: "User ID is required." });
+      }
+
+      // Fetch pending friend requests
+      const requests = await database.getFriendRequests(userId);
+      res.status(200).json(requests);
+  } catch (err) {
+      console.error("Error fetching friend requests:", err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+app.put('/friend-requests/update', async (req, res) => {
+  const { requestId, newStatus } = req.body;
+
+  try {
+      if (!requestId || !newStatus) {
+          return res.status(400).json({ message: "Request ID and new status are required." });
+      }
+
+      if (!['accepted', 'rejected'].includes(newStatus)) {
+          return res.status(400).json({ message: "Invalid status. Must be 'accepted' or 'rejected'." });
+      }
+
+      // Update friend request status
+      await database.updateFriendRequest(requestId, newStatus);
+      res.status(200).json({ message: `Friend request ${newStatus}.` });
+  } catch (err) {
+      console.error("Error updating friend request:", err);
+      res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+/*
+Friends Section Ends
+*/
 // Catch-all for any requests to serve HTML files
 app.get('*', (req, res) => {
   //initially put users on login page
