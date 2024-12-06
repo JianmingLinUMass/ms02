@@ -167,6 +167,83 @@ class Database {
         const sql2 = `SELECT * FROM userAccounts WHERE ${whereClause}`;
         return this.runCommand(sql2);
     }
+
+    createFriendRequestTable() {
+        const sql = `
+            CREATE TABLE friendRequests (
+
+                sender_id INTEGER NOT NULL,
+                recipient_id INTEGER NOT NULL,
+                status TEXT NOT NULL DEFAULT 'pending',
+                PRIMARY KEY (sender_id, recipient_id),
+            )
+        `;
+        return this.runCommand(sql);
+    }
+    
+
+    removeFriendRequestTable(){
+        const sql = `DROP TABLE IF EXISTS friendRequests;`
+        return this.runCommand(sql);
+    }
+
+    addFriendRequest(sender_id,recipient_id){
+        const sql = `INSERT INTO friendsRequest (sender_id, recipient_id) VALUES (?,?)`
+        return this.runCommand(sql, [sender_id, recipient_id, language, category, exception]);
+    }
+
+    modifyFriendRequestStatus(sender_id, recipient_id, newStatus) {
+        const sql = `
+            UPDATE friendRequests 
+            SET status = ? 
+            WHERE sender_id = ? AND recipient_id = ?;
+        `;
+        return this.runCommand(sql, [newStatus, sender_id, recipient_id]);
+    }
+
+    removeFriendRequest(sender_id, recipient_id) {
+        const sql = `
+            DELETE FROM friendRequests 
+            WHERE sender_id = ? AND recipient_id = ?;
+        `;
+        return this.runCommand(sql, [sender_id, recipient_id]);
+    }
+
+    createFriendsTable() {
+        const sql = `
+            CREATE TABLE friends (
+                user1_id INTEGER NOT NULL,
+                user2_id INTEGER NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (user1_id, user2_id)
+            );
+        `;
+        return this.runCommand(sql);
+    }
+    
+    deleteFriendsTable() {
+        const sql = `DROP TABLE IF EXISTS friends;`;
+        return this.runCommand(sql);
+    }
+    
+    addFriend(user1_id, user2_id) {
+        const sql = `
+            INSERT INTO friends (user1_id, user2_id) 
+            VALUES (?, ?), (?, ?);
+        `;
+        return this.runCommand(sql, [user1_id, user2_id, user2_id, user1_id]);
+    }
+    
+    removeFriend(user1_id, user2_id) {
+        const sql = `
+            DELETE FROM friends 
+            WHERE (user1_id = ? AND user2_id = ?) 
+               OR (user1_id = ? AND user2_id = ?);
+        `;
+        return this.runCommand(sql, [user1_id, user2_id, user2_id, user1_id]);
+    }
+    
+
 }
 
 module.exports = Database;
