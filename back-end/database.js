@@ -55,8 +55,7 @@ class Database {
 
 
     /* Create user accounts table, called 'userAccounts'.
-    user id:             the unique id                     (unmodifiable; generated upon user account set up)
-    username:            the user's profile name            (modifiable; should be initialized upon user account set up)
+    username:            the user's unique profile name            (modifiable; should be initialized upon user account set up)
     user email:          the user's email address          (modifiable; should be initialized upon user account set up)
     user password:       the user's password               (modifiable; should be stored encrypted upon user account set up)
     user profile path:    the user's profile picture filepath (modifiable; should have a default picture available upon user account set up)
@@ -67,8 +66,7 @@ class Database {
     createUserAccountsTable() {
         const sql = `
             CREATE TABLE IF NOT EXISTS userAccounts (
-                user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT NOT NULL,
+                username TEXT PRIMARY KEY,
                 user_email TEXT NOT NULL,
                 user_password TEXT NOT NULL,
                 user_profile_path TEXT NOT NULL,
@@ -171,12 +169,11 @@ class Database {
     createFriendRequestTable() {
         const sql = `
             CREATE TABLE friendRequests (
-
-                sender_id INTEGER NOT NULL,
-                recipient_id INTEGER NOT NULL,
+                sender_name TEXT NOT NULL,
+                recipient_name TEXT NOT NULL,
                 status TEXT NOT NULL DEFAULT 'pending',
-                PRIMARY KEY (sender_id, recipient_id),
-            )
+                PRIMARY KEY (sender_name, recipient_name)
+            );
         `;
         return this.runCommand(sql);
     }
@@ -187,60 +184,79 @@ class Database {
         return this.runCommand(sql);
     }
 
-    addFriendRequest(sender_id,recipient_id){
-        const sql = `INSERT INTO friendsRequest (sender_id, recipient_id) VALUES (?,?)`
-        return this.runCommand(sql, [sender_id, recipient_id, language, category, exception]);
+    addFriendRequest(sender_name,recipient_name){
+        const sql = `INSERT INTO friendRequests (sender_name, recipient_name) VALUES (?,?)`
+        return this.runCommand(sql, [sender_name, recipient_name]);
     }
 
-    modifyFriendRequestStatus(sender_id, recipient_id, newStatus) {
+    updateFriendRequest(sender_name, recipient_name, newStatus) {
         const sql = `
             UPDATE friendRequests 
             SET status = ? 
-            WHERE sender_id = ? AND recipient_id = ?;
+            WHERE sender_name = ? AND recipient_name = ?;
         `;
-        return this.runCommand(sql, [newStatus, sender_id, recipient_id]);
+        return this.runCommand(sql, [newStatus, sender_name, recipient_name]);
     }
 
-    removeFriendRequest(sender_id, recipient_id) {
+    removeFriendRequest(sender_name, recipient_name) {
         const sql = `
             DELETE FROM friendRequests 
-            WHERE sender_id = ? AND recipient_id = ?;
+            WHERE sender_name = ? AND recipient_name = ?;
         `;
-        return this.runCommand(sql, [sender_id, recipient_id]);
+        return this.runCommand(sql, [sender_name, recipient_name]);
+    }
+
+    getFriendRequests(username) {
+        const sql = `SELECT * FROM friendRequests WHERE recipient_name = ?`;
+        return this.runCommand(sql, [username]); 
     }
 
     createFriendsTable() {
         const sql = `
             CREATE TABLE friends (
-                user1_id INTEGER NOT NULL,
-                user2_id INTEGER NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (user1_id, user2_id)
+                user1_name TEXT NOT NULL,
+                user2_name TEXT NOT NULL,
+                PRIMARY KEY (user1_name, user2_name)
             );
         `;
         return this.runCommand(sql);
     }
     
-    deleteFriendsTable() {
+    removeFriendsTable() {
         const sql = `DROP TABLE IF EXISTS friends;`;
         return this.runCommand(sql);
     }
     
-    addFriend(user1_id, user2_id) {
+    addFriend(user1_name, user2_name) {
         const sql = `
-            INSERT INTO friends (user1_id, user2_id) 
+            INSERT INTO friends (user1_name, user2_name) 
             VALUES (?, ?), (?, ?);
         `;
-        return this.runCommand(sql, [user1_id, user2_id, user2_id, user1_id]);
+        return this.runCommand(sql, [user1_name, user2_name, user2_name, user1_name]);
     }
     
-    removeFriend(user1_id, user2_id) {
+    removeFriend(user1_name, user2_name) {
         const sql = `
             DELETE FROM friends 
-            WHERE (user1_id = ? AND user2_id = ?) 
-               OR (user1_id = ? AND user2_id = ?);
+            WHERE (user1_name = ? AND user2_name = ?) 
+               OR (user1_name = ? AND user2_name = ?);
         `;
-        return this.runCommand(sql, [user1_id, user2_id, user2_id, user1_id]);
+        return this.runCommand(sql, [user1_name, user2_name, user2_name, user1_name]);
+    }
+
+    getFriends(username) {
+        const sql = `
+            SELECT user1_name AS friend_name
+            FROM friends
+            WHERE user1_name = ?
+    
+            UNION
+    
+            SELECT user2_name AS friend_name
+            FROM friends
+            WHERE user2_name = ?;
+        `;
+        return this.runCommand(sql, [username, username]);
     }
     
 

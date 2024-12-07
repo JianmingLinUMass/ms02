@@ -2,6 +2,7 @@ import { UserProfileComponent } from '/ProgressTracking/components/UserProfileCo
 import { UserBasicMetricsComponent } from '/ProgressTracking/components/UserBasicMetricsComponent/UserBasicMetricsComponent.js'
 import { UserPasswordComponent } from '/ProgressTracking/components/UserPasswordComponent/UserPasswordComponent.js'
 import { UserPointMetricsComponent } from '/ProgressTracking/components/UserPointMetricsComponent/UserPointMetricsComponent.js'
+import { FriendComponent } from '/ProgressTracking/components/FriendComponent/FriendComponent.js'
 import { EventHub } from '/ProgressTracking/eventHub/EventHub.js'
 import { Events } from '/ProgressTracking/eventHub/Events.js';
 
@@ -13,6 +14,7 @@ export class AppControlComponent {
     #userBasicMetricsComponent = null;
     #userPasswordComponent = null;
     #userPointMetricsComponent = null;
+    #friendComponent = null;
     #hub = null;
 
     user_id = 0;
@@ -29,13 +31,16 @@ export class AppControlComponent {
     value = "u1"; // default username value
 
     constructor() {
+
+        this.value = localStorage.getItem("storedUsername");
+
         this.#hub = EventHub.getInstance();
         this.#userProfileComponent = new UserProfileComponent();
         this.#userBasicMetricsComponent = new UserBasicMetricsComponent();
         this.#userPasswordComponent = new UserPasswordComponent();
         this.#userPointMetricsComponent = new UserPointMetricsComponent();
+        this.#friendComponent = new FriendComponent(this.value);
 
-        this.value = localStorage.getItem("storedUsername");
 
         this.addSubscriptions();
     }
@@ -72,6 +77,7 @@ export class AppControlComponent {
         viewContainer.appendChild(this.#userBasicMetricsComponent.render());
         viewContainer.appendChild(this.#userPasswordComponent.render());
         viewContainer.appendChild(this.#userPointMetricsComponent.render());
+        viewContainer.appendChild(this.#friendComponent.render());
     }
 
     // fetchUserAccountInApp(attribute, value) {

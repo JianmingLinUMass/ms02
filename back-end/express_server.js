@@ -8,8 +8,11 @@ const bcrypt = require('bcrypt');
 const app = express();
 const PORT = 3000;
 
-const dbFilePath = path.resolve(__dirname, 'questions.db');
-const database = new Database(dbFilePath);
+const questionsdbFilePath = path.resolve(__dirname, 'questions.db');
+const questionsDatabase = new Database(questionsdbFilePath);
+
+const friendsdbFilePath = path.resolve(__dirname, 'friendDatabase.db');
+const friendsDatabase = new Database(friendsdbFilePath)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -100,7 +103,7 @@ app.post('/questions', async (req, res) => {
     }
 
     //pass attributes and values into a function that will use them to query the database.
-    const questions = await database.queryQuestions(attributes, values);
+    const questions = await questionsDatabase.queryQuestions(attributes, values);
     res.status(200).json(questions);
 
   } catch (err) {
@@ -230,13 +233,14 @@ Friends Section Starts
 
 // Add a friend
 app.post('/friends/add', async (req, res) => {
-  const { user1_id, user2_id } = req.body;
+  console.log('attempting to add a friend')
+  const { user1_name, user2_name } = req.body;
   try {
-      if (!user1_id || !user2_id) {
+      if (!user1_name || !user2_name) {
           return res.status(400).json({ message: "Both user IDs are required." });
       }
 
-      await database.addFriend(user1_id, user2_id);
+      await friendsDatabase.addFriend(user1_name, user2_name);
       res.status(201).json({ message: "Friendship added successfully." });
   } catch (err) {
       console.error('Error adding friendship:', err);
@@ -246,13 +250,14 @@ app.post('/friends/add', async (req, res) => {
 
 // Remove a friend
 app.post('/friends/remove', async (req, res) => {
-  const { user1_id, user2_id } = req.body;
+  console.log('attempting to remove a friend')
+  const { user1_name, user2_name } = req.body;
   try {
-      if (!user1_id || !user2_id) {
+      if (!user1_name || !user2_name) {
           return res.status(400).json({ message: "Both user IDs are required." });
       }
 
-      await database.removeFriend(user1_id, user2_id);
+      await friendsDatabase.removeFriend(user1_name, user2_name);
       res.status(200).json({ message: "Friendship removed successfully." });
   } catch (err) {
       console.error('Error removing friendship:', err);
@@ -262,18 +267,23 @@ app.post('/friends/remove', async (req, res) => {
 
 // Fetch all friends for a user
 app.post('/friends/get', async (req, res) => {
-  const { user_id } = req.body;
+  console.log('attempting to get all friends')
+
+  console.log(req)
+  const { username } = req.body;
+
+  console.log("get friends", username)
   try {
-      if (!user_id) {
-          return res.status(400).json({ message: "User ID is required." });
+      if (!username) {
+          return res.status(400).json({ message: "Username is required." });
       }
 
       const sql = `
-          SELECT user2_id AS friend_id FROM friends WHERE user1_id = ?
+          SELECT user2_name AS friend_name FROM friends WHERE user1_name = ?
           UNION
-          SELECT user1_id AS friend_id FROM friends WHERE user2_id = ?;
+          SELECT user1_name AS friend_name FROM friends WHERE user2_name = ?;
       `;
-      const friends = await database.runCommand(sql, [user_id, user_id]);
+      const friends = await friendsDatabase.runCommand(sql, [username, username]);
       res.status(200).json(friends);
   } catch (err) {
       console.error('Error fetching friends:', err);
@@ -282,15 +292,17 @@ app.post('/friends/get', async (req, res) => {
 });
 
 app.post('/friend-requests/send', async (req, res) => {
-  const { senderId, receiverId } = req.body;
+  console.log('attempting to add a friend request')
 
+  const { sender_name, receiver_name } = req.body;
+  
   try {
-      if (!senderId || !receiverId) {
-          return res.status(400).json({ message: "Sender and receiver IDs are required." });
+      if (!sender_name || !receiver_name) {
+          return res.status(400).json({ message: "Sender and receiver usernames are required." });
       }
 
       // Add friend request
-      await database.addFriendRequest(senderId, receiverId);
+      await friendsDatabase.addFriendRequest(sender_name, receiver_name);
       res.status(201).json({ message: "Friend request sent." });
   } catch (err) {
       console.error("Error sending friend request:", err);
@@ -298,16 +310,18 @@ app.post('/friend-requests/send', async (req, res) => {
   }
 });
 
-app.get('/friend-requests', async (req, res) => {
-  const { userId } = req.query;
-
+app.get('/friend-requests/get-all', async (req, res) => {
+  console.log('attempting to get all friend requests')
+  const { username } = req.query;
+  console.log(username)
   try {
-      if (!userId) {
-          return res.status(400).json({ message: "User ID is required." });
+      if (!username) {
+          return res.status(400).json({ message: "Username is required." });
       }
 
       // Fetch pending friend requests
-      const requests = await database.getFriendRequests(userId);
+      const requests = await friendsDatabase.getFriendRequests(username);
+      console.log(requests)
       res.status(200).json(requests);
   } catch (err) {
       console.error("Error fetching friend requests:", err);
@@ -316,10 +330,11 @@ app.get('/friend-requests', async (req, res) => {
 });
 
 app.put('/friend-requests/update', async (req, res) => {
-  const { requestId, newStatus } = req.body;
+  console.log('attempting to update a friend request')
 
+  const { sender_name, recipient_name, newStatus } = req.body;
   try {
-      if (!requestId || !newStatus) {
+      if (!sender_name || !recipient_name || !newStatus) {
           return res.status(400).json({ message: "Request ID and new status are required." });
       }
 
@@ -328,7 +343,11 @@ app.put('/friend-requests/update', async (req, res) => {
       }
 
       // Update friend request status
-      await database.updateFriendRequest(requestId, newStatus);
+      await friendsDatabase.updateFriendRequest(sender_name, recipient_name, newStatus);
+
+      if (newStatus === 'accepted'){
+        await friendsDatabase.addFriend(sender_name,recipient_name);
+      }
       res.status(200).json({ message: `Friend request ${newStatus}.` });
   } catch (err) {
       console.error("Error updating friend request:", err);
