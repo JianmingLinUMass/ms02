@@ -219,6 +219,31 @@ app.put('/userAccounts', async (req, res) => {
     res.status(500).send('Failed to update user accounts');
   }
 });
+
+app.put('/changeUserPassword', async (req, res) => {
+  console.log("Attempting to update user password");
+  try {
+    // req.body should contain an object of type {attribute: , value: }
+    const bo = req.body;
+    const attributes = bo.attributes; // should be ["user_password"] only
+    const values = bo.values; // should be a [plain password], where plain password is obtained from user input (when changing password)
+    const whereAttribute = bo.attribute; // should be "username"; used to focus on current user account
+    const whereValue = bo.value; // should be the username of current focusing user account
+    console.log('body:', bo)
+    console.log('attributes:', attributes)
+    console.log('values:', values)
+    console.log('attribute:', whereAttribute)
+    console.log('value:', whereValue)
+
+    const user_password = values[0]; // obtain user plain password
+    const hashedPassword = await bcrypt.hash(user_password, 10); // hash the password
+    const userAccounts = await databaseForUserAccounts.modifyUserAccount(attributes, [hashedPassword], whereAttribute, whereValue); // store the hashed password to userAccounts.db
+    res.status(200).json(userAccounts);
+  } catch (err) {
+    console.error("Error updating user password:", err);
+    res.status(500).send('Failed to update user password');
+  }
+});
 /*
  User Account Section Ends
  */

@@ -29,7 +29,8 @@ export class UserPasswordComponent extends BaseComponent {
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <div><b>Password:</b>
+        <section id="user-password-section">
+        <div><b>Password (encrypted):</b>
             <span id="password"></span>
             <button id="show-hide-password-button">Show/Hide</button>
         </div>
@@ -39,7 +40,8 @@ export class UserPasswordComponent extends BaseComponent {
         <div><b>Confirm New Password:</b>
             <input id="confirm-new-password" type="password"></input>
         </div>
-        <button id="reset-password-button">Reset Password</button>`;
+        <button id="reset-password-button">Reset Password</button>
+        </section>`;
     }
 
     #attachEventListeners() {
