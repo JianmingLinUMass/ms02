@@ -6,7 +6,7 @@ import { FriendComponent } from '/ProgressTracking/components/FriendComponent/Fr
 import { EventHub } from '/ProgressTracking/eventHub/EventHub.js'
 import { Events } from '/ProgressTracking/eventHub/Events.js';
 
-import { fetchUserAccount, modifyUserAccount } from '/ProgressTracking/crudOpsOnUserAccountsFrontEnd.js';
+import { fetchUserAccount, modifyUserAccount, modifyUserPasswordOnly } from '/ProgressTracking/crudOpsOnUserAccountsFrontEnd.js';
 
 export class AppControlComponent {
     #container = null;
@@ -80,17 +80,6 @@ export class AppControlComponent {
         viewContainer.appendChild(this.#friendComponent.render());
     }
 
-    // fetchUserAccountInApp(attribute, value) {
-    //     // Call fetchUserAccount() to fetch an user account with attribute of `attribute` and value of `value`
-    //     const account = fetchUserAccount({attribute, value});
-    //     return account;
-    // }
-
-    // modifyUserAccountInApp(attributes, values, attribute, value) {
-    //     const account = modifyUserAccount({attributes, values, attribute, value});
-    //     return account;
-    // }
-
     setUserAccountInfoToField(user_id, username, user_email, user_password, user_profile_path, 
                               user_level, user_point_exercise, user_point_quiz) {
         this.user_id = user_id;
@@ -147,9 +136,23 @@ export class AppControlComponent {
         }
     }
 
-    modifyPasswordInDB(data) {
+    async modifyPasswordInDB(data) {
         console.log('new password:', data);
-        this.#container.querySelector('#password').innerHTML = data;
+
+        // Pass the new password to the backend, and make modification on userAccounts.db there
+        const acc = modifyUserPasswordOnly({attributes:["user_password"], values:[data], attribute:this.attribute, value:this.value});
+        // await acc.then(function(result) {
+        //     console.log('put:', result);
+        //     this.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+        //         result.user_level, result.user_point_exercise, result.user_point_quiz);
+        // });
+        const thisAppControlComponent = this;
+        await acc.then(function(result) {
+            console.log('put:', result);
+            console.log('thisAppControlComponent:', thisAppControlComponent);
+            thisAppControlComponent.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+                result.user_level, result.user_point_exercise, result.user_point_quiz);
+        });
     }
 
     switchFocusingAccountWithNewUsername(data) {
