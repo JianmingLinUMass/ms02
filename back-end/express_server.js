@@ -165,25 +165,11 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// pass an object that has query data in the form: {user_id: 1} or {user_email: "emailaddress456@gmail.com"}. The attribute has to be either `user_id` or `user_email`.
-// This should only fetch one user account, if successful. (assuming either the id or the email address is unique)
+// pass an object that has query data in the form like: {user_email: "emailaddress456@gmail.com"}.
+// This should only fetch one user account, if successful.
 app.post('/userAccounts', async (req, res) => {
   console.log("Attempting to fetch user accounts");
   try {
-    // To fetch the user account using `user_email`, replace each initialization/appearance from `user_id` to `user_email`
-    // Modify `user_id` here and `user_id` on the top of `progress-tracking.js`
-    // const user_id = req.body; 
-    // const attributes = [];
-    // const values = [];
-
-    // const queryParams = {user_id};
-    // for (const [key, value] of Object.entries(queryParams)) {
-    //   if (value) {
-    //     attributes.push(key);
-    //     values.push(value.value);
-    //   }
-    // }
-
     // req.body should contain an object of type {attribute: , value: }
     const bo = req.body;
     const attribute = bo.attribute;

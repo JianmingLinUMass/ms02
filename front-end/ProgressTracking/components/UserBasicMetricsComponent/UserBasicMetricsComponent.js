@@ -9,7 +9,6 @@ export class UserBasicMetricsComponent extends BaseComponent{
         super();
         this.loadCSS('UserBasicMetricsComponent');
 
-        this.userID = "";
         this.username = "";
         this.emailAddress = "";
     }
@@ -30,9 +29,6 @@ export class UserBasicMetricsComponent extends BaseComponent{
 
     #setupContentInContainer() {
         this.#container.innerHTML = `
-        <div><b>User ID:</b> 
-            <span id="user-id"></span>
-        </div>
         <div><b>Username:</b>
             <span id="username">username456</span>
         </div>
@@ -42,11 +38,9 @@ export class UserBasicMetricsComponent extends BaseComponent{
     }
 
     #attachEventListeners() {
-        const userIdSpan = this.#container.querySelector('#user-id');
         const usernameSpan = this.#container.querySelector('#username');
         const userEmailAddressSpan = this.#container.querySelector('#email-address');
 
-        userIdSpan.innerHTML = this.userID;
         usernameSpan.innerHTML = this.username;
         userEmailAddressSpan.innerHTML = this.emailAddress;
     }

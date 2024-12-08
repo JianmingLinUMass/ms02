@@ -17,7 +17,7 @@ const value = localStorage.getItem("storedUsername"); // obtained when user succ
 const account = fetchUserAccount({attribute, value}); // parameter is an object
 await account.then(function(result){
     console.log('post:', result);
-    appController.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+    appController.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
         result.user_level, result.user_point_exercise, result.user_point_quiz);
 });
 
@@ -33,7 +33,7 @@ await account.then(function(result){
 // const account2 = modifyUserAccount(attributesToModify, valuesToModify, attribute, value);
 // await account2.then(function(result){
 //     console.log('put:', result);
-//     appController.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+//     appController.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
 //         result.user_level, result.user_point_exercise, result.user_point_quiz);
 // });
 
