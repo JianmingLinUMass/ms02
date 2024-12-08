@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const Database = require('./database.js'); 
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 
 const app = express();
@@ -17,13 +18,14 @@ const friendsDatabase = new Database(friendsdbFilePath)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// // Configure session
-// app.use(session({
-//   secret: 'your_secret_key',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: false } // Set to true if using HTTPS
-// }));
+ // Configure session
+ // Middleware to create a session
+ app.use(session({
+   secret: '12345',
+   resave: false,
+   saveUninitialized: false,
+   cookie: { secure: false } // Set to true if using HTTPS
+ }));
 
 // Serve static files from the front-end directory
 const frontEndPath = path.join(__dirname, '../front-end');
@@ -66,11 +68,34 @@ app.post('/login', async (req, res) => {
           return res.status(400).json({ message: "Invalid username or password." });
       }
 
+       // Store session data
+       req.session.user = {
+        id: user.id,
+        username: user.username
+      };
+
       // Successful login
       res.status(200).json({ message: "Login successful.", redirectUrl: '/Homepage/home-page.html' });
   } catch (err) {
       console.error('Error during login:', err);
       res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+// Logout endpoint
+app.post('/logout', (req, res) => {
+  if (req.session) {
+    // Destroy session
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).json({ message: "Failed to log out." });
+      }
+      // Successfully logged out
+      res.status(200).json({ message: "Logout successful.", redirectUrl: '/AccountPages/LoginPage/login.html' });
+    });
+  } else {
+    res.status(400).json({ message: "No active session found." });
   }
 });
 
