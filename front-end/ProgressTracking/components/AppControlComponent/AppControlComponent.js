@@ -17,7 +17,6 @@ export class AppControlComponent {
     #friendComponent = null;
     #hub = null;
 
-    user_id = 0;
     username = "";
     user_email = "";
     user_password = "";
@@ -80,9 +79,8 @@ export class AppControlComponent {
         viewContainer.appendChild(this.#friendComponent.render());
     }
 
-    setUserAccountInfoToField(user_id, username, user_email, user_password, user_profile_path, 
+    setUserAccountInfoToField(username, user_email, user_password, user_profile_path, 
                               user_level, user_point_exercise, user_point_quiz) {
-        this.user_id = user_id;
         this.username = username;
         this.user_email = user_email;
         this.user_password = user_password;
@@ -95,7 +93,6 @@ export class AppControlComponent {
     }
 
     loadUserAccountToFrontEnd() {
-        const userIdElement = this.#container.querySelector('#user-id');
         const usernameElement = this.#container.querySelector('#username');
         const userEmailElement = this.#container.querySelector('#email-address');
         const userPasswordElement = this.#container.querySelector('#password');
@@ -104,7 +101,6 @@ export class AppControlComponent {
         const userPointExerciseElement = this.#container.querySelector('#point-earned-from-exercise-page');
         const userPointQuizElement = this.#container.querySelector('#point-earned-from-quiz-page');
 
-        userIdElement.innerHTML = this.user_id;
         usernameElement.innerHTML = this.username;
         userEmailElement.innerHTML = this.user_email;
         userPasswordElement.innerHTML = this.user_password;
@@ -143,14 +139,14 @@ export class AppControlComponent {
         const acc = modifyUserPasswordOnly({attributes:["user_password"], values:[data], attribute:this.attribute, value:this.value});
         // await acc.then(function(result) {
         //     console.log('put:', result);
-        //     this.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+        //     this.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
         //         result.user_level, result.user_point_exercise, result.user_point_quiz);
         // });
         const thisAppControlComponent = this;
         await acc.then(function(result) {
             console.log('put:', result);
             console.log('thisAppControlComponent:', thisAppControlComponent);
-            thisAppControlComponent.setUserAccountInfoToField(result.user_id, result.username, result.user_email, result.user_password, result.user_profile_path, 
+            thisAppControlComponent.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
                 result.user_level, result.user_point_exercise, result.user_point_quiz);
         });
     }

@@ -27,7 +27,6 @@ await account.then(function(result){
     // result will return the updated user account
     // You can access it like this:
     console.log('fetched account:', result);
-    console.log('user_id:', result.user_id);
     console.log('username:', result.username);
     console.log('user_email:', result.user_email);
     console.log('user_password:', result.user_password);   

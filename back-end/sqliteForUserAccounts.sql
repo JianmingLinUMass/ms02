@@ -1,7 +1,6 @@
 -- SQLite
 CREATE TABLE IF NOT EXISTS userAccounts (
-    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
+    username TEXT PRIMARY KEY,
     user_email TEXT NOT NULL,
     user_password TEXT NOT NULL,
     user_profile_path TEXT NOT NULL,

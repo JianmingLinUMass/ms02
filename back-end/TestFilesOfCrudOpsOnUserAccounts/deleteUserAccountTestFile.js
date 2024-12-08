@@ -2,8 +2,8 @@
 // It uses deleteUserAccount() in crudOperationsOnUserAccounts.js
 
 const delAcc = require('../crudOperationsOnUserAccounts.js'); // remember to update the path if this file is not found
-const deleteAttribute = "user_id";
-const deleteValue = 9;
+const deleteAttribute = "username";
+const deleteValue = "user1";
 
 // Call deleteUserAccount() to delete the user account with attribute of `deleteAttribute` and value of `deleteValue`
 delAcc.deleteUserAccount(deleteAttribute, deleteValue);

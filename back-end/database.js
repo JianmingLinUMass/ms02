@@ -127,10 +127,9 @@ class Database {
 
     // Method to query user account.
     // For example, to query a specific account, need to have 
-    // attributes = ["user_id"] and values = [1], OR 
     // attributes = ["user_email"] and values = ["emailaddress456@gmail.com"]
     queryUserAccounts(attributes, values) {
-        // Construct the WHERE clause based on the attributes (i.e. user_id or user_email)
+        // Construct the WHERE clause based on the attributes (i.e. user_email)
         const whereClause = attributes.map(attr => `${attr} = ?`);
         const sql = `SELECT * FROM userAccounts WHERE ${whereClause}`;
         
@@ -139,8 +138,8 @@ class Database {
     }
 
     // Delete an existing user account from userAccounts.db with the specific value for a attribute
-    // whereAttribute: should be either "user_email" or "user_id"
-    // whereValue: should be something like "useremail2@gmail.com" (if attribute is email), or "1" (if attribute is id)
+    // whereAttribute: should be something like "user_email"
+    // whereValue: should be something like "useremail2@gmail.com" (if attribute is email)
     deleteUserAccount(whereAttribute, whereValue) {
         const whereClause = `${whereAttribute} = ${whereValue}`;
         const sql = `DELETE FROM userAccounts

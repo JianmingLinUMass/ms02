@@ -12,14 +12,13 @@ async function fetchUserAccount(queryParams = {}) { // parameter is an object
         });
 
         console.log('response in fetchUserAccount():', response);
-        // queryParams should only contain one attribute: `user_id` or `user_email`
+        // queryParams should only contain one attribute like: `user_email`
         const userAccounts = await response.json();
         console.log(userAccounts);
 
         // The specific user account is found
         if (userAccounts.length > 0) {
             const account = userAccounts[0];
-            const user_id = account.user_id;
             const username = account.username;
             const user_email = account.user_email;
             const user_password = account.user_password;
@@ -28,17 +27,17 @@ async function fetchUserAccount(queryParams = {}) { // parameter is an object
             const user_point_exercise = account.user_point_exercise;
             const user_point_quiz = account.user_point_quiz;
 
-            return {user_id: user_id, username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
+            return {username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
                     user_level: user_level, user_point_exercise: user_point_exercise, user_point_quiz: user_point_quiz };
         } else {
             // Otherwise, report that no user account is found
             console.log('No user account is available');
-            return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+            return {username: null, user_email: null, user_password: null, user_profile_path: null,
                     user_level: null, user_point_exercise: null, user_point_quiz: null };
         }
     } catch (err) {
         console.error('Failed to load user account:', err);
-        return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+        return {username: null, user_email: null, user_password: null, user_profile_path: null,
                 user_level: null, user_point_exercise: null, user_point_quiz: null };
     }
 }
@@ -63,7 +62,6 @@ async function modifyUserAccount(attributes, values, attribute, value) {
         // The specific user account is found
         if (userAccounts.length > 0) {
             const account = userAccounts[0];
-            const user_id = account.user_id
             const username = account.username;
             const user_email = account.user_email;
             const user_password = account.user_password;
@@ -72,17 +70,17 @@ async function modifyUserAccount(attributes, values, attribute, value) {
             const user_point_exercise = account.user_point_exercise;
             const user_point_quiz = account.user_point_quiz;
 
-            return {user_id: user_id, username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
+            return {username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
                     user_level: user_level, user_point_exercise: user_point_exercise, user_point_quiz: user_point_quiz };
         } else {
             // Otherwise, report that no user account is found
             console.log('No user account is available');
-            return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+            return {username: null, user_email: null, user_password: null, user_profile_path: null,
                     user_level: null, user_point_exercise: null, user_point_quiz: null };
         }
     } catch (err) {
         console.error('Failed to modify user account:', err);
-        return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+        return {username: null, user_email: null, user_password: null, user_profile_path: null,
                 user_level: null, user_point_exercise: null, user_point_quiz: null };
     }
 }
@@ -111,7 +109,6 @@ async function modifyUserPasswordOnly(attributes, values, attribute, value) {
         // The specific user account is found
         if (userAccounts.length > 0) {
             const account = userAccounts[0];
-            const user_id = account.user_id
             const username = account.username;
             const user_email = account.user_email;
             const user_password = account.user_password;
@@ -120,17 +117,17 @@ async function modifyUserPasswordOnly(attributes, values, attribute, value) {
             const user_point_exercise = account.user_point_exercise;
             const user_point_quiz = account.user_point_quiz;
 
-            return {user_id: user_id, username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
+            return {username: username, user_email: user_email, user_password: user_password, user_profile_path: user_profile_path,
                     user_level: user_level, user_point_exercise: user_point_exercise, user_point_quiz: user_point_quiz };
         } else {
             // Otherwise, report that no user account is found
             console.log('No user account is available');
-            return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+            return {username: null, user_email: null, user_password: null, user_profile_path: null,
                     user_level: null, user_point_exercise: null, user_point_quiz: null };
         }
     } catch (err) {
-        console.error('Failed to modify user account:', err);
-        return {user_id: null, username: null, user_email: null, user_password: null, user_profile_path: null,
+        console.error('Failed to modify user password:', err);
+        return {username: null, user_email: null, user_password: null, user_profile_path: null,
                 user_level: null, user_point_exercise: null, user_point_quiz: null };
     }
 }
