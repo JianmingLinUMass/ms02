@@ -461,10 +461,10 @@ async function addQuizQuestions(questionsToAdd) {
 
 // Run the function
 
-allQuizQuestions = [pastSimpleQuestions, presentSimpleQuestions, pastContinuousQuestions, presentPerfectQuestions, presentPassiveQuestions, pastPassiveQuestions, presentConditionalQuestions, pastConditionalQuestions, futureSimpleQuestions];
+allQuizQuestions = [quizPastSimpleQuestions];
 
-allQuestions.forEach(i => {
-    addQuestions(i)
+allQuizQuestions.forEach(i => {
+    addQuizQuestions(i)
 });
 // Function to add questions to the database
 
