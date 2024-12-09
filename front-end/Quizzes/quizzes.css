@@ -64,48 +64,46 @@ body {
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 20px 15px;
-    width: 90%; /* Reduced width */
-    max-width: 500px; /* Restrict width */
-    height: 300px; /* Longer height to resemble a flashcard */
+    width: 90%; 
+    max-width: 500px; 
+    height: 300px; 
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center all child elements */
-    justify-content: space-between; /* Space between question and buttons */
+    align-items: center; 
+    justify-content: space-between; 
 }
 
-/* Question styling */
 .question {
     font-size: 30px;
     color: rgba(42, 167, 160, 0.8); 
     font-weight: bold;
     margin-bottom: 10px;
-    width: 100%; /* Full width for line */
+    width: 100%; 
     border-bottom: 1px solid rgba(42, 167, 160, 0.3); 
 }
 
-/* Answer input styling */
 .answer-input {
-    width: 80%; /* Centered width */
+    width: 80%; 
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid rgba(42, 167, 160, 0.5); /* Turquoise border with reduced opacity */
+    border: 1px solid rgba(42, 167, 160, 0.5); 
     border-radius: 10px;
-    text-align: center; /* Center text inside the input */
+    text-align: center; 
 }
 
-/* Button group styling */
+
 .button-group {
     display: flex;
-    justify-content: center; /* Center buttons in the row */
+    justify-content: center; 
     gap: 10px;
-    width: 100%; /* Ensure buttons are centered relative to flashcard width */
+    width: 100%; 
 }
 
 .hint-button,
 .submit-button {
     padding: 10px 20px;
-    background-color: rgba(255, 105, 180, 0.85); /* Neon pink with reduced opacity */
+    background-color: rgba(255, 105, 180, 0.85); 
     color: white;
     border: none;
     border-radius: 10px;
@@ -116,5 +114,5 @@ body {
 
 .hint-button:hover,
 .submit-button:hover {
-    background-color: rgba(255, 105, 180, 1); /* Full neon pink on hover */
+    background-color: rgba(255, 105, 180, 1); 
 }
