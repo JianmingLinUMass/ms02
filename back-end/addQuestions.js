@@ -628,7 +628,15 @@ quizPresentConditionalQuestions = [
 
 // Run the function
 
-allQuizQuestions = [quizPastSimpleQuestions];
+allQuizQuestions = [
+    quizPastSimpleQuestions, 
+    quizPastContinuousQuestions,
+    quizPresentSimpleQuestions,
+    quizPresentPerfectQuestions,
+    quizPresentPassiveQuestions,
+    quizPastPassiveQuestions,
+    quizPresentConditionalQuestions
+];
 
 allQuizQuestions.forEach(i => {
     addQuizQuestions(i)
