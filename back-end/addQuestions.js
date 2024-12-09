@@ -409,8 +409,63 @@ futureSimpleQuestions = [
     { question: "What is the future simple tense of to come?", answer: "will come", language: "english", category: "future-simple", exception: false, possible_answers: "will come, comes, come" }
 ];
 
+quizPastSimpleQuestions = [
+    {question: "When ___ (you/go) to the park last week?", answer: "did you go", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you go"}, 
+    { question: "What ___ (he/say) about the project?", answer: "did he say", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did he say" },
+    { question: "Why ___ (they/leave) the party early?", answer: "did they leave", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they leave" },
+    { question: "Where ___ (she/find) her lost keys?", answer: "did she find", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did she find" },
+    { question: "Who ___ (you/see) at the concert?", answer: "did you see", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you see" },
+    { question: "How ___ (he/learn) to play the guitar?", answer: "did he learn", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did he learn" },
+    { question: "When ___ (it/start) raining?", answer: "did it start", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did it start" },
+    { question: "What ___ (they/do) after school?", answer: "did they do", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they do" },
+    { question: "Why ___ (you/not/call) me yesterday?", answer: "did you not call", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you not call" },
+    { question: "Where ___ (she/go) for her holiday?", answer: "did she go", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did she go" },
+    { question: "Who ___ (help) you with your homework?", answer: "did help", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did help" },
+    { question: "How ___ (you/feel) after the exam?", answer: "did you feel", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you feel" },
+    { question: "Why ___ (they/not/finish) their work on time?", answer: "did they not finish", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they not finish" },
+    { question: "What ___ (he/eat) for dinner?", answer: "did he eat", language: "english", category: "past-simple", exception: false, possible_answers: "did he eat" },
+    { question: "When ___ (you/realize) your mistake?", answer: "did you realize", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you realize" },
+    { question: "Why ___ (she/not/go) to the meeting?", answer: "did she not go", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did she not go" },
+    { question: "Where ___ (you/buy) this book?", answer: "did you buy", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you buy" },
+    { question: "What ___ (they/say) about the movie?", answer: "did they say", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they say" },
+    { question: "How ___ (he/manage) to solve the problem?", answer: "did he manage", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did he manage" },
+    { question: "When ___ (you/decide) to move?", answer: "did you decide", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you decide" },
+    { question: "Who ___ (they/invite) to the party?", answer: "did they invite", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they invite" },
+    { question: "Why ___ (she/not/speak) to him?", answer: "did she not speak", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did she not speak" },
+    { question: "What ___ (he/write) in the email?", answer: "did he write", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did he write" },
+    { question: "Where ___ (you/put) your keys?", answer: "did you put", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did you put" },
+    { question: "How ___ (they/prepare) for the test?", answer: "did they prepare", language: "english", category: "quiz-past-simple", exception: false, possible_answers: "did they prepare" }
+];
 
+async function addQuizQuestions(questionsToAdd) {
+    try {
+        // Loop through each question and add it to the database
+        for (const q of quizQuestionsToAdd) {
+            const { question, answer, language, category, exception, possible_answers } = q;
+            
+            // Handle the optional possible_answers field
+            const possibleAnswersString = possible_answers ? possible_answers : null;
 
+            // Use the updated addQuestion method to include all new fields
+            await db.addQuestion(question, answer, language, category, exception, possibleAnswersString);  
+            console.log(`Question added: "${question}"`);
+        }
+        console.log('All questions have been added successfully!');
+    } catch (err) {
+        console.error('Error adding questions:', err);
+    } finally {
+        // Close the database connection when done
+        db.db.close();
+    }
+}
+
+// Run the function
+
+allQuizQuestions = [pastSimpleQuestions, presentSimpleQuestions, pastContinuousQuestions, presentPerfectQuestions, presentPassiveQuestions, pastPassiveQuestions, presentConditionalQuestions, pastConditionalQuestions, futureSimpleQuestions];
+
+allQuestions.forEach(i => {
+    addQuestions(i)
+});
 // Function to add questions to the database
 
 // QuestionID (integer) , Question Text (string), Answer (string), Language (string), Category (string), Exception (boolean)
@@ -440,7 +495,8 @@ async function addQuestions(questionsToAdd) {
 
 allQuestions = [pastSimpleQuestions, presentSimpleQuestions, pastContinuousQuestions, presentPerfectQuestions, presentPassiveQuestions, pastPassiveQuestions, presentConditionalQuestions, pastConditionalQuestions, futureSimpleQuestions];
 
-
 allQuestions.forEach(i => {
     addQuestions(i)
 });
+
+
