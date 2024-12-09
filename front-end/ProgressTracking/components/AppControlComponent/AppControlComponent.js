@@ -8,6 +8,8 @@ import { Events } from '/ProgressTracking/eventHub/Events.js';
 
 import { fetchUserAccount, modifyUserAccount, modifyUserPasswordOnly } from '/ProgressTracking/crudOpsOnUserAccountsFrontEnd.js';
 
+import Base64 from "../../base64.js";
+
 export class AppControlComponent {
     #container = null;
     #userProfileComponent = null;
@@ -30,7 +32,6 @@ export class AppControlComponent {
     value = "u1"; // default username value
 
     constructor() {
-
         this.value = localStorage.getItem("storedUsername");
 
         this.#hub = EventHub.getInstance();
@@ -39,7 +40,6 @@ export class AppControlComponent {
         this.#userPasswordComponent = new UserPasswordComponent();
         this.#userPointMetricsComponent = new UserPointMetricsComponent();
         this.#friendComponent = new FriendComponent(this.value);
-
 
         this.addSubscriptions();
     }
@@ -92,7 +92,7 @@ export class AppControlComponent {
         this.loadUserAccountToFrontEnd();
     }
 
-    loadUserAccountToFrontEnd() {
+    async loadUserAccountToFrontEnd() {
         const usernameElement = this.#container.querySelector('#username');
         const userEmailElement = this.#container.querySelector('#email-address');
         const userPasswordElement = this.#container.querySelector('#password');
@@ -104,32 +104,28 @@ export class AppControlComponent {
         usernameElement.innerHTML = this.username;
         userEmailElement.innerHTML = this.user_email;
         userPasswordElement.innerHTML = this.user_password;
-        userProfileElement.setAttribute('src', this.user_profile_path);
+
+        const blob = Base64.convertBase64ToFile(this.user_profile_path); // blob should be a Blob that is converted from user_profile_path (a base64)
+        const profilePic = URL.createObjectURL(blob);
+
+        userProfileElement.setAttribute('src', profilePic); // set front-end user profile on user page
         userLevelElement.innerHTML = this.user_level;
         userPointExerciseElement.innerHTML = this.user_point_exercise;
         userPointQuizElement.innerHTML = this.user_point_quiz;
     }
 
-    modifyProfileInDB(data) {
-        console.log("data:", data);
-        this.readURL(data)
+    async modifyProfileInDB(data) { // data should be a File object
+        const base64 = await Base64.convertFileToBase64(data); // base64 should be a string that is converted from data
 
-        const objectURL = URL.createObjectURL(data);
-        console.log("objectURL:", objectURL);
-
-        const attributesToModify = ["user_profile_path"];
-        const valuesToModify = [objectURL];
-        modifyUserAccount({attributes:attributesToModify, values:valuesToModify, whereAttribute:this.attribute, whereValue:this.value});
-    }
-
-    readURL(file) {
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-picture').src = e.target.result;
-            }
-            reader.readAsDataURL(file)
-        }
+        // Pass the new profile () to the backend, and make modification on userAccounts.db there
+        const acc = modifyUserAccount({attributes:["user_profile_path"], values:[base64], attribute:this.attribute, value:this.value});
+ 
+        const thisAppControlComponent = this;
+        await acc.then(function(result) {
+            console.log('put:', result);
+            thisAppControlComponent.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
+                result.user_level, result.user_point_exercise, result.user_point_quiz);
+        });
     }
 
     async modifyPasswordInDB(data) {
@@ -137,22 +133,13 @@ export class AppControlComponent {
 
         // Pass the new password to the backend, and make modification on userAccounts.db there
         const acc = modifyUserPasswordOnly({attributes:["user_password"], values:[data], attribute:this.attribute, value:this.value});
-        // await acc.then(function(result) {
-        //     console.log('put:', result);
-        //     this.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
-        //         result.user_level, result.user_point_exercise, result.user_point_quiz);
-        // });
+
         const thisAppControlComponent = this;
         await acc.then(function(result) {
             console.log('put:', result);
-            console.log('thisAppControlComponent:', thisAppControlComponent);
             thisAppControlComponent.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 
                 result.user_level, result.user_point_exercise, result.user_point_quiz);
         });
-    }
-
-    switchFocusingAccountWithNewUsername(data) {
-        console.log('Switching to user account with username:', data);
     }
 
     subscribe(event, listener) {
@@ -168,11 +155,6 @@ export class AppControlComponent {
         // password
         this.subscribe(Events.ModifyPassword, data => {
             this.modifyPasswordInDB(data);
-        });
-
-        // listen for new value of username to switch account
-        this.subscribe(Events.SwitchFocusingAccountWithNewUsername, data => {
-            this.switchFocusingAccountWithNewUsername(data);
         });
     }
 }

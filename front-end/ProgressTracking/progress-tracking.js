@@ -30,7 +30,7 @@ await account.then(function(result){
 // const valuesToModify = [2, 2, 2];
 
 // // Modify an user account
-// const account2 = modifyUserAccount(attributesToModify, valuesToModify, attribute, value);
+// const account2 = modifyUserAccount({attributesToModify, valuesToModify, attribute, value});
 // await account2.then(function(result){
 //     console.log('put:', result);
 //     appController.setUserAccountInfoToField(result.username, result.user_email, result.user_password, result.user_profile_path, 

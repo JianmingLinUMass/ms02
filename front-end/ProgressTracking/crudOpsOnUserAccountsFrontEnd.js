@@ -52,7 +52,7 @@ async function modifyUserAccount(attributes, values, attribute, value) {
             headers: {
                 'Content-Type': 'application/json'  // Inform the server we're sending JSON
             },
-            body: JSON.stringify({attributes, values, attribute, value}) 
+            body: JSON.stringify(attributes, values, attribute, value) 
         });
 
         console.log('response in modifyUserAccount():', response);

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Database = require('./database.js'); 
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-
+const base64Converter = require('./base64.js');
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +14,8 @@ const questionsDatabase = new Database(questionsdbFilePath);
 
 const friendsdbFilePath = path.resolve(__dirname, 'friendDatabase.db');
 const friendsDatabase = new Database(friendsdbFilePath)
+
+const base64FileConverter = new base64Converter();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -167,8 +169,12 @@ app.post('/signup', async (req, res) => {
       // Hash the password
       const hashedPassword = await bcrypt.hash(user_password, 10);
 
-      // Add the user to the database
+      // Convert default profile file into base64 
       const defaultUserProfilePath = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
+      const blob = await fetch(defaultUserProfilePath).then(r => r.blob());
+      const base64 = await base64FileConverter.convertFileToBase64(blob); // add base64 to userAccounts.db as user_profile_path, instead of defaultUserProfilePath
+
+      // Add the user to the database
       const user_level = 1;
       const user_point_exercise = 0.0;
       const user_point_quiz = 0.0;
@@ -177,7 +183,7 @@ app.post('/signup', async (req, res) => {
           username,
           user_email,
           hashedPassword,
-          defaultUserProfilePath,
+          base64,
           user_level,
           user_point_exercise,
           user_point_quiz
