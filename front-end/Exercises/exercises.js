@@ -19,29 +19,25 @@ function shuffleArray(array) {
 async function updateExercisePoints() {
     const attribute = "username";
     const value = localStorage.getItem("storedUsername");
-    //console.log(value);
     let currExercisePoints = 0;
+
     const userAccount = fetchUserAccount({attribute, value});
-    //console.log("account fetched");
+
     await userAccount.then(function(result) {
         console.log('post:', result);
         currExercisePoints = result.user_point_exercise;
     });
-        
-    let newPoints = currExercisePoints + 1;
-    //console.log(newPoints);
-    const valueToModify = [newPoints];
-    const attributeToModify = ["user_point_exercise"];
-    //console.log(valueToModify.toString());
-    const userAccount2 = modifyUserAccount({attributeToModify, valueToModify, attribute, value});
 
-    //console.log("account modified");
+    const values = [currExercisePoints + 1];
+    const attributes = ["user_point_exercise"];
+
+    const userAccount2 = modifyUserAccount({attributes, values, attribute, value});
+
     await userAccount2.then(function(result) {
         console.log('put:', result);
         const points = document.getElementById("exercise-points");
-        points.innerHTML = `Total Exercise Points: ${valueToModify}`;
+        points.innerHTML = `Total Exercise Points: ${values[0]}`;
     });
-    console.log(`Number of points ${valueToModify}`);
 }
 
 async function checkExercisePoints() {
@@ -93,8 +89,6 @@ async function build() {
     const exerciseContainer = document.getElementById("exercise");
 
     const shuffledIndices = shuffleArray([...Array(30).keys()]).slice(0, 10);
-    console.log(currentQuestions.length);
-    console.log(shuffledIndices);
 
     for(let i = 0; i < shuffledIndices.length; i++) {
         const currIndex = shuffledIndices[i];
@@ -164,7 +158,13 @@ function resetExercise() {
     build();
 }
 
+function clearResultMarkers() {
+    const markers = document.querySelectorAll(".result-marker");
+    markers.forEach(marker => marker.remove());
+}
+
 function checkAnswers(shuffledIndices) {
+    clearResultMarkers();
     let score = 0;
 
     shuffledIndices.forEach((index) => {
@@ -207,12 +207,13 @@ function checkAnswers(shuffledIndices) {
         }
     });
 
+    console.log(score);
     const scoreDisplay = document.getElementById("score");
     scoreDisplay.innerHTML = `Unit ${getUnitfromURL()} Exercise - You got ${score} / ${shuffledIndices.length} correct!`;
 
-    updateExercisePoints();
+
     if(score >= 7 && notUpdated == true) {
-        //updateExercisePoints();
+        updateExercisePoints();
         notUpdated = false;
     }
 }
