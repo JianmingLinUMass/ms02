@@ -54,12 +54,27 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    --mask: radial-gradient(62.31px at calc(100% + 30px) 50%, #0000 calc(99% - 8px), #000 calc(101% - 8px) 99%, #0000 101%) calc(50% - 29px + 0.5px) calc(50% - 100px)/58px 200px repeat-y,
-             radial-gradient(62.31px at -30px 50%, #0000 calc(99% - 8px), #000 calc(101% - 8px) 99%, #0000 101%) calc(50% + 29px) 50%/58px 200px repeat-y;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
+    --mask:
+    radial-gradient(43.5px at 50% 61.5px, #000 99%, #0000 101%) calc(50% - 60px) 0/120px 51% repeat-x,
+    radial-gradient(43.5px at 50% -31.5px, #0000 99%, #000 101%) 50% 30px/120px calc(51% - 30px) repeat-x,
+    radial-gradient(43.5px at 50% calc(100% - 61.5px), #000 99%, #0000 101%) calc(50% - 60px) 100%/120px 51% repeat-x,
+    radial-gradient(43.5px at 50% calc(100% + 31.5px), #0000 99%, #000 101%) 50% calc(100% - 30px)/120px calc(51% - 30px) repeat-x,
+    radial-gradient(43.5px at 61.5px 50%, #000 99%, #0000 101%) 0 calc(50% - 60px)/51% 120px repeat-y,
+    radial-gradient(43.5px at -31.5px 50%, #0000 99%, #000 101%) 30px 50%/calc(51% - 30px) 120px repeat-y,
+    radial-gradient(43.5px at calc(100% - 61.5px) 50%, #000 99%, #0000 101%) 100% calc(50% - 60px)/51% 120px repeat-y,
+    radial-gradient(43.5px at calc(100% + 31.5px) 50%, #0000 99%, #000 101%) calc(100% - 30px) 50%/calc(51% - 30px) 120px repeat-y;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);--mask:
+  radial-gradient(43.5px at 50% 61.5px, #000 99%, #0000 101%) calc(50% - 60px) 0/120px 51% repeat-x,
+  radial-gradient(43.5px at 50% -31.5px, #0000 99%, #000 101%) 50% 30px/120px calc(51% - 30px) repeat-x,
+  radial-gradient(43.5px at 50% calc(100% - 61.5px), #000 99%, #0000 101%) calc(50% - 60px) 100%/120px 51% repeat-x,
+  radial-gradient(43.5px at 50% calc(100% + 31.5px), #0000 99%, #000 101%) 50% calc(100% - 30px)/120px calc(51% - 30px) repeat-x,
+  radial-gradient(43.5px at 61.5px 50%, #000 99%, #0000 101%) 0 calc(50% - 60px)/51% 120px repeat-y,
+  radial-gradient(43.5px at -31.5px 50%, #0000 99%, #000 101%) 30px 50%/calc(51% - 30px) 120px repeat-y,
+  radial-gradient(43.5px at calc(100% - 61.5px) 50%, #000 99%, #0000 101%) 100% calc(50% - 60px)/51% 120px repeat-y,
+  radial-gradient(43.5px at calc(100% + 31.5px) 50%, #0000 99%, #000 101%) calc(100% - 30px) 50%/calc(51% - 30px) 120px repeat-y;
+-webkit-mask: var(--mask);
+mask: var(--mask);
 }
 
 .modules-box h2 {
