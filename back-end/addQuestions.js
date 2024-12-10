@@ -604,7 +604,7 @@ quizPresentConditionalQuestions = [
     { question: "If I had more time, I ___ (learn) another language!", answer: "would learn", language: "english", category: "quiz-present-conditional", exception: false, possible_answers: "NULL" }
 ];
 
-    async function addQuizQuestions(quizQuestionsToAdd) {
+async function addQuizQuestions(quizQuestionsToAdd) {
     try {
         // Loop through each question and add it to the database
         for (const q of quizQuestionsToAdd) {
@@ -626,52 +626,64 @@ quizPresentConditionalQuestions = [
     }
 }
 
-// Run the function
 
-allQuizQuestions = [
-    quizPastSimpleQuestions, 
-    quizPastContinuousQuestions,
-    quizPresentSimpleQuestions,
-    quizPresentPerfectQuestions,
-    quizPresentPassiveQuestions,
-    quizPastPassiveQuestions,
-    quizPresentConditionalQuestions
+allQuizQuestions = [ // creating the array for adding all quiz sections
+    ...quizPastSimpleQuestions, 
+    ...quizPastContinuousQuestions,
+    ...quizPresentSimpleQuestions,
+    ...quizPresentPerfectQuestions,
+    ...quizPresentPassiveQuestions,
+    ...quizPastPassiveQuestions,
+    ...quizPresentConditionalQuestions
 ];
 
-allQuizQuestions.forEach(i => {
-    addQuizQuestions(i)
-});
-// Function to add questions to the database
-
 // QuestionID (integer) , Question Text (string), Answer (string), Language (string), Category (string), Exception (boolean)
-async function addQuestions(questionsToAdd) {
+async function addQuestions(allQuestions) {
     try {
         // Loop through each question and add it to the database
-        for (const q of questionsToAdd) {
-            const { question, answer, language, category, exception, possible_answers } = q;
-            
-            // Handle the optional possible_answers field
-            const possibleAnswersString = possible_answers ? possible_answers : null;
-
-            // Use the updated addQuestion method to include all new fields
-            await db.addQuestion(question, answer, language, category, exception, possibleAnswersString);  
-            console.log(`Question added: "${question}"`);
+        for (const q of allQuestions) {
+            try {
+                await db.addQuestion(
+                    q.question,
+                    q.answer,
+                    q.language,
+                    q.category,
+                    q.exception,
+                    q.possible_answers || null
+                );
+                console.log(`Inserted: ${q.question}`);
+            } catch (err) {
+                console.error(`Error inserting question: ${q.question}`, err);
+            }
         }
-        console.log('All questions have been added successfully!');
     } catch (err) {
-        console.error('Error adding questions:', err);
+        console.error("Error processing questions:", err);
     } finally {
-        // Close the database connection when done
+        // Close the database connection when all questions are done
         db.db.close();
+        console.log("Database connection closed.");
     }
 }
 
-// Run the function
+// Aggregate all question arrays into one
+const allQuestions = [
+    ...pastSimpleQuestions,
+    ...presentSimpleQuestions,
+    ...pastContinuousQuestions,
+    ...presentPerfectQuestions,
+    ...presentPassiveQuestions,
+    ...pastPassiveQuestions,
+    ...presentConditionalQuestions,
+    ...pastConditionalQuestions,
+    ...futureSimpleQuestions
+];
 
-allQuestions = [pastSimpleQuestions, presentSimpleQuestions, pastContinuousQuestions, presentPerfectQuestions, presentPassiveQuestions, pastPassiveQuestions, presentConditionalQuestions, pastConditionalQuestions, futureSimpleQuestions];
+// Run the function
+(async () => {
+    await addQuizQuestions(allQuizQuestions);
+})();
 
 allQuestions.forEach(i => {
     addQuestions(i)
 });
-
 
