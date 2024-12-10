@@ -17,6 +17,8 @@ const friendsDatabase = new Database(friendsdbFilePath)
 
 const base64FileConverter = new base64Converter();
 
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
