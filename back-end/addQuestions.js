@@ -604,39 +604,6 @@ quizPresentConditionalQuestions = [
     { question: "If I had more time, I ___ (learn) another language!", answer: "would learn", language: "english", category: "quiz-present-conditional", exception: false, possible_answers: "NULL" }
 ];
 
-async function addQuizQuestions(quizQuestionsToAdd) {
-    try {
-        // Loop through each question and add it to the database
-        for (const q of quizQuestionsToAdd) {
-            const { question, answer, language, category, exception, possible_answers } = q;
-            
-            // Handle the optional possible_answers field
-            const possibleAnswersString = possible_answers ? possible_answers : null;
-
-            // Use the updated addQuestion method to include all new fields
-            await db.addQuestion(question, answer, language, category, exception, possibleAnswersString);  
-            console.log(`Question added: "${question}"`);
-        }
-        console.log('All questions have been added successfully!');
-    } catch (err) {
-        console.error('Error adding questions:', err);
-    } finally {
-        // Close the database connection when done
-        db.db.close();
-    }
-}
-
-
-allQuizQuestions = [ // creating the array for adding all quiz sections
-    ...quizPastSimpleQuestions, 
-    ...quizPastContinuousQuestions,
-    ...quizPresentSimpleQuestions,
-    ...quizPresentPerfectQuestions,
-    ...quizPresentPassiveQuestions,
-    ...quizPastPassiveQuestions,
-    ...quizPresentConditionalQuestions
-];
-
 // QuestionID (integer) , Question Text (string), Answer (string), Language (string), Category (string), Exception (boolean)
 async function addQuestions(allQuestions) {
     try {
@@ -667,23 +634,28 @@ async function addQuestions(allQuestions) {
 
 // Aggregate all question arrays into one
 const allQuestions = [
-    ...pastSimpleQuestions,
-    ...presentSimpleQuestions,
-    ...pastContinuousQuestions,
-    ...presentPerfectQuestions,
-    ...presentPassiveQuestions,
-    ...pastPassiveQuestions,
-    ...presentConditionalQuestions,
-    ...pastConditionalQuestions,
-    ...futureSimpleQuestions
+    ...new Set([
+        ...pastSimpleQuestions,
+        ...presentSimpleQuestions,
+        ...pastContinuousQuestions,
+        ...presentPerfectQuestions,
+        ...presentPassiveQuestions,
+        ...pastPassiveQuestions,
+        ...presentConditionalQuestions,
+        ...pastConditionalQuestions,
+        ...futureSimpleQuestions,
+        ...quizPastSimpleQuestions,
+        ...quizPastContinuousQuestions,
+        ...quizPresentSimpleQuestions,
+        ...quizPresentPerfectQuestions,
+        ...quizPresentPassiveQuestions,
+        ...quizPastPassiveQuestions,
+        ...quizPresentConditionalQuestions
+    ])
 ];
 
 // Run the function
 (async () => {
-    await addQuizQuestions(allQuizQuestions);
+    await addQuestions(allQuestions);
 })();
-
-allQuestions.forEach(i => {
-    addQuestions(i)
-});
 
