@@ -32,33 +32,43 @@ body {
 }
 
 .modules-box {
-    text-align: left; 
-    background-color: rgba(52, 197, 190, 0.15); 
-    border: 1px solid rgba(16, 67, 65, 0.3); 
-    padding: 20px; 
-    margin: 20px auto; 
-    width: 220px; 
-    cursor: pointer; 
-    display: block; 
-    border-radius: 12px; 
-    transition: all 0.3s ease; 
-    font-family: 'Arial', sans-serif; 
-    font-size: 16px; 
-    color: #104341; 
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
+    position: fixed; /* Attach the box to the side */
+    left: 0; /* Make it attached to the left */
+    top: 50%; /* Position it vertically in the middle */
+    transform: translateY(-50%); /* Center it vertically */
+    background-color: #c6f5e9; /* Inner layer color */
+    border: 5px solid #f49097; /* Thick outline with your specified color */
+    border-radius: 100px; /* Make it puffy and curvy */
+    padding: 20px; /* Add spacing inside the box */
+    width: 250px; /* Control the width */
+    height: 350px; /* Control the height */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+    overflow: hidden; /* Hide content that overflows */
+    clip-path: ellipse(75% 100% at 100% 50%); /* Create the half-curvy design */
 }
 
-.modules-box:hover {
-    background-color: rgba(52, 197, 190, 0.25); 
-    border-color: rgba(16, 67, 65, 0.5); 
-    transform: scale(1.05); 
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); 
+
+.module-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
 }
 
-.modules-box:active {
-    transform: scale(0.98); /* Pressed down effect */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle reset of shadow */
+.module-list li {
+    margin-bottom: 15px; /* Add spacing between items */
 }
+
+.module-list a {
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Dark color for text */
+    font-weight: bold; /* Make the links bold */
+    transition: color 0.3s; /* Smooth color change on hover */
+}
+
+.module-list a:hover {
+    color: #f49097; /* Change text color on hover */
+}
+
 
 .home-button {
     background-color: white;
