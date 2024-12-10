@@ -17,6 +17,14 @@ const friendsDatabase = new Database(friendsdbFilePath)
 
 const base64FileConverter = new base64Converter();
 
+const tasksdbFilePath = path.resolve(__dirname, 'tasks.db');
+const tasksDatabase = new Database(tasksdbFilePath);
+
+// Initialize tasks table
+tasksDatabase.createTasksTable().catch(err => {
+    console.error('Error creating tasks table:', err);
+});
+
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.use(bodyParser.json());
@@ -399,6 +407,50 @@ app.put('/friend-requests/update', async (req, res) => {
   }
 });
 
+// Tasks Routes
+app.post('/api/tasks', async (req, res) => {
+  try {
+      const { username, content } = req.body;
+      await tasksDatabase.addTask(username, content);
+      const tasks = await tasksDatabase.getTasks(username);
+      res.status(201).json(tasks);
+  } catch (error) {
+      console.error('Error adding task:', error);
+      res.status(500).json({ message: 'Failed to add task' });
+  }
+});
+
+app.get('/api/tasks/:username', async (req, res) => {
+  try {
+      const tasks = await tasksDatabase.getTasks(req.params.username);
+      res.json(tasks);
+  } catch (error) {
+      console.error('Error fetching tasks:', error);
+      res.status(500).json({ message: 'Failed to fetch tasks' });
+  }
+});
+
+app.delete('/api/tasks/:taskId', async (req, res) => {
+  try {
+      await tasksDatabase.deleteTask(req.params.taskId);
+      res.json({ message: 'Task deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting task:', error);
+      res.status(500).json({ message: 'Failed to delete task' });
+  }
+});
+
+app.patch('/api/tasks/:taskId', async (req, res) => {
+  try {
+      const { status } = req.body;
+      await tasksDatabase.updateTaskStatus(req.params.taskId, status);
+      res.json({ message: 'Task updated successfully' });
+  } catch (error) {
+      console.error('Error updating task:', error);
+      res.status(500).json({ message: 'Failed to update task' });
+  }
+});
+
 /*
 Friends Section Ends
 */
@@ -413,6 +465,7 @@ app.get('*', (req, res) => {
     }
   });
 });
+
 
 // Start the server
 app.listen(PORT, () => {
