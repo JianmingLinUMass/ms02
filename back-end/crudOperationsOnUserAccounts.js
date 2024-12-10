@@ -7,12 +7,16 @@
 
 const Database = require('./database.js');  // Assuming your database.js file is in the same directory
 const db = new Database('./back-end/userAccounts.db');  // Path to your SQLite database
+const base64Converter = require('./base64.js');
+const base64FileConverter = new base64Converter();
 
 
 /* Variables should be defined here: */
 
-const defaultUserProfilePath = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
-
+const defaultUserProfilePathURL = 'https://github.com/JianmingLinUMass/ms02/blob/main/front-end/ProgressTracking/components/UserProfileComponent/profile-picture.jpg?raw=true';
+const blob = await fetch(defaultUserProfilePathURL).then(r => r.blob());
+const base64 = await base64FileConverter.convertFileToBase64(blob);
+const defaultUserProfilePath = base64;
 
 /* Functions should be defined here: */
 

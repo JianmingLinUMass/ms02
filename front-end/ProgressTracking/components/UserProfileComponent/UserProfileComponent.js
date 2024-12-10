@@ -54,14 +54,14 @@ export class UserProfileComponent extends BaseComponent {
     }
     
     #handleProfileEdition(editProfileInput) {
-        const file = editProfileInput.files[0];
+        const file = editProfileInput.files[0]; // receive a file object
 
         if (!file) {
             alert('Please upload a profile image.');
             return;
         }
 
-        this.publishModifyProfile(file);
+        this.publishModifyProfile(file); // publish a file object
         this.#clearInputs(editProfileInput);
     }
 

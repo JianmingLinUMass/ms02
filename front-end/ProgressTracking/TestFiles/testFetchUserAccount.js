@@ -16,10 +16,9 @@ const account = fetchUserAccount({attribute, value}); // parameter is an object
 await account.then(function(result){
     /* You can access fetched account ONLY in this function. The fetched account will not work outside this function. */
 
-    // result will have a return type of: user_id, username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz
+    // result will have a return type of: username, user_email, user_password, user_profile_path, user_level, user_point_exercise, user_point_quiz
     // You can access them like this:
     console.log('fetched account:', result);
-    console.log('user_id:', result.user_id);
     console.log('username:', result.username);
     console.log('user_email:', result.user_email);
     console.log('user_password:', result.user_password);   

@@ -29,22 +29,75 @@ async function loadQuestion(queryParams = {}) {
     }
 }
 
+let currentQuestions = [];
+let currentIndex = 0;
+
+async function loadQuiz(category) {
+    try {
+        const response = await fetch('/questions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ category }), // Pass the category
+        });
+
+        const questions = await response.json();
+        if (questions.length > 0) {
+            currentQuestions = questions; // Store the fetched questions
+            currentIndex = 0; // Reset the index for the new quiz
+            displayQuestion(currentQuestions[currentIndex]); // Display the first question
+        } else {
+            document.getElementById('question-text').innerText = 'No questions available for this category.';
+            currentQuestions = [];
+        }
+    } catch (err) {
+        console.error('Failed to load quiz:', err);
+        document.getElementById('question-text').innerText = 'Failed to load questions. Please try again later.';
+    }
+}
+
+// Question Display on flashcard
+function displayQuestion(question) {
+    document.getElementById('question-text').innerText = question.question;
+    document.getElementById('submit-button').onclick = () => handleSubmit(question);
+    const resultMessageElement = document.getElementById('result-message');
+    resultMessageElement.textContent = ''; // Clears results for new questions
+}
+
 // Handle answer submission
 function handleSubmit(question) {
     const userAnswer = document.getElementById('answer-input').value.trim();
     const correctAnswer = question.answer.trim();
-    const resultMessage = userAnswer.toLowerCase() === correctAnswer.toLowerCase() 
-        ? 'Correct!' 
-        : `Incorrect. The correct answer is: ${correctAnswer}`;
 
-    alert(resultMessage); // @ srishti replace this with a styled message in the UI
-    document.getElementById('answer-input').value = ''; // Clear the input field
+    const resultMessageElement = document.getElementById('result-message');
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        resultMessageElement.textContent = 'Correct!';
+        resultMessageElement.className = 'result-message correct'; // 'correct' style
+    } else {
+        resultMessageElement.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+        resultMessageElement.className = 'result-message incorrect'; //  'incorrect' style
+    }
+
+    document.getElementById('answer-input').value = '';
 }
+
+// Next button functionality, so it goes to the NEXT ->
+document.getElementById('next-button').addEventListener('click', () => {
+    if (currentQuestions.length > 0) {
+        currentIndex = (currentIndex + 1) % currentQuestions.length; 
+        displayQuestion(currentQuestions[currentIndex]);
+    } else {
+        document.getElementById('question-text').innerText = 'No questions available. Please select a quiz.';
+    }
+});
 
 // Provide a hint (optional logic, can be improved later)
 document.getElementById('hint-button').addEventListener('click', () => {
-    alert('Hint: Try thinking about the the word in different contexts'); // You can modify this for more specific hints
+    alert('Hint: Try thinking about the the word in different contexts...'); // You can modify this for more specific hints
 });
 
 // Initialize the page by loading a question
-window.onload = loadQuestion();
+window.onload = () => {
+    document.getElementById('question-text').innerText = 'Please select a quiz to start.';
+};

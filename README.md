@@ -10,6 +10,8 @@ A repository for 326 milestone 02, 03, and 04, Team 13.
 
 **Step3:** Run command `npm install sqlite3` to install sqlite3.
 
-**Step4:** Run command `node back-end/express_server.js` to run the web app.
+**Step4:** Run Command `npm install bcrypt` to install bcrypt.
 
-**Step5:** Run `[Ctrl+C]` to terminate the web app.
+**Step5:** Run command `node back-end/express_server.js` to run the web app.
+
+**Step6:** Run `[Ctrl+C]` to terminate the web app.

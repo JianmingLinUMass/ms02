@@ -81,8 +81,14 @@
         <li><a href="/Quizzes/quizzes.html">Quizzes</a></li>
         <li><a href="/Exercises/exercises.html">Exercises</a></li>
         <li><a href="/ProgressTracking/progress-tracking.html">Account</a></li>
+        <li>
+          <button id="logout-btn" style="background: none; border: none; color: #4a5568; cursor: pointer; text-decoration: underline;">
+            Logout
+          </button>
+        </li>
       </ul>
     </nav>
+    <script src="../session.js"></script>
 
     <!-- Header -->
     <header>
@@ -135,6 +141,7 @@
     </script>
   </body>
 
+
   <section id="progress-dashboard">
     <h2>Your Progress</h2>
     <div class="progress-item">
@@ -150,6 +157,17 @@
       </div>
     </div>
   </section>
+
+    <!-- Tasks-->
+  <section id="tasks-section">
+    <h2>My Tasks</h2>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="Add a new task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul id="task-list"></ul>
+  </section>
+  <script src="./tasks.js"></script>
 
   <section id="quick-stats">
     <h2>Quick Stats</h2>
