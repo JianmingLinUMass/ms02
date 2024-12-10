@@ -29,6 +29,11 @@ async function loadQuestion(queryParams = {}) {
     }
 }
 
+function loadQuiz(module) {
+    console.log(`Loading questions for module: ${module}`);
+    loadQuestion({ module });
+}
+
 // Handle answer submission
 function handleSubmit(question) {
     const userAnswer = document.getElementById('answer-input').value.trim();
