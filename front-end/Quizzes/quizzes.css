@@ -20,7 +20,6 @@ body {
     text-align: center;
 }
 
-
 .title {
     font-size: 48px;
     font-weight: bold;
@@ -55,6 +54,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    --mask: radial-gradient(62.31px at calc(100% + 30px) 50%, #0000 calc(99% - 8px), #000 calc(101% - 8px) 99%, #0000 101%) calc(50% - 29px + 0.5px) calc(50% - 100px)/58px 200px repeat-y,
+             radial-gradient(62.31px at -30px 50%, #0000 calc(99% - 8px), #000 calc(101% - 8px) 99%, #0000 101%) calc(50% + 29px) 50%/58px 200px repeat-y;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
 }
 
 .modules-box h2 {
