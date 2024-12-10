@@ -163,25 +163,42 @@ function shuffleArray(array) {
 
 async function updateExercisePoints() {
     const attribute = "username";
-    const value = "u3";
+    const value = localStorage.getItem("storedUsername");
+    console.log(value);
     const attributeToModify = ["user_point_exercise"];
     let currExercisePoints = 0;
-    const u3Account = fetchUserAccount({attribute, value});
+    const userAccount = fetchUserAccount({attribute, value});
     //console.log("account fetched");
-    await u3Account.then(function(result) {
+    await userAccount.then(function(result) {
         console.log('post:', result);
         currExercisePoints = result.user_point_exercise;
     });
         
     const valueToModify = currExercisePoints + 1;
-    const u3Account2 = modifyUserAccount(attributeToModify, valueToModify, attribute, value);
+    const userAccount2 = modifyUserAccount(attributeToModify, valueToModify, attribute, value);
+
     //console.log("account modified");
-    await u3Account2.then(function(result) {
+    await userAccount2.then(function(result) {
         console.log('put:', result);
         const points = document.getElementById("exercise-points");
         points.innerHTML = `Total Exercise Points: ${valueToModify}`;
     });
     console.log(`Number of points ${valueToModify}`);
+}
+
+async function checkExercisePoints() {
+    const attribute = "username";
+    const value = localStorage.getItem("storedUsername");
+    let currExercisePoints = 0;
+    const userAccount = fetchUserAccount({attribute, value});
+
+    await userAccount.then(function(result) {
+        console.log('put:', result);
+        currExercisePoints = result.user_point_exercise;
+        const points = document.getElementById("exercise-points");
+        points.innerHTML = `Total Exercise Points: ${currExercisePoints}`;
+    })
+    
 }
 
 const build = () => {
@@ -246,6 +263,7 @@ const build = () => {
         resetExercise();
     });
     exerciseContainer.appendChild(resetButton);
+    checkExercisePoints();
 };
 
 function resetExercise() {
@@ -301,6 +319,7 @@ function checkAnswers(shuffledIndices, selectedQA) {
     const scoreDisplay = document.getElementById("score");
     scoreDisplay.innerHTML = `Unit ${getUnitfromURL()} Exercise - You got ${score} / ${shuffledIndices.length} correct!`;
     //console.log(score);
+    //updateExercisePoints();
     if(score >= 7 && notUpdated == true) {
         updateExercisePoints();
         notUpdated = false;
