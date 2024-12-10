@@ -463,9 +463,9 @@ quizPastContinuousQuestions = [
     { question: "Why ___ (she/not/look) where she was going?", answer: "was she not looking", language: "english", category: "quiz-past-continuous", exception: false, possible_answers: "NULL" },
     { question: "He ___ (wait) for her all evening.", answer: "was waiting", language: "english", category: "quiz-past-continuous", exception: false, possible_answers: "NULL" } 
 ];
-
+/*
 quizPresentSimpleQuestions [
-{ question: "When ___ (he/work) at the office?", answer: "does he work", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
+    { question: "When ___ (he/work) at the office?", answer: "does he work", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
     { question: "Why ___ (they/not/like) spicy food?", answer: "do they not like", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
     { question: "How often ___ (you/exercise)?", answer: "do you exercise", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
     { question: "The train ___ (arrive) at 7 PM every day.", answer: "arrives", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
@@ -491,6 +491,8 @@ quizPresentSimpleQuestions [
     { question: "The clock ___ (not/work) again!", answer: "does not work", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" },
     { question: "How often ___ (they/practice) piano?", answer: "do they practice", language: "english", category: "quiz-present-simple", exception: false, possible_answers: "NULL" }
 ];
+console.log(quizPresentSimpleQuestions);
+*/
 
 quizPresentPerfectQuestions = [
     { question: "What ___ (you/do) since morning?", answer: "have you done", language: "english", category: "quiz-present-perfect", exception: false, possible_answers: "NULL" },
@@ -646,7 +648,7 @@ const allQuestions = [
         ...futureSimpleQuestions,
         ...quizPastSimpleQuestions,
         ...quizPastContinuousQuestions,
-        ...quizPresentSimpleQuestions,
+        //...quizPresentSimpleQuestions,
         ...quizPresentPerfectQuestions,
         ...quizPresentPassiveQuestions,
         ...quizPastPassiveQuestions,

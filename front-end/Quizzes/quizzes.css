@@ -38,6 +38,8 @@ body {
     padding: 20px;
     margin: 20px;
     width: 200px;
+    cursor: pointer;
+    display: block;
     border-radius: 10px;
     text-align: left;
 }
