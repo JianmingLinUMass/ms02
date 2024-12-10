@@ -38,12 +38,17 @@ function loadQuiz(module) {
 function handleSubmit(question) {
     const userAnswer = document.getElementById('answer-input').value.trim();
     const correctAnswer = question.answer.trim();
-    const resultMessage = userAnswer.toLowerCase() === correctAnswer.toLowerCase() 
-        ? 'Correct!' 
-        : `Incorrect. The correct answer is: ${correctAnswer}`;
 
-    alert(resultMessage); // @ srishti replace this with a styled message in the UI
-    document.getElementById('answer-input').value = ''; // Clear the input field
+    const resultMessageElement = document.getElementById('result-message');
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        resultMessageElement.textContent = 'Correct!';
+        resultMessageElement.className = 'result-message correct'; // 'correct' style
+    } else {
+        resultMessageElement.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+        resultMessageElement.className = 'result-message incorrect'; //  'incorrect' style
+    }
+
+    document.getElementById('answer-input').value = '';
 }
 
 // Provide a hint (optional logic, can be improved later)
