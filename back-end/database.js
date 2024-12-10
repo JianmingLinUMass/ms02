@@ -24,6 +24,40 @@ class Database {
         });
     }
 
+    // Create a table called 'Tasks' in the database
+    createTasksTable() {
+        const sql = `
+            CREATE TABLE IF NOT EXISTS Tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                content TEXT NOT NULL,
+                status TEXT DEFAULT 'Pending',
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (username) REFERENCES userAccounts(username) ON DELETE CASCADE
+            );`;
+        return this.runCommand(sql);
+    }
+    
+    addTask(username, content) {
+        const sql = `INSERT INTO Tasks (username, content) VALUES (?, ?)`;
+        return this.runCommand(sql, [username, content]);
+    }
+    
+    getTasks(username) {
+        const sql = `SELECT * FROM Tasks WHERE username = ? ORDER BY created_at DESC`;
+        return this.runCommand(sql, [username]);
+    }
+    
+    deleteTask(taskId) {
+        const sql = `DELETE FROM Tasks WHERE id = ?`;
+        return this.runCommand(sql, [taskId]);
+    }
+    
+    updateTaskStatus(taskId, status) {
+        const sql = `UPDATE Tasks SET status = ? WHERE id = ?`;
+        return this.runCommand(sql, [status, taskId]);
+    }
+
     /* Create questions tables
 
     id:                 number used to uniquely identify questions
