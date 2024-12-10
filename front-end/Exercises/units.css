@@ -1,94 +1,179 @@
 body {
-    background-color: rgba(253, 232, 255, 0.8);
+    background-color: rgba(253, 232, 255, 0.9);
     font-family: 'Courier New', Courier, monospace;
-}
-
-.units-header {
-    font-size: 18px;
-    color: #ffffff;
-    background-color: #ff547c;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
 .page-main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
-    margin-top: 60px;
+    padding-top: 80px;
+    margin: 20px;
 }
 
 .title {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: bold;
-    color: rgba(255, 105, 180, 0.85);
+    color: rgba(255, 105, 180, 0.9);
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .description {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 15px;
     color: #00ad9e;
+    text-align: center;
 }
-.exercise { 
+
+.exercise {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
     margin-top: 20px;
 }
+
 .exercise-question {
     font-size: 18px;
     font-weight: bold;
     color: #00ad9e;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .answer-label {
     font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
 }
+
 .radio-button {
     cursor: pointer;
+    margin-right: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #submit-button {
     background-color: #00ad9e;
-    font-size: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
+    color: #fff;
     margin-top: 10px;
-    margin-bottom: 20px;
-    cursor: pointer;
+}
+
+#submit-button:hover {
+    background-color: #007f6b;
+    transform: scale(1.05);
 }
 
 #reset-button {
-    background-color: red;
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
+    background-color: #ff547c;
+    color: #fff;
     margin-top: 10px;
-    margin-bottom: 20px;
-    cursor: pointer;
+}
+
+#reset-button:hover {
+    background-color: #d43b5f;
+    transform: scale(1.05);
 }
 
 .score {
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 20px;
     font-weight: bold;
+    color: #333;
 }
 
 .exercise-points {
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 18px;
+    margin-top: 15px;
     font-weight: bold;
+    color: #333;
 }
 
 .green {
-    color: green;
+    color: #00ad9e;
     font-weight: bold;
 }
 
 .red {
-    color: red;
+    color: #ff547c;
     font-weight: bold;
+}
+
+fieldset {
+    border: 2px solid #00ad9e;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+legend {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ad9e;
+    padding: 5px 10px;
+    background-color: rgba(253, 232, 255, 0.9);
+    border: 2px solid #ff547c;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.result-marker {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 15px;
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.result-marker.green {
+    background-color: #00ad9e;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.result-marker.red {
+    background-color: #ff547c;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+
+    .description {
+        font-size: 18px;
+    }
+
+    .exercise {
+        width: 90%;
+    }
+
+    button {
+        font-size: 16px;
+    }
 }
