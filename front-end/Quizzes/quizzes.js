@@ -115,7 +115,7 @@ function showCompletionMessage() {
 }
 
 // Save attempt to localStorage and update the results table
-function saveAttempt(moduleName, scorePercentage) {
+function saveAttempt(scorePercentage) {
     const attempts = JSON.parse(localStorage.getItem('quizAttempts')) || [];
 
     const now = new Date();
