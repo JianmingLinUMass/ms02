@@ -30,18 +30,10 @@ body {
     display: block;
 }
 
-.modules-box h2,
-.results-box h2 {
-    /* Removed font-family: Arial, sans-serif; */
-    font-size: 18px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 15px;
-}
 
 .modules-box h2,
 .results-box h2 {
-    font-family: inherit;
+    font-family: 'Courier New', monospace;
     color: rgba(255, 105, 180, 0.85);
     text-shadow:
         0 0 5px rgba(255, 105, 180, 0.8),
@@ -54,10 +46,10 @@ body {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 250px;
+    width: 150px;
     height: 250px;
     background-color: #ffbef9e3;
-    border: 80px solid #affddf;
+    border: 20px solid #affddf;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 15px;
@@ -79,7 +71,7 @@ body {
 .results-box h2 {
     font-family: Arial, sans-serif;
     font-size: 18px;
-    color: #333;
+    color: #e652e6;
     text-align: center;
     margin-bottom: 15px;
 }
@@ -108,17 +100,17 @@ body {
 .results-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', monospace;
+    
   }
   
   .results-table th, .results-table td {
-    border: 1px solid #333;
+    border: 1px solid #ba28b5;
     padding: 8px;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
   }
   
-  /* Assign approximate widths to columns */
   .date-column {
     width: 25%;
   }
