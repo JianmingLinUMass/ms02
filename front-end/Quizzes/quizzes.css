@@ -45,7 +45,7 @@ body {
 .modules-box,
 .results-box {
     position: fixed;
-    top: 10%;
+    top: 50%;
     transform: translateY(-50%);
     width: 180px;
     height: 250px;
