@@ -87,6 +87,7 @@ class Database {
         return this.runCommand(sql);
     }
 
+    //function for creating a table in the theory database (used in resetTheoryDatabase.js)
     createTheoryTable() {
         const sql = `
             CREATE TABLE IF NOT EXISTS blocks (
@@ -98,6 +99,7 @@ class Database {
         return this.runCommand(sql);
     }
 
+    //function for removing a table in the theory database (used in resetTheoryDatabase.js)
     removeTheoryTable() {
         const sql = `DROP TABLE IF EXISTS blocks;`
         return this.runCommand(sql);
@@ -147,7 +149,7 @@ class Database {
         }
     }
 
-    //insert new text block into database 
+    //insert new entry of text block into the database (used in addTheory.js)
     addTheoryBlock(text, unit, block) {
         const sql = `
         INSERT INTO blocks (text, unit, block)
@@ -174,7 +176,7 @@ class Database {
         }
     }
 
-    //query theory blocks by attributes
+    //query theory blocks by attributes on the server side (used in express_server.js)
     queryTheory(attributes, values) {
         if(attributes.length === 0){
             const sql = `SELECT * FROM blocks`;
