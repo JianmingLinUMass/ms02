@@ -50,7 +50,37 @@
 - **Details**: Recreated our server.js file to use ExpressJS to be in line with ms04 requirements.
 - **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/d605017236129a7e0404b446ec96fbc053f673b5
 
-### Time 11/22/2024
+### Time 11/29/2024
 - **Task**: Updated Database and Backend to Support new Question format.
 - **Details**: I put more thought and decided on the final form our questions should be stored in. I then made the encessary adjustemnts to store questions in that format in sqlite and wury from the frontend.
 - **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/744598fc81385f853830a713bbdd96c7b65b8730
+
+### Time 12/03/2024
+- **Task**: Updated url for the Login pages to work correctly
+- **Details**: The login/signup pages were pushed with incorrect urls so I corrected them. I also changed the default page that the webapp loads to from the home page to the login page and I added an event listener for the login button to redirect to the home page.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/2752f280a307c6438d8a21d0de79fa02f97bbe7e
+
+### Time 12/04/2024
+- **Task**: fixed some typos in the code.
+- **Details**: Made changes to improve spelling/style consistency.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/ccf72365175501afd4d43064eb55746e92702c8f
+
+### Time 12/05/2024
+- **Task**: Added more questions to the database.
+- **Details**: I created some more questions and added them to our sqlite database so that the quiz and exercise sections have things to pull.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/823d9228c632f2607ad2a893071a8ef81bc7bb4f
+
+### Time 12/05/2024
+- **Task**: deleted unused files
+- **Details**: I deleted some unused files 
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/c3eca4d287c8afb8a5606a6a6695558b5093bf83
+
+### Time 12/07/2024
+- **Task**: Added a friends feature
+- **Details**: I implemented a friends feature across all levels of the webapp. I created a .qb file and sql table to hold friends and friend requests. I created javascript methods to interact with the database. I created get/post methods in the express_server.js file to route to the backend from the front end. I modified the front end as needed to send/accept freinds requests and show friends.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/e11ee15edd02cd3ea6c7f405022dc79e18a3d4b6
+
+### Time 12/010/2024
+- **Task**: fixed a minor bug with theory db.
+- **Details**: There was a minor bug with the theory db not being instantialized, causing the front end to be unable to access the database. I patched it.
+- **Link to Commit**: https://github.com/JianmingLinUMass/ms02/commit/834675aa07d13f3987a6d408d04695da33b6f07a
