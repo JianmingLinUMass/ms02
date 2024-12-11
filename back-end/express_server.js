@@ -451,6 +451,27 @@ app.patch('/api/tasks/:taskId', async (req, res) => {
   }
 });
 
+// Progress Tracking Routes
+app.get('/api/tasks/progress/:username', async (req, res) => {
+  try {
+      const username = req.params.username;
+      const totalTasks = await tasksDatabase.runCommand(
+          `SELECT COUNT(*) as total FROM Tasks WHERE username = ?`, [username]
+      );
+      const completedTasks = await tasksDatabase.runCommand(
+          `SELECT COUNT(*) as completed FROM Tasks WHERE username = ? AND status = 'Completed'`, [username]
+      );
+
+      res.json({
+          total: totalTasks[0].total,
+          completed: completedTasks[0].completed
+      });
+  } catch (error) {
+      console.error('Error fetching task progress:', error);
+      res.status(500).json({ message: 'Failed to fetch task progress' });
+  }
+});
+
 /*
 Friends Section Ends
 */
