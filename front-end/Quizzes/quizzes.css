@@ -88,6 +88,32 @@ body {
     color: #f49097; 
 }
 
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  
+  .results-table th, .results-table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  /* Assign approximate widths to columns */
+  .date-column {
+    width: 25%;
+  }
+  
+  .time-column {
+    width: 25%;
+  }
+  
+  .module-column {
+    width: 50%;
+  }
+  
 .home-button {
     background-color: white;
     padding: 10px 20px;
