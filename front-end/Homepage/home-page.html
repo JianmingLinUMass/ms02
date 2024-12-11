@@ -141,22 +141,23 @@
     </script>
   </body>
 
-
+  <!-- 
   <section id="progress-dashboard">
-    <h2>Your Progress</h2>
-    <div class="progress-item">
-      <p>Lessons Completed: <span id="lessons-completed">0</span> / 10</p>
-      <div class="progress-bar-container">
-        <div id="lessons-progress-bar" class="progress-bar"></div>
+      <h2>Your Progress</h2>
+      <div class="progress-item">
+        <p>Lessons Completed: <span id="lessons-completed">0</span> / 10</p>
+        <div class="progress-bar-container">
+          <div id="lessons-progress-bar" class="progress-bar"></div>
+        </div>
       </div>
-    </div>
-    <div class="progress-item">
-      <p>Quizzes Passed: <span id="quizzes-passed">0</span> / 5</p>
-      <div class="progress-bar-container">
-        <div id="quizzes-progress-bar" class="progress-bar"></div>
+      <div class="progress-item">
+        <p>Quizzes Passed: <span id="quizzes-passed">0</span> / 5</p>
+        <div class="progress-bar-container">
+          <div id="quizzes-progress-bar" class="progress-bar"></div>
+        </div>
       </div>
-    </div>
   </section>
+  -->
 
     <!-- Tasks-->
   <section id="tasks-section">
@@ -180,26 +181,31 @@
 
 <script>
   async function updateTaskProgress() {
-      const username = localStorage.getItem('storedUsername');
-      if (!username) return;
+    const username = localStorage.getItem('storedUsername');
+    if (!username) return;
 
-      try {
-          const response = await fetch(`/api/tasks/progress/${username}`);
-          if (!response.ok) throw new Error('Failed to fetch task progress');
-          const data = await response.json();
+    try {
+        const response = await fetch(`/api/tasks/progress/${username}`);
+        if (!response.ok) throw new Error('Failed to fetch task progress');
+        const data = await response.json();
 
-          const total = data.total;
-          const completed = data.completed;
-          const percentage = total > 0 ? (completed / total) * 100 : 0;
+        const total = data.total;
+        const completed = data.completed;
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
 
-          document.getElementById('progress-fill').style.width = `${percentage}%`;
-          document.getElementById('progress-text').textContent = `${Math.round(percentage)}% completed`;
-      } catch (error) {
-          console.error('Error:', error);
-      }
-  }
+        document.getElementById('progress-fill').style.width = `${percentage}%`;
+        document.getElementById('progress-text').textContent = `${Math.round(percentage)}% completed`;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
-  document.addEventListener("DOMContentLoaded", updateTaskProgress);
+// Update progress when page loads
+document.addEventListener("DOMContentLoaded", updateTaskProgress);
+// Update progress when tasks change
+document.addEventListener('taskStatusChanged', updateTaskProgress);
+// periodic updates
+setInterval(updateTaskProgress, 30000);
 </script>
 
   <section id="quick-stats">
