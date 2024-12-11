@@ -1,10 +1,12 @@
 const Database = require('./database.js');  
 const db = new Database('./theory.db');  
 
+//file used locally to reset the database or create one if it does not exist yet 
+
 async function resetTheoryTable(){
-    await db.removeTheoryTable();
-    await db.createTheoryTable();
+    await db.removeTheoryTable(); //uses method from database.js to remove table if it exists
+    await db.createTheoryTable(); //uses method from database.js to create  anew table 
 }
 
-// Run the function
+// run the function
 resetTheoryTable();
