@@ -22,6 +22,7 @@ const tasksDatabase = new Database(tasksdbFilePath);
 
 const theoryDBFilePath = path.resolve(__dirname, 'theory.db')
 const theoryDB = new Database(theoryDBFilePath)
+
 // Initialize tasks table
 tasksDatabase.createTasksTable().catch(err => {
     console.error('Error creating tasks table:', err);
