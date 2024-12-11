@@ -20,6 +20,7 @@ const base64FileConverter = new base64Converter();
 const tasksdbFilePath = path.resolve(__dirname, 'tasks.db');
 const tasksDatabase = new Database(tasksdbFilePath);
 
+//theory.db path 
 const theoryDBFilePath = path.resolve(__dirname, 'theory.db')
 const theoryDB = new Database(theoryDBFilePath)
 
@@ -154,6 +155,7 @@ app.post('/questions', async (req, res) => {
 
 //Post to query theory text from the database.
 
+//post to query theory text from the database on the server side (used on the frontend)
 app.post('/blocks', async (req, res) => {
   console.log("Attempting to fetch text");
   try {
