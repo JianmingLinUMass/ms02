@@ -141,7 +141,7 @@
     </script>
   </body>
 
-
+  <!--
   <section id="progress-dashboard">
     <h2>Your Progress</h2>
     <div class="progress-item">
@@ -157,6 +157,7 @@
       </div>
     </div>
   </section>
+  -->
 
     <!-- Tasks-->
   <section id="tasks-section">
@@ -168,6 +169,44 @@
     <ul id="task-list"></ul>
   </section>
   <script src="./tasks.js"></script>
+
+  <!-- Tasks -->
+<div id="task-progress">
+  <h3>Task Completion Progress</h3>
+  <div id="progress-bar" style="width: 100%; background-color: #f3f3f3;">
+      <div id="progress-fill" style="width: 0%; height: 30px; background-color: #4caf50;"></div>
+  </div>
+  <p id="progress-text">0% completed</p>
+</div>
+
+<script>
+  async function updateTaskProgress() {
+    const username = localStorage.getItem('storedUsername');
+    if (!username) return;
+
+    try {
+        const response = await fetch(`/api/tasks/progress/${username}`);
+        if (!response.ok) throw new Error('Failed to fetch task progress');
+        const data = await response.json();
+
+        const total = data.total;
+        const completed = data.completed;
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
+
+        document.getElementById('progress-fill').style.width = `${percentage}%`;
+        document.getElementById('progress-text').textContent = `${Math.round(percentage)}% completed`;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Update progress when page loads
+document.addEventListener("DOMContentLoaded", updateTaskProgress);
+// Update progress when tasks change
+document.addEventListener('taskStatusChanged', updateTaskProgress);
+// periodic updates
+setInterval(updateTaskProgress, 30000);
+</script>
 
   <section id="quick-stats">
     <h2>Quick Stats</h2>
