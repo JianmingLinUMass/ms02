@@ -1,3 +1,4 @@
+//frontend connecting to the database
 async function loadTheory(queryParams = {}) {
     try {
         // Fetch theory from the server
