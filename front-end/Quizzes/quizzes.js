@@ -10,7 +10,7 @@ const categoryDisplayNames = { // making display names for Results Tab
 
 let currentQuestions = [];
 let currentIndex = 0;
-let answeredCount = 0;    // Number of questions completed (correctly and moved on)
+let answeredCount = 0;    // Number of questions completed 
 let correctCount = 0;     // Number of correctly answered questions
 let currentCategory = ''; // Module/category name
 let currentQuestionAnsweredCorrectly = false;
@@ -45,7 +45,7 @@ async function loadQuiz(category) {
 }
 
 function displayQuestion(question) {
-    // If we've completed 25 questions, show completion message
+    // If they completed 25 questions, show completion message
     if (answeredCount >= 25) {
         showCompletionMessage();
         return;

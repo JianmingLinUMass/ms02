@@ -42,32 +42,24 @@ body {
     margin-bottom: 15px;
 }
 
-.modules-box h2,
-.results-box h2 {
-    font-family: 'Courier New', monospace;
-    color: rgba(255, 105, 180, 0.85);
-    text-shadow:
-        0 0 5px rgba(255, 105, 180, 0.8),
-        0 0 10px rgba(255, 105, 180, 0.7),
-        0 0 20px rgba(255, 105, 180, 0.6);
-}
-
 .modules-box,
 .results-box {
     position: fixed;
-    top: 50%;
+    top: 10%;
     transform: translateY(-50%);
     width: 180px;
     height: 250px;
     background-color: #ffbef9e3;
-    border: 20px solid #affddf;
+    border: 20px solid #b0f7daa9;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: auto; 
+    overflow-y: auto; 
 }
 
 .modules-box {
@@ -108,31 +100,28 @@ body {
     color: #f49097; 
 }
 
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Courier New', monospace;
-    
-  }
-  
-  .results-table th, .results-table td {
+.results-table th, .results-table td {
     border: 1px solid #ba28b5;
     padding: 8px;
     text-align: left;
     font-size: 12px;
-  }
-  
-  .date-column {
-    width: 25%;
-  }
-  
-  .time-column {
-    width: 25%;
-  }
-  
-  .module-column {
-    width: 50%;
-  }
+}
+
+.date-column {
+    width: 20%;
+}
+
+.time-column {
+    width: 20%;
+}
+
+.module-column {
+    width: 30%;
+}
+
+.score-column {
+    width: 30%;
+}
   
 .home-button {
     background-color: white;
