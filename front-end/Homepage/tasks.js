@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ username, content })
             });
             if (!response.ok) throw new Error('Failed to add task');
+            document.dispatchEvent(new CustomEvent('taskStatusChanged'));
             fetchTasks();
         } catch (error) {
             console.error('Error:', error);
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ status: 'Completed' })
             });
             if (!response.ok) throw new Error('Failed to complete task');
+            document.dispatchEvent(new CustomEvent('taskStatusChanged'));
             fetchTasks();
         } catch (error) {
             console.error('Error:', error);
@@ -92,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'DELETE'
             });
             if (!response.ok) throw new Error('Failed to delete task');
+            document.dispatchEvent(new CustomEvent('taskStatusChanged'));
             fetchTasks();
         } catch (error) {
             console.error('Error:', error);
