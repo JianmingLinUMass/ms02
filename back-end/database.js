@@ -87,6 +87,21 @@ class Database {
         return this.runCommand(sql);
     }
 
+    createTheoryTable() {
+        const sql = `
+            CREATE TABLE IF NOT EXISTS blocks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                text TEXT NOT NULL,
+                unit TEXT NOT NULL,
+                block TEXT NOT NULL
+            )`;
+        return this.runCommand(sql);
+    }
+
+    removeTheoryTable() {
+        const sql = `DROP TABLE IF EXISTS blocks;`
+        return this.runCommand(sql);
+    }
 
     /* Create user accounts table, called 'userAccounts'.
     username:            the user's unique profile name            (modifiable; should be initialized upon user account set up)
@@ -132,6 +147,14 @@ class Database {
         }
     }
 
+    //insert new text block into database 
+    addTheoryBlock(text, unit, block) {
+        const sql = `
+        INSERT INTO blocks (text, unit, block)
+        VALUES (?, ?, ?)`;
+        return this.runCommand(sql, [text, unit, block]);
+    }
+    
     // General method to query questions by attributes.For example, to query all english questions that deal with future simple, have
     // attributes = ["language", "category"] and
     // values = ["english", "future simple"]
@@ -147,6 +170,19 @@ class Database {
             const sql = `SELECT * FROM questions WHERE ${whereClause}`;
             
             // Execute the query with the provided values
+            return this.runCommand(sql, values);
+        }
+    }
+
+    //query theory blocks by attributes
+    queryTheory(attributes, values) {
+        if(attributes.length === 0){
+            const sql = `SELECT * FROM blocks`;
+            return this.runCommand(sql);
+        }
+        else {
+            const whereClause = attributes.map(attr => `${attr} = ?`).join(' AND ');
+            const sql = `SELECT * FROM blocks WHERE ${whereClause}`;
             return this.runCommand(sql, values);
         }
     }

@@ -20,6 +20,8 @@ const base64FileConverter = new base64Converter();
 const tasksdbFilePath = path.resolve(__dirname, 'tasks.db');
 const tasksDatabase = new Database(tasksdbFilePath);
 
+const theoryDBFilePath = path.resolve(__dirname, 'theory.db')
+const theoryDB = new Database(theoryDBFilePath)
 // Initialize tasks table
 tasksDatabase.createTasksTable().catch(err => {
     console.error('Error creating tasks table:', err);
@@ -146,6 +148,36 @@ app.post('/questions', async (req, res) => {
   } catch (err) {
     console.error("Error fetching questions:", err);
     res.status(500).send('Failed to fetch questions');
+  }
+});
+
+//Post to query theory text from the database.
+
+app.post('/blocks', async (req, res) => {
+  console.log("Attempting to fetch text");
+  try {
+    //parsed obj from front end
+    const {id, text, unit, block} = req.body;
+    const attributes = []
+    const values = []
+
+    const queryParams = {id, text, unit, block};
+
+    //split data into list of attributes and values
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value) {
+        attributes.push(key);
+        values.push(value);
+      }
+    }
+
+    //pass attributes and values into a function that will use them to query the database
+    const blocks = await theoryDB.queryTheory(attributes, values);
+    res.status(200).json(blocks);
+
+  } catch (err) {
+    console.error("Error fetching text:", err);
+    res.status(500).send('Failed to fetch text');
   }
 });
 
