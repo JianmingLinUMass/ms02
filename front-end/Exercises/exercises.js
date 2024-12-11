@@ -3,11 +3,13 @@ import { fetchUserAccount, modifyUserAccount } from '/ProgressTracking/crudOpsOn
 let notUpdated = true;
 let currentQuestions = [];
 
+// function to get the unit number from the url, based on what unit is selected on the main exercises page
 function getUnitfromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("unit");
 }
 
+// function to shuffle an array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -16,6 +18,8 @@ function shuffleArray(array) {
     return array;
 }
 
+// function to fetch and then update the exercise points in the userAccount database,
+// then display them on the exercises page
 async function updateExercisePoints() {
     const attribute = "username";
     const value = localStorage.getItem("storedUsername");
@@ -40,6 +44,8 @@ async function updateExercisePoints() {
     });
 }
 
+// function to fetch and display the user's current exercise points, used
+// when the user first opens the unit exercise page
 async function checkExercisePoints() {
     const attribute = "username";
     const value = localStorage.getItem("storedUsername");
@@ -55,6 +61,8 @@ async function checkExercisePoints() {
     
 }
 
+// function to fetch the questions from the question database and load them into an array 
+// that can be used by the build function
 async function loadExercise(category) {
     try {
         const response = await fetch('/questions', {
@@ -79,8 +87,11 @@ async function loadExercise(category) {
     }
 }
 
+// main build function to create and setup the various html elements based on the question array from the database
 async function build() {
 
+    //gets the unit from the url, then selects the correct category of questions and loads those questions from the database
+    //into currentQuestions
     const unit = parseInt(getUnitfromURL(), 10);
     const categoryArr = ["past-conditional", "past-continuous", "future-simple", "present-perfect", "present-passive", "past-passive"];
     const selectedCategory = categoryArr[unit-1];
@@ -88,8 +99,13 @@ async function build() {
 
     const exerciseContainer = document.getElementById("exercise");
 
+    //gets a shuffled arrays of indices 0-30 which are used to semi-randomize the questions used in the exercises
+    //picks the first 10 to display on the page as questions
     const shuffledIndices = shuffleArray([...Array(30).keys()]).slice(0, 10);
 
+    //main logic for loop which iterates through the 10 questions and adds them all to html fieldsets with legends
+    //then iterates through the possible answers for each question and adds them as radio buttons, which are then attached
+    //to the fieldsets
     for(let i = 0; i < shuffledIndices.length; i++) {
         const currIndex = shuffledIndices[i];
         
@@ -129,6 +145,7 @@ async function build() {
     const description = document.getElementById("description");
     description.innerHTML = `Welcome to the Unit ${unit} Exercise. Go ahead and get practicing!`;
 
+    //creates buttons for submitting the questions and resetting the page with a new group of questions
     const submitButton = document.createElement("button");
     submitButton.innerHTML = "Submit my answers!";
     submitButton.setAttribute("id", "submit-button");
@@ -147,6 +164,8 @@ async function build() {
     checkExercisePoints();
 };
 
+//function to reset the exercise by clearing the display and then building again
+//with a new set of 10 random questions
 function resetExercise() {
     const scoreDisplay = document.getElementById("score");
     scoreDisplay.innerHTML = "";
@@ -158,11 +177,15 @@ function resetExercise() {
     build();
 }
 
+//function to clear existing result markers (check/x's) on the questions when checking answers
 function clearResultMarkers() {
     const markers = document.querySelectorAll(".result-marker");
     markers.forEach(marker => marker.remove());
 }
 
+//function to check answers when exercise is submitted, it checks each question to see if correct answer
+//is selected, then updates score and adds a result marker (check/x) to the question to show if you
+//were correct or incorrect. if score is 7/10 or greater, gives the user an exercise point in the database
 function checkAnswers(shuffledIndices) {
     clearResultMarkers();
     let score = 0;
