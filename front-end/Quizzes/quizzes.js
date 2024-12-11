@@ -81,20 +81,14 @@ document.getElementById('next-button').addEventListener('click', () => {
         return;
     }
 
-    if (currentQuestionAnsweredCorrectly) {
-        answeredCount++;
-        if (answeredCount === 25) {
-            // Completed the quiz
-            showCompletionMessage();
-        } else {
-            currentIndex = (currentIndex + 1) % currentQuestions.length;
-            displayQuestion(currentQuestions[currentIndex]);
-        }
+    // Regardless of correctness, increment answeredCount and move on
+    answeredCount++;
+    if (answeredCount === 25) {
+        // Completed the quiz
+        showCompletionMessage();
     } else {
-        // Must answer correctly before moving on
-        const resultMessageElement = document.getElementById('result-message');
-        resultMessageElement.textContent = 'You must get the correct answer before moving on.';
-        resultMessageElement.className = 'result-message incorrect';
+        currentIndex = (currentIndex + 1) % currentQuestions.length;
+        displayQuestion(currentQuestions[currentIndex]);
     }
 });
 
