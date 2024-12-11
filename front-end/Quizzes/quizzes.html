@@ -20,6 +20,7 @@
 
     <div class="modules-box">
       <h2>Modules</h2>
+      <h2 class="glowing-title">Modules</h2>
       <ol class="module-list">
         <li><a href="javascript:void(0)" onclick="loadQuiz('past-simple')">Past Simple</a></li>
         <li><a href="javascript:void(0)" onclick="loadQuiz('past-continuous')">Past Continuous</a></li>
@@ -33,26 +34,18 @@
 
     <div class="results-box">
       <h2>Results</h2>
+      <h2 class="glowing-title">Modules</h2>
       <table class="results-table">
         <thead>
           <tr>
             <th class="date-column">Date</th>
             <th class="time-column">Time</th>
             <th class="module-column">Module</th>
+            <th class="score-column">Score</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2024-12-10</td>
-            <td>10:15 AM</td>
-            <td>Past Simple</td>
-          </tr>
-          <tr>
-            <td>2024-12-11</td>
-            <td>02:30 PM</td>
-            <td>Present Perfect</td>
-          </tr>
-          <!-- Add more rows as needed -->
+          
         </tbody>
       </table>
     </div>
@@ -72,6 +65,7 @@
           id ="answer-input"
           placeholder="Type your answer here"
         />
+        
         <div id="result-message" class="result-message"></div>
         <div class="button-group">
           <button class="hint-button" id="hint-button">Hint</button>

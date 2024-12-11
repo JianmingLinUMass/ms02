@@ -1,37 +1,21 @@
-// quizzes.js
-
-// Fetch a random question when the page loads
-async function loadQuestion(queryParams = {}) {
-    try {
-        // Fetch questions from the server
-        const response = await fetch('/questions', {
-            method: 'POST',  // Use POST instead of GET
-            headers: {
-                'Content-Type': 'application/json'  // Inform the server we're sending JSON
-            },
-            body: JSON.stringify(queryParams)  // Convert the queryParams object to a JSON string
-        });
-
-        console.log(response)
-        const questions = await response.json();
-        console.log(questions)
-        // If there are questions, randomly select one and display it
-        if (questions.length > 0) {
-            const question = questions[Math.floor(Math.random() * questions.length)];
-            document.getElementById('question-text').innerText = question.question;
-            // Store the correct answer for validation later
-            document.getElementById('submit-button').onclick = () => handleSubmit(question);
-        } else {
-            document.getElementById('question-text').innerText = 'No questions available.';
-        }
-    } catch (err) {
-        console.error('Failed to load questions:', err);
-    }
-}
+const categoryDisplayNames = { // making display names for Results Tab
+    'past-simple': 'Past Simple',
+    'past-continuous': 'Past Continuous',
+    'present-simple': 'Present Simple',
+    'present-perfect': 'Present Perfect',
+    'present-passive': 'Present Passive',
+    'past-passive': 'Past Passive',
+    'present-conditional': 'Present Conditional'
+};
 
 let currentQuestions = [];
 let currentIndex = 0;
+let answeredCount = 0;    // Number of questions completed (correctly and moved on)
+let correctCount = 0;     // Number of correctly answered questions
+let currentCategory = ''; // Module/category name
+let currentQuestionAnsweredCorrectly = false;
 
+// Load quiz from server by category
 async function loadQuiz(category) {
     try {
         const response = await fetch('/questions', {
@@ -39,16 +23,19 @@ async function loadQuiz(category) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ category }), // Pass the category
+            body: JSON.stringify({ category }),
         });
 
         const questions = await response.json();
-        if (questions.length > 0) {
-            currentQuestions = questions; // Store the fetched questions
-            currentIndex = 0; // Reset the index for the new quiz
-            displayQuestion(currentQuestions[currentIndex]); // Display the first question
+        if (questions.length >= 25) {
+            currentCategory = category;
+            currentQuestions = questions;
+            currentIndex = 0;
+            answeredCount = 0;
+            correctCount = 0;
+            displayQuestion(currentQuestions[currentIndex]);
         } else {
-            document.getElementById('question-text').innerText = 'No questions available for this category.';
+            document.getElementById('question-text').innerText = 'Not enough questions available for this category.';
             currentQuestions = [];
         }
     } catch (err) {
@@ -57,47 +44,138 @@ async function loadQuiz(category) {
     }
 }
 
-// Question Display on flashcard
 function displayQuestion(question) {
+    // If we've completed 25 questions, show completion message
+    if (answeredCount >= 25) {
+        showCompletionMessage();
+        return;
+    }
+
+    currentQuestionAnsweredCorrectly = false;
     document.getElementById('question-text').innerText = question.question;
+    document.getElementById('answer-input').value = '';
+    document.getElementById('result-message').textContent = '';
     document.getElementById('submit-button').onclick = () => handleSubmit(question);
-    const resultMessageElement = document.getElementById('result-message');
-    resultMessageElement.textContent = ''; // Clears results for new questions
 }
 
 // Handle answer submission
 function handleSubmit(question) {
+    if (answeredCount >= 25) return; // No action if quiz is completed
+
     const userAnswer = document.getElementById('answer-input').value.trim();
     const correctAnswer = question.answer.trim();
-
     const resultMessageElement = document.getElementById('result-message');
+
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        // Correct answer
         resultMessageElement.textContent = 'Correct!';
-        resultMessageElement.className = 'result-message correct'; // 'correct' style
+        resultMessageElement.className = 'result-message correct';
+        currentQuestionAnsweredCorrectly = true;
+        correctCount++;
     } else {
-        resultMessageElement.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
-        resultMessageElement.className = 'result-message incorrect'; //  'incorrect' style
+        // Incorrect answer
+        resultMessageElement.textContent = 'Incorrect. Try again.';
+        resultMessageElement.className = 'result-message incorrect';
     }
 
     document.getElementById('answer-input').value = '';
 }
 
-// Next button functionality, so it goes to the NEXT ->
+// Next button event
 document.getElementById('next-button').addEventListener('click', () => {
-    if (currentQuestions.length > 0) {
-        currentIndex = (currentIndex + 1) % currentQuestions.length; 
-        displayQuestion(currentQuestions[currentIndex]);
+    // If completed all questions, show completion
+    if (answeredCount >= 25) {
+        showCompletionMessage();
+        return;
+    }
+
+    // Regardless of correctness, increment answeredCount and move on
+    answeredCount++;
+    if (answeredCount === 25) {
+        // Completed the quiz
+        showCompletionMessage();
     } else {
-        document.getElementById('question-text').innerText = 'No questions available. Please select a quiz.';
+        currentIndex = (currentIndex + 1) % currentQuestions.length;
+        displayQuestion(currentQuestions[currentIndex]);
     }
 });
 
-// Provide a hint (optional logic, can be improved later)
+// Display congratulations completion message + saving attempt
+function showCompletionMessage() {
+    const scorePercentage = ((correctCount / 25) * 100).toFixed(0);
+    const displayCategory = categoryDisplayNames[currentCategory] || currentCategory;
+
+    document.getElementById('question-text').innerText =
+        `Great job! You completed the ${displayCategory} quiz and scored ${scorePercentage}%. Practice more quizzes or check out your results!`;
+
+    document.getElementById('result-message').textContent = '';
+
+    // Save current attempt
+    saveAttempt(currentCategory, scorePercentage);
+}
+
+// Save attempt to localStorage and update the results table
+function saveAttempt(moduleName, scorePercentage) {
+    const attempts = JSON.parse(localStorage.getItem('quizAttempts')) || [];
+
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const moduleName = categoryDisplayNames[moduleIdentifier] || moduleIdentifier;
+
+    const attempt = {
+        date: dateStr,
+        time: timeStr,
+        module: moduleName,
+        score: scorePercentage + '%'
+    };
+
+    attempts.push(attempt);
+    localStorage.setItem('quizAttempts', JSON.stringify(attempts));
+
+    appendAttemptRow(attempt.date, attempt.time, attempt.module, attempt.score);
+}
+
+// Load attempts from localStorage and display them
+function loadAttempts() {
+    const attempts = JSON.parse(localStorage.getItem('quizAttempts')) || [];
+    attempts.forEach(attempt => {
+        appendAttemptRow(attempt.date, attempt.time, attempt.module, attempt.score);
+    });
+}
+
+// Append a new row to the results table
+function appendAttemptRow(date, time, moduleName, score) {
+    const tbody = document.querySelector('.results-table tbody');
+    const tr = document.createElement('tr');
+
+    const dateTd = document.createElement('td');
+    dateTd.textContent = date;
+    tr.appendChild(dateTd);
+
+    const timeTd = document.createElement('td');
+    timeTd.textContent = time;
+    tr.appendChild(timeTd);
+
+    const moduleTd = document.createElement('td');
+    moduleTd.textContent = moduleName;
+    tr.appendChild(moduleTd);
+
+    const scoreTd = document.createElement('td');
+    scoreTd.textContent = score;
+    tr.appendChild(scoreTd);
+
+    tbody.appendChild(tr);
+}
+
+// Hint button functionality
 document.getElementById('hint-button').addEventListener('click', () => {
-    alert('Hint: Try thinking about the the word in different contexts...'); // You can modify this for more specific hints
+    alert('Hint: Try thinking about the word in different contexts...');
 });
 
-// Initialize the page by loading a question
+// Initialize the page
 window.onload = () => {
     document.getElementById('question-text').innerText = 'Please select a quiz to start.';
+    loadAttempts(); // Load previous attempts from localStorage
 };
