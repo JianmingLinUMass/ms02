@@ -94,7 +94,6 @@ function handleSubmit(question) {
         // Incorrect answer
         resultMessageElement.textContent = `Incorrect. Try again.`;
         resultMessageElement.className = 'result-message incorrect';
-        // Don't increment anything, let the user try again
     }
 
     document.getElementById('answer-input').value = '';
@@ -105,7 +104,8 @@ document.getElementById('next-button').addEventListener('click', () => {
     if (answeredCount >= 25) {
         showCompletionMessage();
         return;
-    } if (currentQuestionAnsweredCorrectly) {
+    } 
+    if (currentQuestionAnsweredCorrectly) {
         answeredCount++;
 
         if (answeredCount === 25) {
@@ -124,7 +124,57 @@ document.getElementById('next-button').addEventListener('click', () => {
     }
 });
 
-// Hint button (optional logic)
+// Save an attempt to localStorage
+function saveAttempt(moduleName, scorePercentage) {
+    const attempts = JSON.parse(localStorage.getItem('quizAttempts')) || [];
+
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    attempts.push({
+        date: dateStr,
+        time: timeStr,
+        module: moduleName,
+        score: scorePercentage + '%'
+    });
+
+    localStorage.setItem('quizAttempts', JSON.stringify(attempts));
+
+    // Update the results table
+    appendAttemptRow(dateStr, timeStr, moduleName, scorePercentage + '%');
+}
+
+// Load attempts from localStorage and display them
+function loadAttempts() {
+    const attempts = JSON.parse(localStorage.getItem('quizAttempts')) || [];
+    attempts.forEach(attempt => {
+        appendAttemptRow(attempt.date, attempt.time, attempt.module, attempt.score);
+    });
+}
+
+// Append a new row to the results table
+function appendAttemptRow(date, time, moduleName, score) {
+    const tbody = document.querySelector('.results-table tbody');
+    const tr = document.createElement('tr');
+
+    const dateTd = document.createElement('td');
+    dateTd.textContent = date;
+    tr.appendChild(dateTd);
+
+    const timeTd = document.createElement('td');
+    timeTd.textContent = time;
+    tr.appendChild(timeTd);
+
+    const moduleTd = document.createElement('td');
+    // Include score as well, e.g. "ModuleName (Score%)"
+    moduleTd.textContent = `${moduleName} (${score})`;
+    tr.appendChild(moduleTd);
+
+    tbody.appendChild(tr);
+}
+
+// Hint button functionality
 document.getElementById('hint-button').addEventListener('click', () => {
     alert('Hint: Try thinking about the word in different contexts...');
 });
@@ -132,4 +182,7 @@ document.getElementById('hint-button').addEventListener('click', () => {
 // Initialize the page
 window.onload = () => {
     document.getElementById('question-text').innerText = 'Please select a quiz to start.';
+    loadAttempts(); // Load previous attempts on page load
 };
+
+
