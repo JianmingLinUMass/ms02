@@ -1,4 +1,12 @@
-// quizzes.js
+const categoryDisplayNames = { // making display names for Results Tab
+    'past-simple': 'Past Simple',
+    'past-continuous': 'Past Continuous',
+    'present-simple': 'Present Simple',
+    'present-perfect': 'Present Perfect',
+    'present-passive': 'Present Passive',
+    'past-passive': 'Past Passive',
+    'present-conditional': 'Present Conditional'
+};
 
 let currentQuestions = [];
 let currentIndex = 0;
@@ -92,15 +100,17 @@ document.getElementById('next-button').addEventListener('click', () => {
     }
 });
 
-// Display completion message and save attempt
+// Display congratulations completion message + saving attempt
 function showCompletionMessage() {
     const scorePercentage = ((correctCount / 25) * 100).toFixed(0);
+    const displayCategory = categoryDisplayNames[currentCategory] || currentCategory;
+
     document.getElementById('question-text').innerText =
-        `Great job! You completed the ${currentCategory} quiz and scored ${scorePercentage}%. Practice more quizzes or check out your results!`;
+        `Great job! You completed the ${displayCategory} quiz and scored ${scorePercentage}%. Practice more quizzes or check out your results!`;
 
     document.getElementById('result-message').textContent = '';
 
-    // Save this attempt
+    // Save current attempt
     saveAttempt(currentCategory, scorePercentage);
 }
 
@@ -111,6 +121,8 @@ function saveAttempt(moduleName, scorePercentage) {
     const now = new Date();
     const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const moduleName = categoryDisplayNames[moduleIdentifier] || moduleIdentifier;
 
     const attempt = {
         date: dateStr,
